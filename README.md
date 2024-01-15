@@ -54,7 +54,7 @@ Displays posts in the selected category.
 ### SearchBar.js
 For typing in a search.
 
-### Search Results.js
+### SearchResults.js
 Displays all the posts of the search.
 
 ### Menu.js
