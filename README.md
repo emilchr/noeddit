@@ -34,7 +34,7 @@ SCREENSHOTS
 
 ## Functions in components
 ### App.js
-Displays the app.
+Displays the the different components in the app, such as Posts.js, Category.js, and so on.
 
 ### Post.js
 Displays a selected post
