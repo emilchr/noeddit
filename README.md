@@ -45,7 +45,7 @@ Displays comments in a post.
 ### Votes.js
 Displays votes i posts and in separate posts.
 
-### Posts.js (Main page)
+### Posts.js
 Displays all posts in the main page.
 
 ### Category.js
