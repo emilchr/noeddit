@@ -19,15 +19,11 @@ Portfolio project through Codecademy.
 
 
 ## Features
-**Lite view of general posts**
-
-**View posts**
-
-**Category selection**
-
-**Search function**
-
-**Compatible with all modern devices**
+- Lite view of general posts
+- View posts with votes and comments
+- Category selection
+- Search function
+- Compatible with all modern devices
 
 ## Wireframes
 SCREENSHOT OF WIREFRAMES
