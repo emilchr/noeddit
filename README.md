@@ -20,7 +20,6 @@ Portfolio project through Codecademy.
 
 ## Features
 **Lite view of general posts**
-text
 **View posts**
 **Category selection**
 **Search function**
@@ -33,8 +32,33 @@ SCREENSHOT OF WIREFRAMES
 SCREENSHOTS
 
 
-## Functions
+## Functions in components
 ### App.js
+Displays the app.
+
+### Post.js
+Displays a selected post
+
+### Comments.js
+Displays comments in a post.
+
+### Votes.js
+Displays votes i posts and in separate posts.
+
+### Posts.js (Main page)
+Displays all posts in the main page.
+
+### Category.js
+Displays posts in the selected category.
+
+### SearchBar.js
+For typing in a search.
+
+### Search Results.js
+Displays all the posts of the search.
+
+### Menu.js
+The main menu with categories.
 
 
 ## Testing
