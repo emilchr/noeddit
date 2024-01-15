@@ -20,9 +20,13 @@ Portfolio project through Codecademy.
 
 ## Features
 **Lite view of general posts**
+
 **View posts**
+
 **Category selection**
+
 **Search function**
+
 **Compatible with all modern devices**
 
 ## Wireframes
