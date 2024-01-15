@@ -20,6 +20,7 @@ Portfolio project through Codecademy.
 
 ## Features
 **Lite view of general posts**
+text
 **View posts**
 **Category selection**
 **Search function**
