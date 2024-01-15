@@ -10,10 +10,10 @@ Portfolio project through Codecademy.
 - HTML5
 - CSS3
 - Javascript
-- Jest RTL
+- Jest & RTL
 - Git
 - NPM
-- API ()
+- API (Reddit API)
 - VS Code
 - Wireframing
 
