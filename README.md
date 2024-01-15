@@ -21,6 +21,7 @@ Portfolio project through Codecademy.
 ## Features
 - Lite view of general posts
 - View posts with votes and comments
+    - View emojis and post text edits in the app. Markdown viewer?
 - Category selection
 - Search function
 - Compatible with all modern devices
