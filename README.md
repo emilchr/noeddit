@@ -27,8 +27,14 @@ Portfolio project through Codecademy.
 - Compatible with all modern devices
 
 ## Wireframes
-SCREENSHOT OF WIREFRAMES
+### Mobile
+![Mobile](screenshot/noeddit-mobile.png)
 
+### Desktop 768px
+![Desktop 768px](screenshot/noeddit-768.png)
+
+### Desktop 1200px
+![Desktop 1200px](screenshot/noeddit-1200.png)
 ## Screenshots of live site
 SCREENSHOTS
 
