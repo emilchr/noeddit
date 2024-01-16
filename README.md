@@ -5,6 +5,7 @@ Portfolio project through Codecademy.
 
 ## Tech stack
 - React
+    - Redux
     - Redux Toolkit
     - React Router v6
 - HTML5
@@ -38,7 +39,7 @@ Portfolio project through Codecademy.
 SCREENSHOTS
 
 
-## Functions in components
+## Functions
 ### App.js
 Displays the the different components in the app, such as Posts.js, Category.js, and so on.
 
