@@ -15,8 +15,6 @@ Portfolio project through Codecademy.
 - NPM
 - API (Reddit API)
 - VS Code
-- Wireframing
-
 
 ## Features
 - Lite view of general posts
@@ -35,6 +33,7 @@ Portfolio project through Codecademy.
 
 ### Desktop 1200px
 ![Desktop 1200px](screenshot/noeddit-1200.png)
+
 ## Screenshots of live site
 SCREENSHOTS
 
