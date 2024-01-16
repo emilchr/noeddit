@@ -40,29 +40,7 @@ SCREENSHOTS
 
 
 ## Functions
-### App.js
-Displays the the different components in the app, such as Posts.js, Category.js, and so on.
 
-### Post.js
-Displays a selected post
-
-### Comments.js
-Displays comments in a post.
-
-### Posts.js
-Displays all posts in the main page.
-
-### Category.js
-Displays posts in the selected category.
-
-### SearchBar.js
-For typing in a search.
-
-### SearchResults.js
-Displays all the posts of the search.
-
-### Menu.js
-The main menu with categories.
 
 
 ## Testing
