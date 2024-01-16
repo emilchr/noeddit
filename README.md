@@ -49,9 +49,6 @@ Displays a selected post
 ### Comments.js
 Displays comments in a post.
 
-### Votes.js
-Displays votes i posts and in separate posts.
-
 ### Posts.js
 Displays all posts in the main page.
 
