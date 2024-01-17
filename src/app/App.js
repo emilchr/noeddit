@@ -1,5 +1,8 @@
 import React from 'react';
 import Home from '../Features/Home/Home';
+import Posts from '../Features/Posts/Posts';
+import NotFound from '../Features/NotFound/NotFound';
+import AppLayout from './AppLayout';
 import './App.css';
 import {
   Route,
@@ -11,9 +14,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />}>
-          {/* <Route path="subreddit" element={<Subreddit />}/>
-          <Route path="searchresults" element={<SearchResults />}/> */}
+        <Route path="/" element={<AppLayout />}>
+          <Route path="/" element={<Home />}/>
+          <Route path="posts" element={<Posts />}/>
+          <Route path="*" element={<NotFound />}/>
         </Route>
       </Routes>
     </BrowserRouter>

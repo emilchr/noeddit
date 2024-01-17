@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // Slice
-export const postsSlice = createSlice({
-    name: 'posts',
+export const subRedditsSlice = createSlice({
+    name: 'subReddit',
     initialState: {
-        posts: [] 
+        subReddits: [] 
     },
     reducers: {
 
@@ -15,4 +15,4 @@ export const postsSlice = createSlice({
 
 // Selectors
 
-export default postsSlice.reducer;
+export default subRedditsSlice.reducer;
