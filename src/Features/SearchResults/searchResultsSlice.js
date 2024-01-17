@@ -4,7 +4,9 @@ import { createSlice } from "@reduxjs/toolkit";
 export const searchResultsSlice = createSlice({
     name: 'searchResults',
     initialState: {
-        searchResults: [] 
+        searchResults: [], 
+        isLoading: false,
+        hasError: false 
     },
     reducers: {
 

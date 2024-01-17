@@ -4,7 +4,9 @@ import { createSlice } from "@reduxjs/toolkit";
 export const homeSlice = createSlice({
     name: 'home',
     initialState: {
-        home: [] 
+        home: ['1', '2'], 
+        isLoading: false,
+        hasError: false
     },
     reducers: {
 

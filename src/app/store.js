@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import homeReducer from '../Features/Home/homeSlice';
-import postReducer from '../Features/Posts/Posts';
-import searchResultsReducer from '../Features/SearchResults/SearchResults';
-import subRedditsReducer from '../Features/SubReddit/SubReddits';
+import postsReducer from '../Features/Posts/postsSlice';
+import searchResultsReducer from '../Features/SearchResults/searchResultsSlice';
+import subRedditsReducer from '../Features/SubReddit/subRedditsSlice';
 
 export const store = configureStore({
   reducer: {
     home: homeReducer,
-    posts: postReducer,
+    posts: postsReducer,
     searchResults: searchResultsReducer,
     subReddits: subRedditsReducer,
   },

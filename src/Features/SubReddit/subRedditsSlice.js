@@ -4,7 +4,9 @@ import { createSlice } from "@reduxjs/toolkit";
 export const subRedditsSlice = createSlice({
     name: 'subReddit',
     initialState: {
-        subReddits: [] 
+        subReddits: [], 
+        isLoading: false,
+        hasError: false 
     },
     reducers: {
 
