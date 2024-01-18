@@ -11,7 +11,8 @@ function Posts() {
 
   const dispatch = useDispatch();
   
-  const isLoading = useSelector(isLoading);
+  const isLoading = useSelector(state => state.posts.isLoading);
+  
     
     console.log(isLoading)
     // console.log("Loading: " + useSelector(isLoading));
@@ -30,7 +31,7 @@ function Posts() {
     <div> 
       <h2>Posts</h2>
       <div>This is where the posts will go</div>
-        
+        {isLoading ? <p>Loading...</p>: ''}
     </div>
   )
 }
