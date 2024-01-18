@@ -44,7 +44,7 @@ export const postsSlice = createSlice({
         .addCase(fetchPosts.rejected, (state, action) => {
             state.isLoading = false;
             state.hasError = true;
-            console.log('An error has occurred. ' + action.error.message)
+            console.log('An error has occurred. ' + action.error.message);
         })
     }
 })
@@ -54,7 +54,6 @@ export const postsSlice = createSlice({
 
 // Selectors
 export const loadAllPosts = state => state.posts.posts;
-export const isLoading = state => state.posts.isLoading;
-export const hasError = state => state.posts.hasError;
+
 
 export default postsSlice.reducer;

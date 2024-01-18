@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import homeReducer from '../Features/Home/homeSlice';
 import postsReducer from '../Features/Posts/postsSlice';
+import homeReducer from '../Features/Home/homeSlice';
 import searchResultsReducer from '../Features/SearchResults/searchResultsSlice';
 import subRedditsReducer from '../Features/SubReddit/subRedditsSlice';
 

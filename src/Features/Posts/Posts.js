@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {fetchPosts, 
-        loadAllPosts,
-        isLoading,
-        hasError
+        loadAllPosts
          } from './postsSlice';
 
 
@@ -12,11 +10,8 @@ function Posts() {
   const dispatch = useDispatch();
   
   const isLoading = useSelector(state => state.posts.isLoading);
-  
-    
-    console.log(isLoading)
-    // console.log("Loading: " + useSelector(isLoading));
-    // console.log(useSelector(loadAllPosts))
+  const loadPosts = useSelector(loadAllPosts);
+  const hasError = useSelector(state => state.posts.hasError)
     
     useEffect(() => {
 
@@ -24,14 +19,26 @@ function Posts() {
             
     }, [dispatch])
     
+    if (!isLoading && loadPosts[0]) {console.log(loadPosts)} 
     
-    
+    let content = '';
+
+    if (isLoading) {
+      content = <p>Loading...</p>;
+    } else if (hasError){
+      content = <p>An error has occurred</p>;
+    } else {
+      content = <p>Haha!</p>;
+      
+    }
 
   return (
     <div> 
       <h2>Posts</h2>
       <div>This is where the posts will go</div>
-        {isLoading ? <p>Loading...</p>: ''}
+        { content }  
+        
+
     </div>
   )
 }
