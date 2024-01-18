@@ -71,7 +71,7 @@ export const postsSlice = createSlice({
         .addCase(fetchPhotos.fulfilled, (state, action) => {
             state.isLoading = false;
             state.hasError = false;
-            state.posts = action.payload;
+            state.photos = action.payload;
             console.log('fetchPhotos are fetched.');
         })
         .addCase(fetchPhotos.rejected, (state, action) => {
@@ -87,6 +87,7 @@ export const postsSlice = createSlice({
 
 // Selectors
 export const loadAllPosts = state => state.posts.posts;
+
 export const loadAllPhotos = state => state.posts.photos;
 
 export default postsSlice.reducer;
