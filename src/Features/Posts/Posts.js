@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {fetchPosts, 
+import {fetchPosts,
+        fetchPhotos,
         loadAllPosts
          } from './postsSlice';
 
@@ -16,6 +17,7 @@ function Posts() {
     useEffect(() => {
 
       dispatch(fetchPosts())
+      dispatch(fetchPhotos())
             
     }, [dispatch])
     
@@ -28,8 +30,15 @@ function Posts() {
     } else if (hasError){
       content = <p>An error has occurred</p>;
     } else {
-      content = <p>Haha!</p>;
-      
+      content = loadPosts.map(post => (
+      <div className="post" id={post.id} key={post.id}>
+         <h2>{post.title}</h2>
+         <p>{post.body}</p>
+         <></>
+         <p>Posted by userID: {post.userId}</p>
+      </div>
+      ));
+
     }
 
   return (
