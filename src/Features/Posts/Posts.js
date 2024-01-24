@@ -27,8 +27,7 @@ function Posts() {
       console.log(loadPosts);
       console.log(loadPhotos);
     }; 
-    
-    let content = '';
+    let content = ''; // Content will get assigned to this variable.
 
     if (isLoading) {
       content = <p>Loading...</p>;
