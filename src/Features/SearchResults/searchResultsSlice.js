@@ -1,17 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 // Slice
 export const searchResultsSlice = createSlice({
-    name: 'searchResults',
-    initialState: {
-        searchResults: [], 
-        isLoading: false,
-        hasError: false 
-    },
-    reducers: {
-
-    }
-})
+  name: 'searchResults',
+  initialState: {
+    searchResults: [],
+    isLoading: false,
+    hasError: false,
+  },
+  reducers: {},
+});
 
 // Action creators
 
