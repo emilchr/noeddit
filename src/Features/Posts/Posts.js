@@ -31,14 +31,25 @@ function Posts() {
   } else if (hasError) {
     content = <p>An error has occurred</p>;
   } else {
-    content = loadPosts.map((post, index) => (
-      <div className="post" id={post.id} key={post.id}>
+    content = loadPosts.map(
+      (post, index) => 
+      
+      <div className="post" id={post.id[index]} key={post.id}>
         <h2>{post.title}</h2>
         <p>{post.body}</p>
-        {}
+        {/* {
+          loadPhotos.map((photo, photoIndex) => 
+          {
+            return (
+              <img src={photo.thumbnailUrl[photoIndex]} key={photo.id + 's' } alt={photo.title}></img>
+            )
+          }
+          )
+        } */}
         <p>Posted by userID: {post.userId}</p>
       </div>
-    ));
+      
+    );
   }
 
   return (
