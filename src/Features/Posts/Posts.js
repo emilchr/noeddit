@@ -25,37 +25,41 @@ function Posts() {
     console.log(loadPhotos);
   }
   let content = ''; // Content will get assigned to this variable.
-
+  const photos = loadPhotos.map((photo) => { // loads all photos into the variable photos and returns a img and title.
+    return (
+      <img
+        src={photo.thumbnailUrl}
+        alt={photo.title}
+      ></img>
+    );
+  });
+  const posts = loadPosts.map((post, index) => { // loads all posts and combines photos with the post.
+    return (
+      <div className="post" id={post.id} key={post.id}>
+        <h2>{post.title}</h2>
+        <p>{post.body}</p>
+        {
+          photos[index] // inserts a photo in each post.
+        }
+        <p>Posted by userID: {post.userId}</p>
+      </div>
+    );
+  });
   if (isLoading) {
     content = <p>Loading...</p>;
   } else if (hasError) {
     content = <p>An error has occurred</p>;
-    
   } else {
-    content = loadPosts.map(
-      (post) => { 
-        return (
-          <div className="post" id={post.id} key={post.id}>
-            <h2>{post.title}</h2>
-            <p>{post.body}</p>
-              {
-                loadPhotos.map((photo) => {
-                  return <img src={photo.thumbnailUrl} alt={photo.title} key={photo.id}></img>
-                })
-              }
-            <p>Posted by userID: {post.userId}</p>
-            
-          </div>
-          )
-        }
-      );
-    }
+    content = posts; // posts combined with pictures.
+  }
 
   return (
     <div>
       <h2>Posts</h2>
       <div>This is where the posts will go</div>
-      {content}
+      {
+        content // inserts the JSX-element content.
+      } 
     </div>
   );
 }
