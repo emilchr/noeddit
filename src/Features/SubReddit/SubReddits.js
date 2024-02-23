@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { fetchLinks, loadLinks } from './subRedditsSlice';
-import './SubReddits.module.css';
+import './SubReddits.css';
 
 function SubReddits() {
 	const dispatch = useDispatch();

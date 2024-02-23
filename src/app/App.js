@@ -3,7 +3,6 @@ import Posts from '../Features/Posts/Posts';
 import Home from '../Features/Home/Home';
 import NotFound from '../Features/NotFound/NotFound';
 import AppLayout from './AppLayout';
-import './App.css';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import SubReddits from '../Features/SubReddit/SubReddits';
 
