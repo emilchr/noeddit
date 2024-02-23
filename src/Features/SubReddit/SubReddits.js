@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { fetchLinks, loadLinks } from './subRedditsSlice';
+import './SubReddits.module.css';
 
 function SubReddits() {
 	const dispatch = useDispatch();
@@ -22,11 +23,13 @@ function SubReddits() {
 	} else {
 		content = (
 			<>
-				{link.map((link) => (
-					<li key={link.id}>
-						<NavLink to={link.url}>{link.title}</NavLink>
-					</li>
-				))}
+				<ul>
+					{link.map((link) => (
+						<li key={link.id}>
+							<NavLink to={link.url}>{link.title}</NavLink>
+						</li>
+					))}	
+				</ul>
 			</>
 		);
 	}

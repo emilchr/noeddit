@@ -6,6 +6,7 @@ import {
 	loadAllPosts,
 	loadAllPhotos,
 } from './postsSlice';
+import { PostList } from '../../Components/PostList/PostList';
 
 function Posts() {
 	const dispatch = useDispatch();
@@ -24,38 +25,22 @@ function Posts() {
 		console.log(loadPosts);
 		console.log(loadPhotos);
 	}
+	
 	let content = ''; // Content will get assigned to this variable.
-	const photos = loadPhotos.map((photo) => {
-		// loads all photos into the variable photos and returns a img and title.
-		return <img src={photo.thumbnailUrl} alt={photo.title}></img>;
-	});
-	const posts = loadPosts.map((post, index) => {
-		// loads all posts and combines photos with the post.
-		return (
-			<div className="post" id={post.id} key={post.id}>
-				<h2>{post.title}</h2>
-				<p>{post.body}</p>
-				{
-					photos[index] // inserts a photo in each post.
-				}
-				<p>Posted by userID: {post.userId}</p>
-			</div>
-		);
-	});
+
 	if (isLoading) {
-		content = <p>Loading...</p>;
+		content = <p>Loading...</p>; console.log(isLoading)
 	} else if (hasError) {
 		content = <p>An error has occurred</p>;
 	} else {
-		content = posts; // posts combined with pictures.
+		content = <PostList />; // posts combined with pictures.
+	
 	}
 
 	return (
 		<div>
-			<h2>Posts</h2>
-			<div>This is where the posts will go</div>
 			{
-				content // inserts the JSX-element content.
+				content
 			}
 		</div>
 	);

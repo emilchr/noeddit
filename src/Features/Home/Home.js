@@ -1,11 +1,11 @@
 import React from 'react';
 
+
 function Home() {
   return (
-    <div> 
+    <div>
       <h2>Home</h2>
-      <div>home page</div>
-
+      HOME
     </div>
   )
 }
