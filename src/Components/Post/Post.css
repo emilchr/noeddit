@@ -1,0 +1,45 @@
+.post{
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+    grid-template-rows: .1fr auto 1fr 1fr .1fr;
+    grid-template-areas:
+        "head head"
+        "title title"
+        "votes text"
+        "votes image"
+        "info info";
+    margin-bottom: 1.5em;
+    margin-left: 1em;
+    margin-right: 1em;
+    gap: .25em;
+    padding: 0.75em 0.75em;
+    box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2), 0 3px 12px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+.post:first-of-type{
+    margin-top: 1.5em;
+}
+.sub-title{
+    font-size: xx-small;
+    grid-area: head;
+    justify-self: center;
+}
+.post-title{
+    grid-area: title;
+    justify-self: center;
+}
+.votes{
+    grid-area: votes;
+    align-self: center;
+}
+.post-text{
+    grid-area: text;
+}
+.image-container{
+    grid-area: image;
+    justify-self: center;
+}
+
+.post-info{
+    grid-area: info;
+}
