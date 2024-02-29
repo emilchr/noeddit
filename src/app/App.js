@@ -1,6 +1,6 @@
 import React from 'react';
 import Posts from '../Features/Posts/Posts';
-import Home from '../Features/Home/Home';
+import { Home } from '../Features/Home/Home';
 import NotFound from '../Features/NotFound/NotFound';
 import AppLayout from './AppLayout';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
@@ -11,7 +11,7 @@ function App() {
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<AppLayout />}>
-					<Route path="/" element={<Home />} />
+					<Route path="/" element={<Posts />} />
 					<Route path="posts" element={<Posts />} />
 					<Route path="subreddits" element={<SubReddits />} />
 					<Route path="*" element={<NotFound />} />
