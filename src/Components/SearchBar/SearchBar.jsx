@@ -5,7 +5,7 @@ import './SearchBar.css';
 export const SearchBar = () => {
   return (
     <form>
-        <input type="search" name="search" id="search" />
+        <div className='search-modal'><input type="search" name="search" id="search" /></div>
         <button type="submit"><SearchRoundedIcon style={{color: 'white'}}/></button>
     </form>
   )

@@ -14,7 +14,7 @@ export default function AppLayout() {
 			<div className="header-overhang"><p>r/subReddit</p></div>
 			
 			<header>
-				<h2>noreddit</h2>
+				<h2>noeddit</h2>
 				<div className='header-right'>
 					<SearchBar />
 					

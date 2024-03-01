@@ -2,6 +2,8 @@
   --font-color: #222;
   --background-color: #EDEDED;
   --accent-color: #406AA8 ;
+
+  overscroll-behavior: none;
 }
 *{
   margin: 0;

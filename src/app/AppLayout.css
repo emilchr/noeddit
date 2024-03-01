@@ -19,7 +19,9 @@ header{
   top: 0;
   padding: 0 0.25em;
 }
-
+header h2{
+  margin-left: 1em;
+}
 .header-right{
   display: inline-flex;
   align-items: center;

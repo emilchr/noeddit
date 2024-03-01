@@ -3,18 +3,30 @@ form{
     display: flex;
     flex-direction: row;
 }
+.search-modal{
+    background-color: var(--accent-color);
+    position: fixed;
+    display: flex;
+    height: 3em;
+    width: 10em;
+    border-radius: 0.45rem;
+    padding: .15em .75em;
+    top: 3.25em;
+    right: 3em;
+    /* display: none; */
+}
 input[type=search]{
     border: 0;
     background-color: var(--background-color);
     align-self: center;
     height: 2em;
     border-radius: 0.25em;
-    margin-right: .25em;
-    display: none;
+    width: 10rem;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.533);
 }
 button{
     background: none;
     border: 0;
+    outline: 0;
     cursor: pointer;
-    /* margin-left: -1.5em; */
 }

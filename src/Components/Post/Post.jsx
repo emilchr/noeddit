@@ -39,6 +39,6 @@ export const Post = () => {
 				</div>
 			</div>
 		);
-	});
+	}).splice(0, 10); // Slice added for dev to max posts
 	return <>{posts}</>;
 };
