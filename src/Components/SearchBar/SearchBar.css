@@ -3,27 +3,42 @@ form{
     display: flex;
     flex-direction: row;
 }
+.search-modal-top{
+    align-self: flex-end;
+    position: relative;
+    display: flex;
+    background-color: var(--accent-color);
+    top: -1.7em;
+    right: -.75em;
+    padding-bottom: 3.3rem;
+    border-radius: 0.45em;
+    box-shadow: 15px 0 15px -3px rgba(0, 0, 0, 0.5);
+}
 .search-modal{
     background-color: var(--accent-color);
     position: fixed;
     display: flex;
+    flex-direction: column;
     height: 3em;
     width: 10em;
     padding: .15em .75em;
     border-radius: 0.45rem;
-    box-shadow: 5px 8px 15px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 8px 8px -8px rgba(0, 0, 0, 0.5);
     top: 3.25em;
-    right: 2.25em;
+    right: 2.5em;
     z-index: 2;
     /* display: none; */
 }
 input[type=search]{
     border: 0;
     background-color: var(--background-color);
+    position: absolute;
+    top: 1em;
     align-self: center;
     height: 2em;
     border-radius: 0.25em;
     width: 10rem;
+    padding-left: .5em;
     outline: 0;
     box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
