@@ -11,10 +11,10 @@ export default function AppLayout() {
 	return (
 		<><div className='container'>
 			
-			<div className="header-overhang"><p>r/subReddit</p></div>
 			
 			<header>
 				<h2>noeddit</h2>
+			<div className="header-overhang"><p>r/subReddit</p></div>
 				<div className='header-right'>
 					<SearchBar />
 					

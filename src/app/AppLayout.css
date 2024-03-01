@@ -13,9 +13,12 @@ header{
   grid-column-start: 1;
   justify-content: space-between;
   align-items: center;
-  z-index: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 5em;
+  display: flex;
   box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.5);
-  position: sticky;
+  position: fixed;
   top: 0;
   padding: 0 0.25em;
 }
@@ -33,12 +36,12 @@ header h2{
   background-color: var(--accent-color);
   color: #FFF;
   font-size: small;
-  top: 5rem;
+  top: 3rem;
   height: 1rem;
   width: 50%;
   border-radius: 0 0 .75rem .75rem;
   padding-bottom: .15rem;
-  position: fixed;
+  position: relative;
   align-items: flex-end;
   justify-self: center;
   justify-content: center;
@@ -63,6 +66,7 @@ main {
   grid-row: 2;
   height: fit-content;
   justify-self: center;
+  position: relative;
 }
 
 footer {
