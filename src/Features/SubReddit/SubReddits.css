@@ -1,7 +1,27 @@
-nav ul{
-    display: block;
+.subReddits-top{    
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background-color: var(--accent-color);
+    width: 2em;
+    height: 1.4em;
+    top: -1.7em;
+    right: -8.75em;
+    padding-bottom: 1rem;
+    border-radius: 0.45em;
+    box-shadow: 12px 0 7px -10px rgba(0, 0, 0, 0.5);
 }
-
-nav ul li {
-    margin: 1em;
+.subReddits{
+    background-color: var(--accent-color);
+    position: fixed;
+    display: flex;
+    width: 10em;
+    padding: .15em .75em;
+    border-radius: 0.45rem;
+    box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.5);
+    top: 3.1em;
+    right: .3em;
+    z-index: 2;
+    /* display: none; */
 }
+  

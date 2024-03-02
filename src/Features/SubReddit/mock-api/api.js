@@ -1,7 +1,7 @@
 export const subRedditLinks = () => {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
-			if (Math.random() < 0.1) {
+			if (Math.random() < 0.001) {
 				// 10% chance to reject
 				reject(new Error('Failed to load subReddit links'));
 			} else {

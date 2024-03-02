@@ -7,7 +7,9 @@ form{
     align-self: flex-end;
     position: relative;
     display: flex;
+    justify-content: center;
     background-color: var(--accent-color);
+    width: 2em;
     top: -1.7em;
     right: -.75em;
     padding-bottom: 3.3rem;
@@ -24,10 +26,10 @@ form{
     padding: .15em .75em;
     border-radius: 0.45rem;
     box-shadow: 0px 8px 8px -8px rgba(0, 0, 0, 0.5);
-    top: 3.25em;
-    right: 2.5em;
+    top: 3.1em;
+    right: 2.6em;
     z-index: 2;
-    /* display: none; */
+    display: none;
 }
 input[type=search]{
     border: 0;

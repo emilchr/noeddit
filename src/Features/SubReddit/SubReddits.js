@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { fetchLinks, loadLinks } from './subRedditsSlice';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import './SubReddits.css';
 
 function SubReddits() {
@@ -23,6 +24,8 @@ function SubReddits() {
 	} else {
 		content = (
 			<>
+			<div className='subReddits'>
+			<div className='subReddits-top'><CloseRoundedIcon /></div>
 				<ul>
 					{link.map((link) => (
 						<li key={link.id}>
@@ -30,6 +33,7 @@ function SubReddits() {
 						</li>
 					))}	
 				</ul>
+			</div>
 			</>
 		);
 	}

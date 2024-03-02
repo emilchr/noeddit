@@ -28,7 +28,7 @@ header h2{
 .header-right{
   display: inline-flex;
   align-items: center;
-  margin-right: 10px;
+  margin-right: .75em;
 }
 
 .header-overhang{
@@ -60,11 +60,26 @@ header .search-modal svg{
   transform: scale(1.2);
 }
 nav {
-  background-color: rgb(43, 226, 67);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
   grid-column-start: 2;
-  display: none;
+  top: 1.5em;
+  right: .48em;
+  width: 10em;
+  z-index: 2;
 }
-
+nav ul{
+  display: flex;
+  flex-direction: column;
+}
+nav ul li {
+  margin: .25em 0;
+}
+.subReddits-top svg {
+  transform: scale(1.2);
+  color: white;
+}
 main {
   grid-row: 2;
   height: fit-content;

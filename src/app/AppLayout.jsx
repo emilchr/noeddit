@@ -26,9 +26,9 @@ export default function AppLayout() {
 
 				
 			</header>
-			<nav>				
-				<SubReddits />				
-			</nav>
+				<nav>
+					<SubReddits />				
+				</nav>
 
 			<main>
 				<Outlet />
