@@ -6,17 +6,17 @@
     width: 2em;
     height: 1.4em;
     top: -1.7em;
-    right: -8.75em;
-    padding-bottom: 1rem;
-    border-radius: 0.45em;
-    box-shadow: 12px 0 7px -10px rgba(0, 0, 0, 0.5);
+    right: -6.22em;
+    padding-bottom: .55rem;
+    border-radius: 0.45em 0.45em 0 0;
+    box-shadow: 20px 2.5px 10px -10px rgba(0, 0, 0, 0.3);
 }
 .subReddits{
     background-color: var(--accent-color);
     position: fixed;
     display: flex;
-    width: 10em;
-    padding: .15em .75em;
+    list-style-position: inside;
+    padding: .15em 0.15em .15em .15em;
     border-radius: 0.45rem;
     box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.5);
     top: 3.1em;
@@ -24,4 +24,18 @@
     z-index: 2;
     /* display: none; */
 }
-  
+nav .subReddits ul li::before {
+    content: "r/";
+    color: white;
+  }
+nav .subReddits ul{
+    
+}
+nav .subReddits ul li{
+    /* background-color: var(--background-color); */
+}
+
+nav .subReddits ul li a{
+    text-decoration: none;
+    color: white;
+}
