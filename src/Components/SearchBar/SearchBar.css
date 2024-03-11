@@ -12,9 +12,10 @@ form{
     width: 2em;
     top: -1.7em;
     right: -.75em;
-    padding-bottom: 3.3rem;
-    border-radius: 0.45em;
-    box-shadow: 15px 0 15px -3px rgba(0, 0, 0, 0.5);
+    padding-bottom: .2rem;
+    border-radius: .45em .45em 0 0;
+    box-shadow: -6px -9px 10px -1px rgba(0, 0, 0, 0.25), 
+                10px -1px 10px -5px rgba(0, 0, 0, 0.25);
 }
 .search-modal{
     background-color: var(--accent-color);
@@ -24,12 +25,12 @@ form{
     height: 3em;
     width: 10em;
     padding: .15em .75em;
-    border-radius: 0.45rem;
-    box-shadow: 0px 8px 8px -8px rgba(0, 0, 0, 0.5);
+    border-radius: .45rem 0 .45rem .45rem;
+    box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.45);
     top: 3.1em;
-    right: 2.6em;
+    right: 2.3em;
     z-index: 2;
-    display: none;
+    /* display: none; */
 }
 input[type=search]{
     border: 0;

@@ -24,16 +24,16 @@ function SubReddits() {
 	} else {
 		content = (
 			<>
-			<div className='subReddits'>
-			<div className='subReddits-top'><CloseRoundedIcon /></div>
-				<ul>
-					{link.map((link) => (
-						<li key={link.id}>
-							<NavLink to={link.url}>{link.title}</NavLink>
-						</li>
-					))}	
-				</ul>
-			</div>
+				<div className='subReddits-top'><CloseRoundedIcon /></div>
+				<div className='subReddits'>
+					<ul>
+						{link.map((link) => (
+							<li key={link.id}>
+								<NavLink to={link.url}>{link.title}</NavLink>
+							</li>
+						))}	
+					</ul>
+				</div>
 			</>
 		);
 	}

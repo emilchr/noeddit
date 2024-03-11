@@ -60,22 +60,14 @@ header .search-modal svg{
   transform: scale(1.2);
 }
 nav {
-  display: flex;
-  flex-direction: column;
   position: fixed;
   grid-column-start: 2;
-  top: 1.5em;
-  right: .48em;
-  width: 10em;
+  top: 1.2em;
+  right: .2em;
   z-index: 2;
 }
 nav ul{
-  display: flex;
-  flex-direction: column;
   list-style-type: none;
-}
-nav ul li {
-  margin: .25em 0;
 }
 .subReddits-top svg {
   transform: scale(1.2);
