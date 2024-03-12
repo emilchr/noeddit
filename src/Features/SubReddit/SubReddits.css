@@ -1,44 +1,55 @@
 .subReddits-top{    
-    /* position: relative; */
     display: flex;
     justify-content: center;
     background-color: var(--accent-color);
     width: 2em;
     height: 1.4em;
-    /* top: -1.7em;
-    right: -10.8em; */
-    transform: translate(189px, 6px);
-    padding-bottom: .55rem;
+    padding-bottom: .25rem;
     border-radius: 0.45em 0.45em 0 0;
-    box-shadow: -6px -8px 10px -5px rgba(0, 0, 0, 0.25), 
-                14px -5.5px 10px -2px rgba(0, 0, 0, 0.25);
+    box-shadow: -6px -8px 10px -5px rgba(0, 0, 0, 0.15), 
+                19px -8px 10px -1px rgba(0, 0, 0, 0.15);
+    position: absolute;
+    top: -25px;
+    right: 0;
                 
 }
 .subReddits{
     background-color: var(--accent-color);
     display: flex;
     flex-direction: column;
-    padding: .25em 1em .25em 1em;
-    border-radius: 0.45rem;
+    max-width: 90vw;
+    padding: .25em .5em .25em .5em;
+    border-radius: 0.45rem 0 0.45rem 0.45rem;
     box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.35);
-    z-index: 2;
+    overflow: hidden;
     /* display: none; */
 }
-nav .subReddits ul li::before {
+nav .subReddits li{
+    display: flex;box-sizing: border-box;
+    flex-direction: row;
+    background-color: var(--background-color);
+    border: 1px solid var(--background-color);
+    margin: .25em 0;
+    border-radius: .25em;
+    transition: linear 200ms;
+}
+nav .subReddits li:hover{
+    background-color: var(--accent-color);
+}
+nav .subReddits li .active, li{
+    border-radius: inherit;
+    background-color: var(--accent-color);
+    color: var(--background-color);   
+}
+nav .subReddits li a::before {
     content: "r/";
-    font-size: x-large;
-    color: white;
-  }
-nav .subReddits ul{
-
 }
-nav .subReddits ul li{
-    /* background-color: var(--background-color); */
-}
-
-nav .subReddits ul li a{
+nav .subReddits li a{
+    display: flex;
+    width: 100%;
+    border-radius: inherit;
+    padding: 0 .2em;
     font-size: xx-large;
     text-decoration: none;
-    color: white;
-    
+    color: var(--font-color);
 }

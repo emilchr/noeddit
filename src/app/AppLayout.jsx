@@ -21,11 +21,9 @@ export default function AppLayout() {
 						<a href=''><MenuRoundedIcon style={{color: 'white'}} /></a>
 					
 				</div>
-				{/* <CloseRoundedIcon style={{color: 'white'}} /> */}
-				
 
-				
 			</header>
+
 				<nav>
 					<SubReddits />				
 				</nav>
@@ -33,8 +31,7 @@ export default function AppLayout() {
 			<main>
 				<Outlet />
 			</main>
-			
-			
+						
 		</div>
 		<footer>
 		Made with <FavoriteRoundedIcon style={{color: 'red'}} /> by Emil

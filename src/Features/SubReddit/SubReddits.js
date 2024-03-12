@@ -24,21 +24,25 @@ function SubReddits() {
 	} else {
 		content = (
 			<>
-				<div className='subReddits-top'><CloseRoundedIcon /></div>
-				<div className='subReddits'>
-					<ul>
-						{link.map((link) => (
-							<li key={link.id}>
-								<NavLink to={link.url}>{link.title}</NavLink>
-							</li>
-						))}	
-					</ul>
-				</div>
+				<ul>
+					{link.map((link) => (
+						<li key={link.id}>
+							<NavLink to={link.url}>{link.title}</NavLink>
+						</li>
+					))}	
+				</ul>
 			</>
 		);
 	}
 
-	return <>{content}</>;
+	return (
+	<><div className='modal-background'></div>
+		<div className='subReddits-top'><CloseRoundedIcon /></div>
+		<div className='subReddits'>
+			{content}
+		</div>
+	</>
+	);
 }
 
 export default SubReddits;

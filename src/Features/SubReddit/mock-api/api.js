@@ -1,7 +1,7 @@
 export const subRedditLinks = () => {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
-			if (Math.random() < 0.001) {
+			if (Math.random() < 0.0001) {
 				// 10% chance to reject
 				reject(new Error('Failed to load subReddit links'));
 			} else {
@@ -12,7 +12,7 @@ export const subRedditLinks = () => {
 						url: '/',
 					},
 					{
-						title: 'SubReddit 1',
+						title: 'SubRedditasdasd 1',
 						id: 1,
 						url: '/posts',
 					},
@@ -22,7 +22,7 @@ export const subRedditLinks = () => {
 						url: '/posts',
 					},
 					{
-						title: 'SubReddit 3',
+						title: 'SubRedditwewqe 3',
 						id: 3,
 						url: '/posts',
 					},
@@ -32,17 +32,17 @@ export const subRedditLinks = () => {
 						url: '/posts',
 					},
 					{
-						title: 'SubReddit 5',
+						title: 'SubRedditqwqw 5',
 						id: 5,
 						url: '/posts',
 					},
 					{
-						title: 'SubReddit 6',
+						title: 'SubRedditwwq 6',
 						id: 6,
 						url: '/posts',
 					},
 					{
-						title: 'SubReddit 7',
+						title: 'SubReddit 7qweqwe',
 						id: 7,
 						url: '/posts',
 					},
@@ -53,6 +53,6 @@ export const subRedditLinks = () => {
 					},
 				]);
 			}
-		}, 1000);
+		}, 100);
 	});
 };

@@ -1,11 +1,10 @@
 
 .container{
   display: grid;
-  grid-template-columns: 100%;
+  grid-template-columns: 100vw;
   grid-template-rows: 5em auto 1.6em;
   justify-content: center;
 }
-
 header{
   display: inline-flex;
   background-color: var(--accent-color);
@@ -36,18 +35,27 @@ header h2{
   background-color: var(--accent-color);
   color: #FFF;
   font-size: small;
-  top: 3rem;
   height: 1rem;
   width: 50%;
   border-radius: 0 0 .75rem .75rem;
   padding-bottom: .15rem;
-  position: relative;
   align-items: flex-end;
   justify-self: center;
   justify-content: center;
-  z-index: 1;
   box-shadow: 0 6px 8px -6px rgba(0, 0, 0, 0.7);
   overflow: hidden;
+  transform: translate(-25px, 45px);
+  z-index: -1;
+}
+.modal-background{
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  backdrop-filter: blur(3px);
+  z-index: -1;
 }
 .menu a{
   display: block;
@@ -61,9 +69,9 @@ header .search-modal svg{
 }
 nav {
   position: fixed;
+  top: 50px;
+  right: 2px;
   grid-column-start: 2;
-  top: 1.2em;
-  right: .2em;
   z-index: 2;
 }
 nav ul{
