@@ -22,7 +22,7 @@
     border-radius: 0.45rem 0 0.45rem 0.45rem;
     box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.35);
     overflow: hidden;
-    /* display: none; */
+   
 }
 nav .subReddits li{
     display: flex;box-sizing: border-box;

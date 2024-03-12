@@ -73,6 +73,7 @@ nav {
   right: 2px;
   grid-column-start: 2;
   z-index: 2;
+  display: none;
 }
 nav ul{
   list-style-type: none;
