@@ -31,6 +31,7 @@
 .post-title{
     grid-area: title;
     justify-self: center;
+    text-align: center;
 }
 .votes{
     grid-area: votes;
@@ -46,4 +47,5 @@
 
 .post-info{
     grid-area: info;
+    justify-self: center;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import SubReddits from '../Features/SubReddit/SubReddits';
 import './AppLayout.css';
 import { SearchBar } from '../Components/SearchBar/SearchBar';
@@ -13,7 +13,9 @@ export default function AppLayout() {
 			
 			
 			<header>
-				<h2>noeddit</h2>
+				<Link to="/">
+					<h2>noeddit</h2>
+				</Link>
 			<div className="header-overhang"><p>r/subReddit</p></div>
 				<div className='header-right'>
 					<SearchBar />

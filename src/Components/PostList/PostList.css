@@ -1,0 +1,4 @@
+.postList a{
+    text-decoration: none;
+    color: var(--font-color);
+ }

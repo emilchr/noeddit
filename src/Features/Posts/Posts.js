@@ -1,29 +1,23 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import {
-	fetchPosts,
-	fetchPhotos,
 	loadAllPosts,
-	loadAllPhotos,
 } from './postsSlice';
 import { PostList } from '../../Components/PostList/PostList';
 
 function Posts() {
-	const dispatch = useDispatch();
+	
 
 	const isLoading = useSelector((state) => state.posts.isLoading);
 	const hasError = useSelector((state) => state.posts.hasError);
 	const loadPosts = useSelector(loadAllPosts);
-	const loadPhotos = useSelector(loadAllPhotos);
+	
 
-	useEffect(() => {
-		dispatch(fetchPhotos());
-		dispatch(fetchPosts());
-	}, [dispatch]);
+	
 
 	if (!isLoading && loadPosts[0]) {
-		console.log(loadPosts);
-		console.log(loadPhotos);
+		console.log("ok");
+		
 	}
 	
 	let content = ''; // Content will get assigned to this variable.
