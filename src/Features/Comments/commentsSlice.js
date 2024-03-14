@@ -23,7 +23,13 @@ export const commentsSlice = createSlice({
 		isLoading: false,
 		hasError: false,
 	},
-	reducers: {},
+	reducers: {
+		rehydrateComments: (state) => {
+			
+			const persistedState = JSON.parse(localStorage.getItem('comments'));
+			state.comments = persistedState;
+			
+		}},
 	extraReducers: (builder) => {
 		builder
 			.addCase(fetchComments.pending, (state) => {
@@ -48,6 +54,8 @@ export const commentsSlice = createSlice({
 });
 
 // Action creators
+
+export const { rehydrateComments } = commentsSlice.actions;
 
 // Selectors
 export const loadAllComments= (state) => state.comments.comments;

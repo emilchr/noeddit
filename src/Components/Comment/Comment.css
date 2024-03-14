@@ -3,8 +3,8 @@
     grid-template-columns: 1fr;
     grid-template-rows: .1fr auto;
     grid-template-areas:
-        "name name"
-        "body body";
+        "body body"
+        "name name";
     margin-bottom: 1.5em;
     margin-left: 1em;
     margin-right: 1em;
@@ -20,9 +20,11 @@
     margin-bottom: 0;
     padding-bottom: 0;
 }
-.comment-name{
-    grid-area: name;
-}
 .comment-body{
     grid-area: body;
+}
+.comment-name{
+    grid-area: name;
+    padding-bottom: 0.5em;
+    justify-self: end;
 }

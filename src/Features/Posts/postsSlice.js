@@ -26,11 +26,6 @@ export const fetchPhotos = createAsyncThunk('posts/fetchPhotos', async () => {
 	}
 });
 
-// Hydrate state with additional data
-const addData =  {
-	upVotes: 0,
-	downVotes: 0
-}
 
 // Slice
 export const postsSlice = createSlice({
@@ -41,7 +36,14 @@ export const postsSlice = createSlice({
 		isLoading: false,
 		hasError: false,
 	},
-	reducers: {},
+	reducers: {
+		rehydratePosts: (state) => {
+			
+			const persistedState = JSON.parse(localStorage.getItem('posts'));
+			state.posts = persistedState;
+			
+		}
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(fetchPosts.pending, (state) => {
@@ -86,6 +88,8 @@ export const postsSlice = createSlice({
 });
 
 // Action creators
+
+export const { rehydratePosts } = postsSlice.actions
 
 // Selectors
 export const loadAllPosts = (state) => state.posts.posts;

@@ -17,7 +17,7 @@ export const PostList = () => {
 	useEffect(() => {
 		dispatch(fetchPhotos());
 		dispatch(fetchPosts());
-		dispatch(fetchComments())
+		dispatch(fetchComments());
 	}, [dispatch]);
 	
   const loadPosts = useSelector(loadAllPosts)
