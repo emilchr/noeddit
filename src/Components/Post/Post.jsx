@@ -8,11 +8,10 @@ export const Post = (props) => {
 
 	// console.log("POST: props post.id: " + props.post.id)
 	const post = props.post;
-
-	// TODO: Add useParams here, for loading state from store, not through props from PostList. ? But PostList needs the singular posts in sequence.
 	
 	let content = '';
 	// if (!post){console.log('Post error: ' + post)} else { console.log(post)}
+	// If post is undefined, log error and repeat.
 	if (post) {
 		content = <>
 		<div className="post" id={post.id} >
