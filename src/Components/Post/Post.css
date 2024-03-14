@@ -8,21 +8,15 @@
         "votes text"
         "votes image"
         "info info";
-    margin-bottom: 1.5em;
+    margin-bottom: .75em;
     margin-left: 1em;
     margin-right: 1em;
     gap: .25em;
-    padding: .75em 0.75em;
+    padding: .75em .75em;
     box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2), 0 3px 12px 0 rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
-.post:first-of-type{
-    margin-top: 1.5em;
-}
-.post:last-of-type{
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
+
 .sub-title{
     font-size: xx-small;
     grid-area: head;

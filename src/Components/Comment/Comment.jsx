@@ -1,11 +1,8 @@
-import React from 'react'
+import React from 'react';
 import './Comment.css';
-import { useSelector } from 'react-redux';
-import { loadAllComments } from '../../Features/Comments/commentsSlice';
-import { useParams } from 'react-router-dom';
 
 export default function Comment(props) {
-
+    
     return (
         <div className='comment'>
             <div className='comment-body'>

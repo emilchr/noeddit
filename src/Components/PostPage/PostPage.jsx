@@ -30,9 +30,9 @@ export const PostPage = () => {
 	// console.log('singlePost: ' + singlePost.id)
 	
 	return (
-	<>
+	<div className='postPage'>
 		<Post post={singlePost} />
 		<CommentList />
-	</>
+	</div>
 	);
 };
