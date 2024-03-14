@@ -9,6 +9,7 @@ export const Post = (props) => {
 
 	const post = props.post;
 
+	
 	return (
 	<>
 		<div className="post" id={post.id} >
