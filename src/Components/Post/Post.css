@@ -12,7 +12,7 @@
     margin-left: 1em;
     margin-right: 1em;
     gap: .25em;
-    padding: 0.75em 0.75em;
+    padding: .75em 0.75em;
     box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2), 0 3px 12px 0 rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
@@ -48,4 +48,5 @@
 .post-info{
     grid-area: info;
     justify-self: center;
+    padding-bottom: .5em;
 }

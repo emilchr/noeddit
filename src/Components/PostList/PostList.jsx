@@ -28,7 +28,7 @@ export const PostList = () => {
 
     const linkToPost = "posts/" + post.id;
 
-    return(
+    return (
     <Link to={linkToPost} key={post.id} >
       <Post post={loadPosts[index]} />
     </Link>
