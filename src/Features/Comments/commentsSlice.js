@@ -29,13 +29,13 @@ export const commentsSlice = createSlice({
 			.addCase(fetchComments.pending, (state) => {
 				state.isLoading = true;
 				state.hasError = false;
-				console.log('fetchComments is pending.');
 			})
 			.addCase(fetchComments.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.hasError = false;
 				state.comments = action.payload;
-				console.log('fetchComments are fetched.');
+				console.log('fetchComments is fulfilled.');
+				localStorage.setItem('comments', JSON.stringify(state.comments)) // Sends the fetched state to localStorage for persistedState.
 			})
 			.addCase(fetchComments.rejected, (state, action) => {
 				state.isLoading = false;

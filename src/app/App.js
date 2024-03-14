@@ -18,8 +18,9 @@ function App() {
 					<Route path="posts" element={<PostList />} />
 					<Route path="posts/:postId"  element={<PostPage /> } />
 					<Route path="subreddits" element={<SubReddits />} />
-					<Route path="*" element={<NotFound />} />
+					<Route path="*" element={<NotFound />} />	
 				</Route>
+				
 			</Routes>
 		</BrowserRouter>
 	);

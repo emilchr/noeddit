@@ -33,12 +33,11 @@ export const subRedditsSlice = createSlice({
 			.addCase(fetchLinks.pending, (state) => {
 				state.isLoading = true;
 				state.hasError = false;
-				console.log('fetchLinks is pending.');
 			})
 			.addCase(fetchLinks.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.hasError = false;
-				console.log('fetchPosts is fulfilled.');
+				console.log('fetchLinks is fulfilled.');
 				state.subReddits = action.payload;
 			})
 			.addCase(fetchLinks.rejected, (state, action) => {

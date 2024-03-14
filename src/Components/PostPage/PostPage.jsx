@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './PostPage.css';
 import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts, loadAllPosts } from '../../Features/Posts/postsSlice';
+import { useSelector } from 'react-redux';
+import { loadAllPosts } from '../../Features/Posts/postsSlice';
 import { Post } from '../Post/Post';
 import CommentList from '../CommentList/CommentList';
 
@@ -10,25 +10,20 @@ export const PostPage = () => {
 	const params = useParams();
 	let { postId } = params;
 	postId = Number(postId); // Converts postId to a number
-	const loadPosts = useSelector(loadAllPosts)
-	
+	let loadPosts = useSelector(loadAllPosts);
 
-	// TODO: Need to create a function that loads the current post and comments from api or localStorage
-    
-	const dispatch = useDispatch();
+	// Check if state.posts is empty. If empty rehydrate with the state stored in localStorage.
+	
+		if (loadPosts.length === 0) {
 
-	useEffect(() => {
-		dispatch(fetchPosts());
-	}, [dispatch]);
-	
-    // console.log(loadComments)
-	console.log("POSTPAGE: params.id " + postId)
-	
-	// console.log(loadPosts)
+			const persistedState = JSON.parse(localStorage.getItem('posts'))
+					
+					loadPosts = persistedState;
+				}
+
 
 	const singlePost = loadPosts.find((post) => post.id === postId ); // Selects the post that has the same ID as postID
 
-	console.log('POSTPAGE: SinglePost id ' + singlePost.id)
 	
 	return (
 	<>

@@ -9,10 +9,20 @@ export default function Comment() {
 	let { postId } = params;
 	
 	postId = Number(postId); // Converts postId to a number
+    let loadComments = useSelector(loadAllComments);
 
-    const comments = useSelector(loadAllComments);
-    const postComments = comments.filter((comment) => comment.postId === postId);
+        if (loadComments.length === 0) {
+
+                const persistedState = JSON.parse(localStorage.getItem('comments'))
+                                        
+                    loadComments = persistedState;
+
+                    }
+
     
+    const postComments = loadComments.filter((comment) => comment.postId === postId);
+    
+
     return (
         <div className='comment'>
                 <div className='comment-name'><h4> Comment Name: {postComments[0].name}</h4>
