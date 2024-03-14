@@ -1,23 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Post } from '../Post/Post';
 import './PostList.css';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
-	loadAllPosts,
+	loadAllPosts,fetchPhotos, fetchPosts
 } from '../../Features/Posts/postsSlice';
+
+import { useDispatch } from 'react-redux';
+import { fetchComments } from '../../Features/Comments/commentsSlice';
 
 export const PostList = () => {  
   
+  const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(fetchPhotos());
+		dispatch(fetchPosts());
+		dispatch(fetchComments())
+	}, [dispatch]);
+	
   const loadPosts = useSelector(loadAllPosts)
 
   
   const listPosts = loadPosts.map((post, index) => {
     
-    // const photos = props.photos.map((photo) => {
-    //   // loads all photos into the variable photos and returns a img and title.
-    //   return <img key={photo.id} src={photo.thumbnailUrl} alt={photo.title}></img>;
-    // });
+
     const linkToPost = "posts/" + post.id;
 
     return(

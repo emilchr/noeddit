@@ -4,7 +4,6 @@ import SubReddits from '../Features/SubReddit/SubReddits';
 import './AppLayout.css';
 import { SearchBar } from '../Components/SearchBar/SearchBar';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 
 export default function AppLayout() {
@@ -20,7 +19,7 @@ export default function AppLayout() {
 				<div className='header-right'>
 					<SearchBar />
 					
-						<a href=''><MenuRoundedIcon style={{color: 'white'}} /></a>
+						<a href='/'><MenuRoundedIcon style={{color: 'white'}} /></a>
 					
 				</div>
 

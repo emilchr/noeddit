@@ -1,0 +1,28 @@
+.comment{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: .1fr auto;
+    grid-template-areas:
+        "name name"
+        "body body";
+    margin-bottom: 1.5em;
+    margin-left: 1em;
+    margin-right: 1em;
+    gap: .25em;
+    padding: 0.75em 0.75em;
+    box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2), 0 3px 12px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+.comment:first-of-type{
+    margin-top: 1.5em;
+}
+.comment:last-of-type{
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.comment-name{
+    grid-area: name;
+}
+.comment-body{
+    grid-area: body;
+}

@@ -2,10 +2,11 @@ import React from 'react';
 import './Post.css';
 
 
+
 export const Post = (props) => {
-	
+
 	// console.log("POST: props post.id: " + props.post.id)
-	
+
 	const post = props.post;
 
 	return (
