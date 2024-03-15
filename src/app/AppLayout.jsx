@@ -5,8 +5,22 @@ import './AppLayout.css';
 import { SearchBar } from '../Components/SearchBar/SearchBar';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
+import { useDispatch, useSelector } from 'react-redux';
+import { menuState, toggleMenu } from '../Features/userUiSlice/userUiSlice';
 
 export default function AppLayout() {
+
+	const dispatch = useDispatch();
+	const currentMenuState = useSelector(menuState);
+	const handleClick = (e) => {
+		e.preventDefault();
+
+		if (!currentMenuState){
+			
+			dispatch(toggleMenu());
+		}
+	}
+	
 	return (
 		<><div className='container'>
 			
@@ -17,9 +31,10 @@ export default function AppLayout() {
 				</Link>
 			<div className="header-overhang"><p>r/subReddit</p></div>
 				<div className='header-right'>
+					
 					<SearchBar />
 					
-						<a href='/'><MenuRoundedIcon style={{color: 'white'}} /></a>
+						<button onClick={handleClick}><MenuRoundedIcon style={{color: 'white'}} /></button>
 					
 				</div>
 

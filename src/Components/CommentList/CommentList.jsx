@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 
 
 export default function CommentList() {
-   // TODO: filter, then map over comments to get correct comments assosiated with post.
+   // filter and map over comments to get correct comments assosiated with post.
    const params = useParams();
    let { postId } = params;
    

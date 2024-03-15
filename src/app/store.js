@@ -3,6 +3,7 @@ import postsReducer from '../Features/Posts/postsSlice';
 import commentsReducer from '../Features/Comments/commentsSlice';
 import searchResultsReducer from '../Features/SearchResults/searchResultsSlice';
 import subRedditsReducer from '../Features/SubReddit/subRedditsSlice';
+import userUiReducer from '../Features/userUiSlice/userUiSlice';
 
 export const store = configureStore({
 	reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
 		posts: postsReducer,
 		searchResults: searchResultsReducer,
 		subReddits: subRedditsReducer,
+		userUi: userUiReducer,
 	},
 });
