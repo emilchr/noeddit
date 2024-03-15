@@ -19,32 +19,32 @@ export const subRedditLinks = () => {
 					{
 						title: 'SubReddit 2',
 						id: 2,
-						url: '/posts',
+						url: '/posts1',
 					},
 					{
 						title: 'SubRedditwewqe 3',
 						id: 3,
-						url: '/posts',
+						url: '/posts2',
 					},
 					{
 						title: 'SubReddit 4',
 						id: 4,
-						url: '/posts',
+						url: '/posts3',
 					},
 					{
 						title: 'SubRedditqwqw 5',
 						id: 5,
-						url: '/posts',
+						url: '/posts4',
 					},
 					{
 						title: 'SubRedditwwq 6',
 						id: 6,
-						url: '/posts',
+						url: '/posts5',
 					},
 					{
 						title: 'SubReddit 7qweqwe',
 						id: 7,
-						url: '/posts',
+						url: '/posts6',
 					},
 					{
 						title: 'SubReddit 8',

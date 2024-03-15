@@ -49,7 +49,7 @@ header a{
   justify-content: center;
   box-shadow: 0 6px 8px -6px rgba(0, 0, 0, 0.7);
   overflow: hidden;
-  transform: translate(-25px, 45px);
+  transform: translate(-15px, 45px);
   z-index: -1;
 }
 .modal-background{
@@ -68,12 +68,13 @@ header .search-modal svg{
   transform: scale(1.2);
 }
 header .toggle-button{
+  margin: 0 0.25em;
   z-index: 3;
 }
 nav {
   position: absolute;
   top: 50px;
-  right: 12px;
+  right: 0.9em;
   grid-column-start: 2;
   z-index: 2;
 }

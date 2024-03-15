@@ -1,5 +1,5 @@
 form{
-    margin-right: .5em;
+    margin-right: 0em;
     display: flex;
     flex-direction: row;
 }
@@ -7,9 +7,10 @@ form{
 .search-modal-top{
     align-self: flex-end;
     position: relative;
-    display: flex;
+    display: block;
     justify-content: center;
     background-color: var(--accent-color);
+    height: 1.36em;
     width: 2em;
     top: -1.7em;
     right: -.75em;

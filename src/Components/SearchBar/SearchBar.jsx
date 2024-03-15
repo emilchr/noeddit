@@ -6,6 +6,7 @@ export const SearchBar = () => {
     <>
     <form>
         <div className='search-modal'>
+          <div className="search-modal-top"></div>
           <input type="search" name="search" id="search" placeholder='Search...' />
         </div>
     </form>
