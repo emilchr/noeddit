@@ -22,10 +22,12 @@ header{
   top: 0;
   padding: 0 0.25em;
 }
-header a, header a h2{
+header a h2{
   margin-left: 1em;
-  text-decoration: none;
   color: var(--background-color);
+}
+header a{
+  text-decoration: none;
 }
 .header-right{
   display: inline-flex;
@@ -51,7 +53,6 @@ header a, header a h2{
   z-index: -1;
 }
 .modal-background{
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -60,30 +61,24 @@ header a, header a h2{
   backdrop-filter: blur(3px);
   z-index: -1;
 }
-.menu a{
-  display: block;
-  margin-right: 1.75em;
-}
 .header-right a svg{
   transform: scale(1.4);
 }
 header .search-modal svg{
   transform: scale(1.2);
 }
+header .toggle-button{
+  z-index: 3;
+}
 nav {
-  position: fixed;
+  position: absolute;
   top: 50px;
-  right: 2px;
+  right: 12px;
   grid-column-start: 2;
   z-index: 2;
-  
 }
 nav ul{
   list-style-type: none;
-}
-.subReddits-top svg {
-  transform: scale(1.2);
-  color: white;
 }
 main {
   grid-row: 2;

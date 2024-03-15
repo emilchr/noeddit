@@ -5,6 +5,8 @@ import './AppLayout.css';
 import { SearchBar } from '../Components/SearchBar/SearchBar';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import { useDispatch, useSelector } from 'react-redux';
 import { menuState, toggleMenu } from '../Features/userUiSlice/userUiSlice';
 
@@ -12,13 +14,15 @@ export default function AppLayout() {
 
 	const dispatch = useDispatch();
 	const currentMenuState = useSelector(menuState);
+	
 	const handleClick = (e) => {
 		e.preventDefault();
-
-		if (!currentMenuState){
+		if (!currentMenuState){ // Check if currentMenuState is false (it should be false).
 			
-			dispatch(toggleMenu());
+			// Shows the navigation 
 		}
+		dispatch(toggleMenu());
+		console.log('Toggled menu state: ' + currentMenuState)
 	}
 	
 	return (
@@ -30,19 +34,35 @@ export default function AppLayout() {
 					<h2>noeddit</h2>
 				</Link>
 			<div className="header-overhang"><p>r/subReddit</p></div>
+			{!currentMenuState ? 
+				null
+				:
+				<div className='modal-background'></div>
+				}
 				<div className='header-right'>
-					
+				<button className='toggle-button'><SearchRoundedIcon style={{color: 'white'}}/></button>
+
 					<SearchBar />
 					
-						<button onClick={handleClick}><MenuRoundedIcon style={{color: 'white'}} /></button>
+					<button 
+					className='toggle-button' 
+					onClick={handleClick}>
+						{!currentMenuState ? 
+						<MenuRoundedIcon style={{color: 'white'}} />
+						:
+						<CloseRoundedIcon style={{color: 'white'}} />
+						}
+					</button>
 					
 				</div>
-
-			</header>
-
+				{!currentMenuState ? null 
+				: 
 				<nav>
 					<SubReddits />				
-				</nav>
+				</nav>}
+			</header>
+
+				
 
 			<main>
 				<Outlet />

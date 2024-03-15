@@ -31,7 +31,6 @@ form{
     top: 3.1em;
     right: 2.3em;
     z-index: 2;
-    display: none;
 }
 input[type=search]{
     border: 0;
