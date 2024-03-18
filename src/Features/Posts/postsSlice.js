@@ -96,4 +96,7 @@ export const loadAllPosts = (state) => state.posts.posts;
 
 export const loadAllPhotos = (state) => state.posts.photos;
 
+export const postLoading = (state) => state.posts.isLoading;
+export const postError = (state) => state.posts.hasError;
+
 export default postsSlice.reducer;

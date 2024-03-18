@@ -22,19 +22,22 @@ export default function AppLayout() {
 		dispatch(toggleMenu());
 		// console.log('Toggled menu state: ' + currentMenuState)
 	};
+
 	const handleSearchClick = (e) => {
 		e.preventDefault();
 		
 		dispatch(toggleSearch());
 		// console.log('Toggled menu state: ' + currentMenuState)
 	};
-	const handleDisableClick = (e) => {
+
+	const handleDisableClick = () => { // handles disabling modal when user clicks outside the container.
 		if (currentMenuState === true){
 			dispatch(toggleMenu());
 		} else if (currentSearchState === true){
 			dispatch(toggleSearch());
 		};
 	}
+	
 	let modalBackground = '';
 	if (currentMenuState || currentSearchState){ // if one condition is true, modalBackground is displayed.
 		modalBackground = <div className='modal-background' onClick={handleDisableClick}></div>
@@ -85,8 +88,6 @@ export default function AppLayout() {
 					</nav>
 				}
 			</header>
-
-				
 
 			<main>
 				<Outlet />

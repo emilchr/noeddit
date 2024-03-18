@@ -2,7 +2,7 @@ import React from 'react';
 import './PostPage.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadAllPosts, rehydratePosts } from '../../Features/Posts/postsSlice';
+import { loadAllPosts, postError, postLoading, rehydratePosts } from '../../Features/Posts/postsSlice';
 import { Post } from '../Post/Post';
 import CommentList from '../CommentList/CommentList';
 import { loadAllComments, rehydrateComments } from '../../Features/Comments/commentsSlice';
@@ -14,6 +14,8 @@ export const PostPage = () => {
 
 	let loadPosts = useSelector(loadAllPosts);
 	let loadComments = useSelector(loadAllComments);
+	const isLoading = useSelector(postLoading);
+	const hasError = useSelector(postError);
 
 	const dispatch = useDispatch();
 
@@ -26,10 +28,12 @@ export const PostPage = () => {
 		dispatch(rehydrateComments());
 		}
 
-	const singlePost = loadPosts.find((post) => post.id === postId ); // Selects the post that has the same ID as postID
-	// console.log('singlePost: ' + singlePost.id)
-	
-	return (
+		// console.log('singlePost: ' + singlePost.id)
+		
+
+		const singlePost = loadPosts.find((post) => post.id === postId ); // Selects the post that has the same ID as postID
+		
+		return (
 	<div className='postPage'>
 		<Post post={singlePost} />
 		<CommentList />
