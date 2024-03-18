@@ -21,17 +21,24 @@ export default function AppLayout() {
 		
 		dispatch(toggleMenu());
 		// console.log('Toggled menu state: ' + currentMenuState)
-	}
+	};
 	const handleSearchClick = (e) => {
 		e.preventDefault();
 		
 		dispatch(toggleSearch());
 		// console.log('Toggled menu state: ' + currentMenuState)
+	};
+	const handleDisableClick = (e) => {
+		if (currentMenuState === true){
+			dispatch(toggleMenu());
+		} else if (currentSearchState === true){
+			dispatch(toggleSearch());
+		};
 	}
 	let modalBackground = '';
 	if (currentMenuState || currentSearchState){ // if one condition is true, modalBackground is displayed.
-		modalBackground = <div className='modal-background'></div>
-	}
+		modalBackground = <div className='modal-background' onClick={handleDisableClick}></div>
+	};
 	
 	return (
 		<><div className='container'>
