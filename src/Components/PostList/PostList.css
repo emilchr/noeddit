@@ -3,5 +3,5 @@
     color: var(--font-color);
  }
 .postList:first-child{
-    margin-top: 1.5em;
+    margin-top: .25em;
 }

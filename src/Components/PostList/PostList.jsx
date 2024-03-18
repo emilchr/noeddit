@@ -33,7 +33,7 @@ export const PostList = () => {
       <Post post={loadPosts[index]} />
     </Link>
     )
-  }).splice(0, 10); // Max posts at 10 XXXXXXXXXXXXXXXXXXXXX
+  }); // Max posts at 10 XXXXXXXXXXXXXXXXXXXXX
 
   return (
     <div className='postList'>
