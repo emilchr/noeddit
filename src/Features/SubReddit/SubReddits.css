@@ -1,4 +1,5 @@
 .subReddits-top{    
+    position: absolute;
     display: flex;
     justify-content: center;
     background-color: var(--accent-color);
@@ -8,37 +9,63 @@
     border-radius: 0.45em 0.45em 0 0;
     box-shadow: -6px -8px 10px -5px rgba(0, 0, 0, 0.15), 
                 19px -8px 10px -1px rgba(0, 0, 0, 0.15);
-    position: absolute;
     top: -25px;
     right: 0;                
 }
 .subReddits{
-    background-color: var(--accent-color);
     display: flex;
     flex-direction: column;
-    max-width: 90vw;
+    background-color: var(--accent-color);
+    max-width: 80vw;
     padding: .25em .5em .25em .5em;
     border-radius: 0.45rem 0 0.45rem 0.45rem;
     box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.35);
     overflow: hidden;
 }
 nav .subReddits li{
+    position: relative;
     display: flex;
     box-sizing: border-box;
     flex-direction: row;
-    background-color: var(--background-color);
+    background-color: var(--accent-color);
     border: 1px solid var(--background-color);
-    margin: .25em 0;
+    margin: .55em 0;
+    padding: .2em .5em;
+    min-width: 15em;
     border-radius: .25em;
-    transition: linear 200ms;
+    letter-spacing: .05em;
+    overflow: hidden;
 }
-nav .subReddits li:hover{
-    background-color: var(--accent-color);
+nav .subReddits li::before{
+    position: absolute;
+    content: '';
+    background-color: #fff;
+    opacity: .2;
+    width: 9em;
+    height: 1em;
+    transform: rotate(35deg);
+    left: -8em;
+    transition: left 350ms cubic-bezier(0.19, 1, 0.22, 1);
 }
-nav .subReddits li .active, li{
+nav .subReddits li .active{
+    font-weight: bolder;
+}
+nav .subReddits li .active::after{
+    position: absolute;
+    content: '';  
+    opacity: .4;  
+    background-color: #fff;;
+    width: 9em;
+    height: 1em;
+    transform: rotate(35deg);
+    left: 66%;
+}
+nav .subReddits li:hover::before{
+    left: 85%;
+}
+nav .subReddits li a, nav .subReddits li a:hover{
     border-radius: inherit;
-    background-color: var(--accent-color);
-    color: var(--background-color);   
+    transition: left 350ms cubic-bezier(0.19, 1, 0.22, 1); 
 }
 nav .subReddits li a::before {
     content: "r/";
@@ -48,7 +75,8 @@ nav .subReddits li a{
     width: 100%;
     border-radius: inherit;
     padding: 0 .2em;
-    font-size: xx-large;
+    font-size: large;
     text-decoration: none;
-    color: var(--font-color);
+    color: var(--background-color);
 }
+

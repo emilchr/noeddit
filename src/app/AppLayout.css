@@ -22,19 +22,16 @@ header{
   top: 0;
   padding: 0 0.25em;
 }
-header a h2{
-  margin-left: 1em;
+header h2{
+  cursor: pointer;
   color: var(--background-color);
-}
-header a{
-  text-decoration: none;
+  margin-left: .25em;
 }
 .header-right{
   display: inline-flex;
   align-items: center;
-  margin-right: .75em;
+  padding-right: .75em;
 }
-
 .header-overhang{
   display: flex;
   background-color: var(--accent-color);
@@ -42,6 +39,7 @@ header a{
   font-size: small;
   height: 1rem;
   width: 50%;
+  max-width: 40rem;
   border-radius: 0 0 .75rem .75rem;
   padding-bottom: .15rem;
   align-items: flex-end;
@@ -49,7 +47,7 @@ header a{
   justify-content: center;
   box-shadow: 0 6px 8px -6px rgba(0, 0, 0, 0.7);
   overflow: hidden;
-  transform: translate(-15px, 45px);
+  transform: translate(-1em, 45px);
   z-index: -1;
 }
 .modal-background{
@@ -82,16 +80,17 @@ nav ul{
   list-style-type: none;
 }
 main {
+  position: relative;
   grid-row: 2;
   margin-top: 1em;
   height: fit-content;
   justify-self: center;
-  position: relative;
+  max-width: 70em;
 }
 
 footer {
   background-color: var(--accent-color);
-  grid-row: 3 ;
+  grid-row: 3;
   grid-column: span 2;
   text-align: center; 
   width: 100%;

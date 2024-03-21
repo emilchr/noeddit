@@ -30,6 +30,8 @@
 .votes{
     grid-area: votes;
     align-self: center;
+    display: flex;
+    flex-direction: column;
 }
 .post-text{
     grid-area: text;
@@ -41,6 +43,14 @@
 
 .post-info{
     grid-area: info;
-    justify-self: center;
-    padding-bottom: .5em;
+    display: inline-flex;
+    border-top: 1px solid rgb(178, 178, 178);
+    font-size: small;
+    width: 100%;
+    justify-content: center;
+}
+.post-info p{
+    margin-top: .5em;
+    
+    
 }

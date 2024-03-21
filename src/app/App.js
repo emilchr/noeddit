@@ -1,14 +1,16 @@
 import NotFound from '../Features/NotFound/NotFound';
 import AppLayout from './AppLayout';
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Route, BrowserRouter, Routes, useLocation } from 'react-router-dom';
 import SubReddits from '../Features/SubReddit/SubReddits';
 import { PostList } from '../Components/PostList/PostList';
 
 import { PostPage } from '../Components/PostPage/PostPage';
+import { useEffect } from 'react';
 
 function App() {
 
-
+	
+	
 
 	return (
 		<BrowserRouter>

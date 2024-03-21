@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import SubReddits from '../Features/SubReddit/SubReddits';
 import './AppLayout.css';
 import { SearchBar } from '../Components/SearchBar/SearchBar';
@@ -11,11 +11,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { menuState, searchState, toggleMenu, toggleSearch } from '../Features/userUiSlice/userUiSlice';
 
 export default function AppLayout() {
+	const { pathname } = useLocation();
+
+	useEffect(() => { // Scrolls to top on route change.
+		
+		window.scrollTo(0, 0);
+
+	}, [pathname])
 
 	const dispatch = useDispatch();
 	const currentMenuState = useSelector(menuState);
 	const currentSearchState = useSelector(searchState);
 	
+	const navigate = useNavigate();
+
 	const handleMenuClick = (e) => {
 		e.preventDefault();
 		
@@ -37,7 +46,7 @@ export default function AppLayout() {
 			dispatch(toggleSearch());
 		};
 	}
-	
+
 	let modalBackground = '';
 	if (currentMenuState || currentSearchState){ // if one condition is true, modalBackground is displayed.
 		modalBackground = <div className='modal-background' onClick={handleDisableClick}></div>
@@ -48,9 +57,9 @@ export default function AppLayout() {
 			
 			
 			<header>
-				<Link to="/">
-					<h2>noeddit</h2>
-				</Link>
+				
+					<h2 onClick={() => {navigate('/')}}>noeddit</h2>
+				
 			<div className="header-overhang"><p>r/subReddit</p></div>
 			
 				{ // Displays modalBackground.
@@ -61,7 +70,7 @@ export default function AppLayout() {
 				<button className='toggle-button' onClick={handleSearchClick}>
 					
 					{!currentSearchState ? 
-							<SearchRoundedIcon style={{color: 'white'}}/>
+							<SearchRoundedIcon style={{color: 'white'}} />
 							:
 							<CloseRoundedIcon style={{color: 'white'}} />
 						}

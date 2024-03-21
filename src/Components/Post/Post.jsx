@@ -1,5 +1,7 @@
 import React from 'react';
 import './Post.css';
+import { ArrowDownward, ArrowUpward } from '@mui/icons-material';
+
 
 
 
@@ -13,40 +15,41 @@ export const Post = (props) => {
 	// if (!post){console.log('Post error: ' + post)} else { console.log(post)}
 	// If post is undefined, log error and repeat.
 	if (post) {
-		content = <>
-		<div className="post" id={post.id} >
+		content = 
+			<>
+				<div className="post" id={post.id} >
 
-		<div className="sub-title">r/facePalm</div>
+				<div className="sub-title">r/facePalm</div>
 
-		<h2 className="post-title">
-		Post title: {post.title}
-		</h2>
+				<h2 className="post-title">
+				Post title: {post.title}
+				</h2>
 
-		<div className="votes">
-			Up
-			<br />
-			2.7k
-			<br />
-			Down
-		</div>
+				<div className="votes">
+					<ArrowUpward />
+					
+					2.7k
+					
+					<ArrowDownward />
+				</div>
 
-		<div className="post-text">
+				<div className="post-text">
+					
+						<p>Body: {post.body}</p>
+					
+				</div>
+
+				<div className="image-container">
+					{}
+				</div>
+
+				<div className="post-info">
+					<p>Posted by userID: <b>{post.userId}</b> - 2 minutes ago - Comments</p>
+				</div>
+
 			
-				<p>Body: {post.body}</p>
-			
-		</div>
-
-		<div className="image-container">
-			{}
-		</div>
-
-		<div className="post-info">
-			<p>Posted by userID: {post.userId} - 2 minutes ago - Comments</p>
-		</div>
-
-	
-		</div>
-	</>
+				</div>
+			</>
 	} else {
 		console.log('Loading post failed')
 	}
