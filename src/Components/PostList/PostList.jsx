@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Post } from '../Post/Post';
 import './PostList.css';
-import { Link } from 'react-router-dom';
+import { Link, ScrollRestoration } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
 	loadAllPosts, fetchPhotos, fetchPosts, postLoading, postError } from '../../Features/Posts/postsSlice';
@@ -55,7 +55,9 @@ export const PostList = () => {
 
     return (
       <div className='postList'>
-      {listPosts}      
+      {listPosts} 
+      {/* Restores position to top */}
+      <ScrollRestoration />      
       </div>
     )
   };

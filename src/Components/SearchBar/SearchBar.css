@@ -37,10 +37,10 @@ input[type=search]{
     border: 0;
     background-color: var(--background-color);
     position: absolute;
-    top: .35em;
+    top: .40em;
     align-self: center;
     height: 2em;
-    border-radius: 0.25em;
+    border-radius: 0.35em;
     width: 14rem;
     padding-left: .5em;
     outline: 0;
@@ -51,7 +51,7 @@ input[type=search]{
     position: absolute;
     width: 1.5rem;
     right: .45rem;
-    top: .40rem;
+    top: .45rem;
     transform: scale(.9)
 }
 button{

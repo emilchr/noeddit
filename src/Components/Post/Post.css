@@ -39,6 +39,7 @@
 .image-container{
     grid-area: image;
     justify-self: center;
+    width: 100%;
 }
 
 .post-info{

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Outlet, ScrollRestoration, useNavigate } from 'react-router-dom';
 import SubReddits from '../Features/SubReddit/SubReddits';
 import './AppLayout.css';
 import { SearchBar } from '../Components/SearchBar/SearchBar';
@@ -11,13 +11,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { menuState, searchState, toggleMenu, toggleSearch } from '../Features/userUiSlice/userUiSlice';
 
 export default function AppLayout() {
-	const { pathname } = useLocation();
-
-	useEffect(() => { // Scrolls to top on route change.
-		
-		window.scrollTo(0, 0);
-
-	}, [pathname])
 
 	const dispatch = useDispatch();
 	const currentMenuState = useSelector(menuState);
@@ -51,10 +44,10 @@ export default function AppLayout() {
 	if (currentMenuState || currentSearchState){ // if one condition is true, modalBackground is displayed.
 		modalBackground = <div className='modal-background' onClick={handleDisableClick}></div>
 	};
-	
+
 	return (
-		<><div className='container'>
-			
+		<>
+		<div className='container'>
 			
 			<header>
 				
@@ -106,6 +99,17 @@ export default function AppLayout() {
 		<footer>
 		Made with <FavoriteRoundedIcon style={{color: 'red'}} /> by Emil
 		</footer>
+		
+		<ScrollRestoration
+			getKey={(location) => {
+				const paths = ['/posts'];
+				return paths.includes(location.pathname)
+				? // posts restore by pathname
+					location.pathname
+				: // everything else by location like the browser
+					location.key;
+			}}
+		/> 
 	</>
 	);
 }

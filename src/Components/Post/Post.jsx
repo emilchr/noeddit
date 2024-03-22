@@ -1,6 +1,7 @@
 import React from 'react';
 import './Post.css';
 import { ArrowDownward, ArrowUpward } from '@mui/icons-material';
+import Skeleton from '../Skeleton/Skeleton';
 
 
 
@@ -40,7 +41,9 @@ export const Post = (props) => {
 				</div>
 
 				<div className="image-container">
-					{}
+					<Skeleton  height='1rem' /><br />
+					<Skeleton  height='1rem' /><br />
+					<Skeleton width='80%' height='1rem' />
 				</div>
 
 				<div className="post-info">
