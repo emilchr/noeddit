@@ -24,21 +24,17 @@ function SubReddits() {
 	} else {
 		content = (
 			<>
-				<ul>
 					{link.map((link) => (
-						<li key={link.id}>
+						<button key={link.id}>
 							<NavLink to={link.url}>{link.title}</NavLink>
-						</li>
+						</button>
 					))}	
-				</ul>
 			</>
 		);
 	}
 
 	return (
 		<>
-			
-			<div className='subReddits-top'></div>
 			<div className='subReddits'>
 				{content}
 			</div>

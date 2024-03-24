@@ -74,6 +74,7 @@ export default function AppLayout() {
 				}
 					<button 
 					className='toggle-button' 
+					
 					onClick={handleMenuClick}>
 						{!currentMenuState ? 
 							<MenuRoundedIcon style={{color: 'white'}} />

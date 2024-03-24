@@ -1,80 +1,82 @@
-.subReddits-top{    
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    background-color: var(--accent-color);
-    width: 2em;
-    height: 1.4em;
-    padding-bottom: .25rem;
-    border-radius: 0.45em 0.45em 0 0;
-    box-shadow: -6px -8px 10px -5px rgba(0, 0, 0, 0.15), 
-                19px -8px 10px -1px rgba(0, 0, 0, 0.15);
-    top: -25px;
-    right: 0;                
-}
 .subReddits{
     display: flex;
+    position: fixed;
+    right: -100%;
     flex-direction: column;
     background-color: var(--accent-color);
+    height: 100vh;
+    width: 17rem;
     max-width: 80vw;
-    padding: .25em .5em .25em .5em;
-    border-radius: 0.45rem 0 0.45rem 0.45rem;
-    box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.35);
+    border-radius: 0 0 0 .25rem;
+    box-shadow: -4px 5px 8px 1px rgba(0, 0, 0, 0.35);
+    padding-right: .5rem;
     overflow: hidden;
+   
+    animation: menu-slide .3s both;
 }
-nav .subReddits li{
+@keyframes menu-slide {
+    
+    to{
+        right: 0;
+    }
+    
+}
+nav .subReddits button{
     position: relative;
     display: flex;
     box-sizing: border-box;
     flex-direction: row;
     background-color: var(--accent-color);
     border: 1px solid var(--background-color);
-    margin: .55em 0;
-    padding: .2em .5em;
-    min-width: 15em;
-    border-radius: .25em;
-    letter-spacing: .05em;
+    margin: .45rem .25rem;
+    padding: .2rem .95rem;
+    border-radius: .25rem;
+    letter-spacing: .05rem;
+    min-width: 15rem;
     overflow: hidden;
 }
-nav .subReddits li::before{
+nav .subReddits button:first-child{
+    margin-top: 2rem;
+}
+nav .subReddits button::before{
     position: absolute;
     content: '';
     background-color: #fff;
     opacity: .2;
-    width: 9em;
-    height: 1em;
+    width: 9rem;
+    height: 1rem;
     transform: rotate(35deg);
-    left: -8em;
+    left: -8rem;
     transition: left 350ms cubic-bezier(0.19, 1, 0.22, 1);
 }
-nav .subReddits li .active{
+nav .subReddits button .active{
     font-weight: bolder;
 }
-nav .subReddits li .active::after{
+nav .subReddits button .active::after{
     position: absolute;
     content: '';  
     opacity: .4;  
     background-color: #fff;;
-    width: 9em;
-    height: 1em;
+    width: 9rem;
+    height: 1rem;
     transform: rotate(35deg);
-    left: 66%;
+    left: 75%;
 }
-nav .subReddits li:hover::before{
+nav .subReddits button:hover::before{
     left: 85%;
 }
-nav .subReddits li a, nav .subReddits li a:hover{
+nav .subReddits button a, nav .subReddits button a:hover{
     border-radius: inherit;
     transition: left 350ms cubic-bezier(0.19, 1, 0.22, 1); 
 }
-nav .subReddits li a::before {
+nav .subReddits button a::before {
     content: "r/";
 }
-nav .subReddits li a{
+nav .subReddits button a{
     display: flex;
     width: 100%;
     border-radius: inherit;
-    padding: 0 .2em;
+    padding: 0 .2rem;
     font-size: large;
     text-decoration: none;
     color: var(--background-color);
