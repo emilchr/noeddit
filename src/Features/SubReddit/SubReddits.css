@@ -1,7 +1,5 @@
 .subReddits{
     display: flex;
-    position: fixed;
-    right: -100%;
     flex-direction: column;
     background-color: var(--accent-color);
     height: 100vh;
@@ -11,15 +9,15 @@
     box-shadow: -4px 5px 8px 1px rgba(0, 0, 0, 0.35);
     padding-right: .5rem;
     overflow: hidden;
-   
-    animation: menu-slide .3s both;
+    animation: menu-slide ease-in-out .3s;
 }
 @keyframes menu-slide {
-    
-    to{
-        right: 0;
+    from{
+        transform:  translateX(110%);
     }
-    
+    to{
+        transform: translateX(0);
+    }
 }
 nav .subReddits button{
     position: relative;
