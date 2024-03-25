@@ -1,54 +1,9 @@
-
 .container{
   display: grid;
   grid-template-columns: 100vw;
   grid-template-rows: 5em auto 1.6em;
   justify-content: center;
   min-height: 95.7vh;
-}
-header{
-  display: inline-flex;
-  background-color: var(--accent-color);
-  color: #FFF;
-  grid-column-start: 1;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1;
-  width: 100vw;
-  height: 5em;
-  display: flex;
-  box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.5);
-  position: fixed;
-  top: 0;
-  padding: 0 0.25em;
-}
-header h2{
-  cursor: pointer;
-  color: var(--background-color);
-  margin-left: .25em;
-}
-.header-right{
-  display: inline-flex;
-  align-items: center;
-  padding-right: .75em;
-}
-.header-overhang{
-  display: flex;
-  background-color: var(--accent-color);
-  color: #FFF;
-  font-size: small;
-  height: 1rem;
-  width: 50%;
-  max-width: 40rem;
-  border-radius: 0 0 .75rem .75rem;
-  padding-bottom: .15rem;
-  align-items: flex-end;
-  justify-self: center;
-  justify-content: center;
-  box-shadow: 0 6px 8px -6px rgba(0, 0, 0, 0.7);
-  overflow: hidden;
-  transform: translate(-1em, 45px);
-  z-index: -1;
 }
 .modal-background{
   position: fixed;
@@ -59,19 +14,71 @@ header h2{
   backdrop-filter: blur(3px);
   z-index: -1;
 }
+header{
+  position: fixed;
+  top: 0;
+  display: flex;
+  background-color: var(--accent-color);
+  color: #FFF;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 5em;
+  box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+header h2{
+  position: absolute;
+  margin-left: .75rem;
+  cursor: pointer;
+  color: var(--background-color);
+}
+.header-right{
+  display: inline-flex;
+  margin-right: .55rem;
+  align-items: center;
+}
+.header-overhang{
+  position: relative;
+  display: flex;
+  background-color: var(--accent-color);
+  color: #FFF;
+  font-size: small;
+  height: 1rem;
+  width: 50%;
+  left: 25%;
+  max-width: 40rem;
+  border-radius: 0 0 .75rem .75rem;
+  padding-bottom: .15rem;
+  align-items: flex-end;
+  justify-self: center;
+  justify-content: center;
+  box-shadow: 0 6px 8px -6px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  transform: translate(0rem, 45px);
+  z-index: -1;
+}
 .header-right a svg{
   transform: scale(1.4);
 }
-header .search-modal svg{
+header .toggle-button svg{
   transform: scale(1.2);
 }
 header .toggle-button{
-  margin: 0 0.25em;
-  z-index: 3;
+  height: 2.2rem;
+  width: 2.2rem;
+  margin: 0 .15rem;
+  z-index: 4;
+}
+header .toggle-button:hover{ 
+    padding: .30rem 0;
+    border-radius: .45rem .45rem .45rem .45rem;
+    box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.45);
+    z-index: 4;
 }
 nav {
   position: absolute;
-  top: 50px;
+  top: 0;
   right: 0;
   grid-column-start: 2;
   z-index: 2;

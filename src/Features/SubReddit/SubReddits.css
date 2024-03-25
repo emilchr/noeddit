@@ -34,7 +34,7 @@ nav .subReddits button{
     overflow: hidden;
 }
 nav .subReddits button:first-child{
-    margin-top: 2rem;
+    margin-top: 4rem;
 }
 nav .subReddits button::before{
     position: absolute;
