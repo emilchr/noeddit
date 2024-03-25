@@ -1,25 +1,36 @@
-.skeleton {
+.skeleton{
+    display: flex;
     margin-top: .25rem;
     display: inline-block;
     line-height: 100%;
     width: 100%;
+    height: 1rem;
     border-radius: .25rem;
     background-color: #e4e4e4;
     background-image: linear-gradient(90deg,
     #e4e4e4 0px,
-    #f3f3f3 40px,
+    #f3f3f37d 40px,
     #e4e4e4 80px) ;
-    background-size: 80px 100%;
+    background-size: 80px;
     background-repeat: no-repeat;
-    background-position: left -40px top 0;
-    animation: line-shine 1.6s ease infinite;
+    background-position: -100px;
+    animation: line-shine 2s ease infinite;
+    
+}
+@keyframes line-shine{
+
+   to {
+        background-position:  101vmax;
+    }
     
 }
 
-@keyframes line-shine {
+.skeleton.image{
+    width: 15rem;
+    height: 10rem;
+}
 
-   to {
-        background-position: right -90px top 0;
-    }
-    
+.skeleton.h2{
+   height: 2rem;
+   width: 100%;
 }

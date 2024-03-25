@@ -27,7 +27,7 @@ export const PostList = () => {
         
       return (
         <div>
-          <p>Loading...</p>
+          <Post />
         </div>
         )
 
