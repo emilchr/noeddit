@@ -17,24 +17,33 @@ export default function AppLayout() {
 	const currentSearchState = useSelector(searchState);
 	
 	const navigate = useNavigate();
-
+	
+	
 	const handleMenuClick = (e) => {
 		e.preventDefault();
-		
+		const toggleMenuButton = document.getElementById('toggle-menu');
+		toggleMenuButton.checked 
+		? toggleMenuButton.checked = false 
+		: toggleMenuButton.checked = true;// Toggles the checkbox on or off
+
 		dispatch(toggleMenu());
-		// console.log('Toggled menu state: ' + currentMenuState)
 	};
 
 	const handleSearchClick = (e) => {
 		e.preventDefault();
 		
 		dispatch(toggleSearch());
-		// console.log('Toggled menu state: ' + currentMenuState)
 	};
 
 	const handleDisableClick = () => { // handles disabling modal when user clicks outside the container.
 		if (currentMenuState === true){
 			dispatch(toggleMenu());
+
+			const toggleMenuButton = document.getElementById('toggle-menu');
+			toggleMenuButton.checked 
+			? toggleMenuButton.checked = false // Toggles the checkbox off if true
+			: toggleMenuButton.checked = true;
+
 		} else if (currentSearchState === true){
 			dispatch(toggleSearch());
 		};
@@ -68,28 +77,31 @@ export default function AppLayout() {
 							<CloseRoundedIcon style={{color: 'white'}} />
 						}
 				</button>
-				{!currentSearchState ? null 
-					: 	
-					<SearchBar />
-				}
-					<button 
-					className='toggle-button' 
+				{!currentSearchState ? 
+							null
+							:
+							<SearchBar />
+						}
 					
-					onClick={handleMenuClick}>
+				
+					<label className='toggle-button' for='toggle-button' onClick={handleMenuClick}>
 						{!currentMenuState ? 
 							<MenuRoundedIcon style={{color: 'white'}} />
 							:
 							<CloseRoundedIcon style={{color: 'white'}} />
 						}
-					</button>
+					</label>
 					
 				</div>
-				{!currentMenuState ? null 
-					: 
-					<nav>
-						<SubReddits />				
-					</nav>
-				}
+				<nav>
+				<input type='checkbox' id='toggle-menu'></input>
+				{!currentMenuState ? 
+							null
+							:
+							<SubReddits />
+						}			
+				</nav>
+				
 			</header>
 
 			<main>

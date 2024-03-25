@@ -1,5 +1,6 @@
 .subReddits{
     display: flex;
+    position: relative;
     flex-direction: column;
     background-color: var(--accent-color);
     height: 100vh;
@@ -9,15 +10,34 @@
     box-shadow: -4px 5px 8px 1px rgba(0, 0, 0, 0.35);
     padding-right: .5rem;
     overflow: hidden;
-    animation: menu-slide ease-in-out .3s;
 }
 @keyframes menu-slide {
     from{
-        transform:  translateX(110%);
+        transform: translateX(600px);
     }
     to{
         transform: translateX(0);
+        
     }
+}
+@keyframes menu-slide-out {
+    from{
+        transform: translateX(0);
+    }
+    to{
+        right:  translateX(600px);
+    }
+}
+#toggle-menu[type=checkbox]{
+    display:none
+}
+#toggle-menu[type=checkbox]:checked~.subReddits{
+    transform: translateX(0);
+    animation: menu-slide ease-in-out .2s;
+}
+#toggle-menu[type=checkbox]:not(:checked)~.subReddits{
+    transform: translateX(600px);
+    animation: menu-slide-out ease-in-out .2s;
 }
 nav .subReddits button{
     position: relative;
