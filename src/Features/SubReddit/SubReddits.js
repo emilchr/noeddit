@@ -12,9 +12,7 @@ function SubReddits() {
 	const link = useSelector(loadLinks);
 	
 		
-	useEffect(() => {
-		dispatch(fetchLinks());
-	}, [dispatch]);
+
 	let content = '';
 	
 	if (isLoading) {

@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Outlet, ScrollRestoration, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { menuState, searchState, toggleMenu, toggleSearch } from '../Features/userUiSlice/userUiSlice';
 import SubReddits from '../Features/SubReddit/SubReddits';
 import './AppLayout.css';
 import { SearchBar } from '../Components/SearchBar/SearchBar';
@@ -7,8 +9,7 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
-import { useDispatch, useSelector } from 'react-redux';
-import { menuState, searchState, toggleMenu, toggleSearch } from '../Features/userUiSlice/userUiSlice';
+import { fetchLinks } from '../Features/SubReddit/subRedditsSlice';
 
 export default function AppLayout() {
 
@@ -18,9 +19,13 @@ export default function AppLayout() {
 	
 	const navigate = useNavigate();
 	
-	
+	useEffect(() => {
+		dispatch(fetchLinks()); //Fetches links from API on page load. 
+	}, [dispatch]);
+
 	const handleMenuClick = (e) => {
 		e.preventDefault();
+		
 		const toggleMenuButton = document.getElementById('toggle-menu');
 		toggleMenuButton.checked 
 		? toggleMenuButton.checked = false 
@@ -68,38 +73,37 @@ export default function AppLayout() {
 					modalBackground 
 				}
 
-				<div className='header-right'>
+			<div className='header-right'>
 				<button className='toggle-button' onClick={handleSearchClick}>
-					
+
 					{!currentSearchState ? 
-							<SearchRoundedIcon style={{color: 'white'}} />
-							:
-							<CloseRoundedIcon style={{color: 'white'}} />
-						}
+						<SearchRoundedIcon style={{color: 'white'}} />
+						:
+						<CloseRoundedIcon style={{color: 'white'}} />
+					}
 				</button>
-				{!currentSearchState ? 
-							null
-							:
-							<SearchBar />
-						}
-					
-				
-					<label className='toggle-button' for='toggle-button' onClick={handleMenuClick}>
-						{!currentMenuState ? 
-							<MenuRoundedIcon style={{color: 'white'}} />
-							:
-							<CloseRoundedIcon style={{color: 'white'}} />
-						}
-					</label>
-					
-				</div>
+					{!currentSearchState ? 
+						null
+						:
+						<SearchBar />
+					}
+
+				<label className='toggle-button' onClick={handleMenuClick}>
+					{!currentMenuState ? 
+						<MenuRoundedIcon style={{color: 'white'}} />
+						:
+						<CloseRoundedIcon style={{color: 'white'}} />
+					}
+				</label>
+						
+			</div>
 				<nav>
 				<input type='checkbox' id='toggle-menu'></input>
-				{!currentMenuState ? 
-							null
-							:
-							<SubReddits />
-						}			
+					{!currentMenuState ? 
+						null
+						:
+						<SubReddits />
+					}			
 				</nav>
 				
 			</header>
