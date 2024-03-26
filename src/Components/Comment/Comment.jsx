@@ -1,7 +1,7 @@
 import React from 'react';
 import './Comment.css';
 import { useSelector } from 'react-redux';
-import { commentError, commentLoading } from '../../Features/Comments/commentsSlice';
+import { commentError } from '../../Features/Comments/commentsSlice';
 
 
 export default function Comment(props) {

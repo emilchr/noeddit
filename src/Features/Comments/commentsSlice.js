@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const COMMENTS_URL = 'https://jsonplaceholder.typicode.com/comments';
+const COMMENTS_URL = 'https://jsonplaceholder.typicode.com/comments?';
 
-export const fetchComments = createAsyncThunk('comments/fetchComments', async () => {
+export const fetchComments = createAsyncThunk('comments/fetchComments', async (postId) => {
 	try {
-		const response = await fetch(COMMENTS_URL);
+		const response = await fetch(COMMENTS_URL + 'postId=' + postId);
 		const json = await response.json();
 
 		return json;
@@ -24,12 +24,7 @@ export const commentsSlice = createSlice({
 		hasError: false,
 	},
 	reducers: {
-		rehydrateComments: (state) => {
-			
-			const persistedState = JSON.parse(localStorage.getItem('comments'));
-			state.comments = persistedState;
-			
-		}},
+		},
 	extraReducers: (builder) => {
 		builder
 			.addCase(fetchComments.pending, (state) => {
@@ -55,7 +50,6 @@ export const commentsSlice = createSlice({
 
 // Action creators
 
-export const { rehydrateComments } = commentsSlice.actions;
 
 // Selectors
 export const loadAllComments = (state) => state.comments.comments;
