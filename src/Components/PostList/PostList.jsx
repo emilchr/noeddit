@@ -3,7 +3,7 @@ import { Post } from '../Post/Post';
 import { useDispatch } from 'react-redux';
 import { Link, ScrollRestoration } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { loadAllPosts, fetchPosts, postLoading, postError, fetchPage, postNextPage, postCurrentPage } from '../../Features/Posts/postsSlice';
+import { loadAllPosts, fetchPosts, postLoading, postError, fetchPage, postNextPage, postCurrentPage, addPage, addCurrentPage } from '../../Features/Posts/postsSlice';
 import './PostList.css';
 
 
@@ -12,8 +12,7 @@ export const PostList = () => {
   const dispatch = useDispatch();
 
 	useEffect(() => {
-
-		// dispatch(fetchPosts());
+    
     dispatch(fetchPage())
 		
   }, [dispatch]);
@@ -29,7 +28,12 @@ export const PostList = () => {
     e.preventDefault();
 
     dispatch(fetchPage(nextPage));
+    dispatch(addPage());
+    dispatch(addCurrentPage());
     
+    console.log(currentPage);
+    console.log(nextPage);
+
   };
 
     if (isLoading){
@@ -60,14 +64,14 @@ export const PostList = () => {
         <Post post={loadPosts[index]} />
       </Link>
       )
-    }).slice(0, 10); // Max posts at 10 XXXXXXXXXXXXXXXXXXXXX
+    })
 
     return (
       <div className='postList'>
       {listPosts} 
       {/* Restores position to top */}
-      <ScrollRestoration />    
       <button onClick={handleNextPage}>Load more</button>  
+      <ScrollRestoration />    
       </div>
     )
   };

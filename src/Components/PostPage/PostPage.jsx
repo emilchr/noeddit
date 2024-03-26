@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadAllPosts, rehydratePosts } from '../../Features/Posts/postsSlice';
 import { Post } from '../Post/Post';
 import CommentList from '../CommentList/CommentList';
-import { fetchComments, loadAllComments } from '../../Features/Comments/commentsSlice';
+import { fetchComments } from '../../Features/Comments/commentsSlice';
 
 export const PostPage = () => {
 	const params = useParams();

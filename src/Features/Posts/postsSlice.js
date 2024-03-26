@@ -19,9 +19,9 @@ export const fetchPosts = createAsyncThunk(
 
 export const fetchPage = createAsyncThunk(
 	'posts/fetchPage', 
-	async (currentPage) => {
+	async (nextPage) => {
 		try{
-		const response = await fetch(PAGE_URL + currentPage);
+		const response = await fetch(PAGE_URL + nextPage);
 		const json = await response.json();
 
 		return json;
@@ -36,7 +36,7 @@ export const postsSlice = createSlice({
 	initialState: {
 		posts: [],
 		currentPage: 1,
-		nextPage: 1,
+		nextPage: 2,
 		isLoading: false,
 		hasError: false,
 	},
@@ -46,6 +46,17 @@ export const postsSlice = createSlice({
 			const persistedState = JSON.parse(localStorage.getItem('posts'));
 			state.posts = persistedState;
 			
+		},
+		addPage: (state) => {
+	
+			state.nextPage = state.nextPage + 1;
+
+		}
+		,
+		addCurrentPage: (state) => {
+
+			state.currentPage = state.currentPage + 1;
+
 		}
 	},
 	extraReducers: (builder) => {
@@ -78,10 +89,15 @@ export const postsSlice = createSlice({
 			.addCase(fetchPage.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.hasError = false;
-				state.posts = action.payload;
-				console.log('Page: '+state.currentPage)
 				
-				state.nextPage++;
+				const isEmpty = action.payload.length;
+
+				if (isEmpty === 0){
+					console.log('No more posts for you.')
+				} else {
+					state.posts = state.posts.concat(action.payload);
+					localStorage.setItem('posts', JSON.stringify(state.posts))
+				}
 			})
 			.addCase(fetchPage.rejected, (state, action) => {
 				state.isLoading = false;
@@ -94,8 +110,9 @@ export const postsSlice = createSlice({
 });
 
 // Action creators
-
-export const { rehydratePosts } = postsSlice.actions
+export const { rehydratePosts } = postsSlice.actions;
+export const { addPage } = postsSlice.actions;
+export const { addCurrentPage } = postsSlice.actions;
 
 // Selectors
 export const loadAllPosts = (state) => state.posts.posts;
