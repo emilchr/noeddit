@@ -11,18 +11,19 @@ export const PostList = () => {
   
   const dispatch = useDispatch();
 
-	useEffect(() => {
-    
-    dispatch(fetchPage())
-		
-  }, [dispatch]);
 	
   const loadPosts = useSelector(loadAllPosts);
   const isLoading = useSelector(postLoading);
   const hasError = useSelector(postError);
   const nextPage = useSelector(postNextPage);
   const currentPage = useSelector(postCurrentPage);
-
+  
+	useEffect(() => {
+    if (loadPosts.length === 0){
+      dispatch(fetchPage())
+    }
+		
+  }, [dispatch, loadPosts]);
 
   const handleNextPage = (e) => {
     e.preventDefault();
