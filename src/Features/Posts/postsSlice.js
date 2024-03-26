@@ -78,7 +78,7 @@ export const postsSlice = createSlice({
 			.addCase(fetchPage.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.hasError = false;
-				state.posts = state.posts + action.payload;
+				state.posts = action.payload;
 				console.log('Page: '+state.currentPage)
 				
 				state.nextPage++;
