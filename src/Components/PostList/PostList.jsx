@@ -71,7 +71,7 @@ export const PostList = () => {
       <div className='postList'>
       {listPosts} 
       {/* Restores position to top */}
-      <button onClick={handleNextPage}>Load more</button>  
+      <button className='load-post' onClick={handleNextPage}>Load more</button>  
       <ScrollRestoration />    
       </div>
     )
