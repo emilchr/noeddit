@@ -5,7 +5,7 @@
   justify-content: center;
   align-content: space-around;
   min-height: 100vh;
-  min-width: 340px;
+  min-width: 300px;
 }
 .modal-background{
   position: fixed;
@@ -24,8 +24,9 @@ header{
   color: #FFF;
   justify-content: space-between;
   align-items: center;
+  align-self: center;
   width: 100vw;
-  min-width: 340px;
+  min-width: 300px;
   height: 5rem;
   box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.5);
   z-index: 1;
@@ -48,17 +49,15 @@ header h2{
   color: #FFF;
   font-size: small;
   height: 1rem;
-  width: 50%;
-  left: 25%;
+  width: 50vw;
+  left: 50%;
   max-width: 40rem;
   border-radius: 0 0 .75rem .75rem;
   padding-bottom: .15rem;
-  align-items: flex-end;
-  justify-self: center;
   justify-content: center;
   box-shadow: 0 6px 8px -6px rgba(0, 0, 0, 0.7);
   overflow: hidden;
-  transform: translate(0rem, 45px);
+  transform: translate(-50%, 45px);
   z-index: -1;
 }
 .header-right a svg{
@@ -97,7 +96,7 @@ main {
   height: fit-content;
   justify-self: center;
   width: 100%;
-  max-width: 70em;
+  max-width: 60rem;
 }
 
 footer {

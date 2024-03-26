@@ -15,7 +15,7 @@
     padding: .75em .75em;
     box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2), 0 3px 12px 0 rgba(0, 0, 0, 0.2);
     border-radius: .5rem;
-    min-width: 340px;
+    min-width: 300px;
 }
 .sub-title{
     display: inline-flex;
