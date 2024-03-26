@@ -11,13 +11,9 @@
     gap: .25em;
     padding: 0.25em 0.75em;
     box-shadow: 0 3px 12px -3px rgba(0, 0, 0, 0.2), 0 3px 12px -3px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
+    border-radius: .5rem;
 }
-.comment:first-child{
-    /* first comment */
-    background-color: aliceblue;
-}
-.comment:last-of-type{
+.comment:last-child{
     /* last comment */
     margin-bottom: .25rem;
     padding-bottom: .25rem;
