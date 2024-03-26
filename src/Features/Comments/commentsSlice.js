@@ -58,7 +58,8 @@ export const commentsSlice = createSlice({
 export const { rehydrateComments } = commentsSlice.actions;
 
 // Selectors
-export const loadAllComments= (state) => state.comments.comments;
-
+export const loadAllComments = (state) => state.comments.comments;
+export const commentLoading = (state) => state.comments.isLoading;
+export const commentError = (state) => state.comments.hasError;
 
 export default commentsSlice.reducer;

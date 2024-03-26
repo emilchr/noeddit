@@ -111,11 +111,11 @@ export default function AppLayout() {
 			<main>
 				<Outlet />
 			</main>
-						
-		</div>
-		<footer>
+			<footer>
 		Made with <FavoriteRoundedIcon style={{color: 'red'}} /> by Emil
-		</footer>
+		</footer>						
+		</div>
+
 		
 		<ScrollRestoration
 			getKey={(location) => {

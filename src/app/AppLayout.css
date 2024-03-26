@@ -1,9 +1,11 @@
 .container{
   display: grid;
   grid-template-columns: 100vw;
-  grid-template-rows: 5em auto 1.6em;
+  grid-template-rows: auto 1fr 2rem;
   justify-content: center;
-  min-height: 95.7vh;
+  align-content: space-around;
+  min-height: 100vh;
+  min-width: 340px;
 }
 .modal-background{
   position: fixed;
@@ -23,7 +25,8 @@ header{
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  height: 5em;
+  min-width: 340px;
+  height: 5rem;
   box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
@@ -90,7 +93,7 @@ nav ul{
 main {
   position: relative;
   grid-row: 2;
-  margin-top: 1em;
+  margin-top: 6.5rem;
   height: fit-content;
   justify-self: center;
   width: 100%;
@@ -98,10 +101,12 @@ main {
 }
 
 footer {
+  display: inline-flex;
   background-color: var(--accent-color);
   grid-row: 3;
   grid-column: span 2;
-  text-align: center; 
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 2.5em;
+  margin-top: .5rem;
 }

@@ -9,22 +9,26 @@
     margin-left: 1em;
     margin-right: 1em;
     gap: .25em;
-    padding: 0.75em 0.75em;
+    padding: 0.25em 0.75em;
     box-shadow: 0 3px 12px -3px rgba(0, 0, 0, 0.2), 0 3px 12px -3px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
 .comment:first-child{
     /* first comment */
-    background-color: violet;
+    background-color: aliceblue;
 }
 .comment:last-of-type{
-    margin-bottom: 0;
-    padding-bottom: 0;
+    /* last comment */
+    margin-bottom: .25rem;
+    padding-bottom: .25rem;
 }
 .comment-body{
     grid-area: body;
 }
 .comment-name{
     grid-area: name;
-    justify-self: end;
+    display: inline-flex;
+    justify-content: flex-end;
+    width: 100%;
 }
+
