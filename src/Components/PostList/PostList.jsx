@@ -1,27 +1,36 @@
 import React, { useEffect } from 'react';
 import { Post } from '../Post/Post';
-import './PostList.css';
+import { useDispatch } from 'react-redux';
 import { Link, ScrollRestoration } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {
-	loadAllPosts, fetchPhotos, fetchPosts, postLoading, postError } from '../../Features/Posts/postsSlice';
+import { loadAllPosts, fetchPosts, postLoading, postError, fetchPage, postNextPage, postCurrentPage } from '../../Features/Posts/postsSlice';
+import './PostList.css';
 
-import { useDispatch } from 'react-redux';
-import { fetchComments } from '../../Features/Comments/commentsSlice';
 
 export const PostList = () => {  
   
   const dispatch = useDispatch();
 
 	useEffect(() => {
-		// dispatch(fetchPhotos());
-		dispatch(fetchPosts());
+
+		// dispatch(fetchPosts());
+    dispatch(fetchPage())
 		
   }, [dispatch]);
 	
   const loadPosts = useSelector(loadAllPosts);
   const isLoading = useSelector(postLoading);
   const hasError = useSelector(postError);
+  const nextPage = useSelector(postNextPage);
+  const currentPage = useSelector(postCurrentPage);
+
+
+  const handleNextPage = (e) => {
+    e.preventDefault();
+
+    dispatch(fetchPage(nextPage));
+    
+  };
 
     if (isLoading){
         
@@ -51,13 +60,14 @@ export const PostList = () => {
         <Post post={loadPosts[index]} />
       </Link>
       )
-    }).splice(0, 10); // Max posts at 10 XXXXXXXXXXXXXXXXXXXXX
+    }).slice(0, 10); // Max posts at 10 XXXXXXXXXXXXXXXXXXXXX
 
     return (
       <div className='postList'>
       {listPosts} 
       {/* Restores position to top */}
-      <ScrollRestoration />      
+      <ScrollRestoration />    
+      <button onClick={handleNextPage}>Load more</button>  
       </div>
     )
   };
