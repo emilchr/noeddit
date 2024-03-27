@@ -48,6 +48,7 @@ input[type=search]{
 }
 .search-modal button{
     color: var(--accent-color);
+    background: none;
     position: absolute;
     width: 1.5rem;
     right: 2.65rem;
@@ -55,10 +56,4 @@ input[type=search]{
     transform: scale(.9);
     transform-origin: right;
     animation: search-expand .1s ease-in-out;
-}
-button{
-    background: none;
-    border: 0;
-    outline: 0;
-    cursor: pointer;
 }

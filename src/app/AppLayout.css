@@ -98,7 +98,15 @@ main {
   width: 100%;
   max-width: 60rem;
 }
-
+button{
+  display: flex;
+  background-color: var(--accent-color);
+  color: var(--background-color);
+  border-radius: .25rem;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
 footer {
   display: inline-flex;
   background-color: var(--accent-color);

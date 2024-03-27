@@ -3,7 +3,7 @@ import postsReducer from '../Features/Posts/postsSlice';
 import commentsReducer from '../Features/Comments/commentsSlice';
 import searchResultsReducer from '../Features/SearchResults/searchResultsSlice';
 import subRedditsReducer from '../Features/SubReddit/subRedditsSlice';
-import userUiReducer from '../Features/userUiSlice/userUiSlice';
+import userUiReducer from '../Features/userUi/userUiSlice';
 
 export const store = configureStore({
 	reducer: {
