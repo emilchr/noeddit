@@ -14,6 +14,7 @@ import {
 	loadingMorePosts,
 } from '../../Features/Posts/postsSlice';
 import './PostList.css';
+import { CircularProgress } from '@mui/material';
 
 export const PostList = () => {
 	const dispatch = useDispatch();
@@ -26,7 +27,7 @@ export const PostList = () => {
 
 	useEffect(() => {
 		if (loadPosts.length === 0) {
-			dispatch(fetchPage(0));
+			dispatch(fetchPage(1));
 		}
 	}, [dispatch, loadPosts]);
 
@@ -53,13 +54,9 @@ export const PostList = () => {
 			<div className="postList">
 				{listPosts}
 				{/* Restores position to top */}
-				<Link
-					className="load-post"
-					onClick={handleNextPage}
-					preventScrollReset={true}
-				>
-					Load more posts
-				</Link>
+				<div className="load-container">
+        <CircularProgress />
+        </div>
 				<ScrollRestoration />
 			</div>
 		);
@@ -85,25 +82,19 @@ export const PostList = () => {
 				</Link>
 			);
 		});
-
 		return (
 			<div className="postList">
 				{listPosts}
 				{/* Restores position to top */}
-				<Link
-					className="load-post"
-					onClick={handleNextPage}
-					preventScrollReset={true}
-				>
-					Load more posts
-				</Link>
+				<div className="load-container">
+        <CircularProgress />
+        </div>
 				<ScrollRestoration />
 			</div>
 		);
 	} else {
 		const listPosts = loadPosts.map((post, index) => {
 			const linkToPost = 'posts/' + post.id;
-
 			return (
 				<Link to={linkToPost} key={post.id}>
 					<Post post={loadPosts[index]} />
@@ -114,14 +105,15 @@ export const PostList = () => {
 		return (
 			<div className="postList">
 				{listPosts}
-				{/* Restores position to top */}
-				<Link
+				<div className="load-container">
+        <Link
 					className="load-post"
 					onClick={handleNextPage}
-					preventScrollReset={true}
-				>
+					preventScrollReset={true}>
 					Load more posts
 				</Link>
+        </div>
+        {/* Restores position to top */}
 				<ScrollRestoration />
 			</div>
 		);
