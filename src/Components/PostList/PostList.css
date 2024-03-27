@@ -8,12 +8,14 @@
 
 .postList .load-post {
     display: flex;
+    background-color: var(--accent-color);
+    color: var(--background-color);
     box-sizing: border-box;
-    font-size: large;
+    font-size: medium;
     justify-content: center;
-    align-items: center;
-    height: 2rem;
-    width: 6rem;
+    border-radius: .25rem;
+    height: 1.5rem;
+    width: 9rem;
     margin: 0 50%;
     transform: translateX(-50%);
     transition: opacity .2s ease;

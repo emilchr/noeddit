@@ -3,77 +3,127 @@ import { Post } from '../Post/Post';
 import { useDispatch } from 'react-redux';
 import { Link, ScrollRestoration } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { loadAllPosts, fetchPosts, postLoading, postError, fetchPage, postNextPage, postCurrentPage, addPage, addCurrentPage } from '../../Features/Posts/postsSlice';
+import {
+	loadAllPosts,
+	postLoading,
+	postError,
+	fetchPage,
+	postNextPage,
+	addPage,
+	addCurrentPage,
+	loadingMorePosts,
+} from '../../Features/Posts/postsSlice';
 import './PostList.css';
 
+export const PostList = () => {
+	const dispatch = useDispatch();
 
-export const PostList = () => {  
-  
-  const dispatch = useDispatch();
+	const loadPosts = useSelector(loadAllPosts);
+	const firstLoad = useSelector(postLoading);
+	const isLoadingPage = useSelector(loadingMorePosts);
+	const hasError = useSelector(postError);
+	const nextPage = useSelector(postNextPage);
 
-	
-  const loadPosts = useSelector(loadAllPosts);
-  const isLoading = useSelector(postLoading);
-  const hasError = useSelector(postError);
-  const nextPage = useSelector(postNextPage);
-  const currentPage = useSelector(postCurrentPage);
-  
 	useEffect(() => {
-    if (loadPosts.length === 0){
-      dispatch(fetchPage())
-    }
-		
-  }, [dispatch, loadPosts]);
+		if (loadPosts.length === 0) {
+			dispatch(fetchPage(0));
+		}
+	}, [dispatch, loadPosts]);
 
-  const handleNextPage = (e) => {
-    e.preventDefault();
+	const handleNextPage = (e) => {
+		e.preventDefault();
 
-    dispatch(fetchPage(nextPage));
-    dispatch(addPage());
-    dispatch(addCurrentPage());
-    
-    console.log(currentPage);
-    console.log(nextPage);
+		dispatch(fetchPage(nextPage));
+		dispatch(addPage());
+		dispatch(addCurrentPage());
+	};
 
-  };
+	if (isLoadingPage && loadPosts) {
+		const listPosts = loadPosts.map((post) => {
+			const linkToPost = 'posts/' + post.id;
 
-    if (isLoading){
-        
-      return (
-        <div>
-          <Post />
-        </div>
-        )
+			return (
+				<Link to={linkToPost} key={post.id}>
+					<Post />
+				</Link>
+			);
+		});
 
-    } else if (hasError){
+		return (
+			<div className="postList">
+				{listPosts}
+				{/* Restores position to top */}
+				<Link
+					className="load-post"
+					onClick={handleNextPage}
+					preventScrollReset={true}
+				>
+					Load more posts
+				</Link>
+				<ScrollRestoration />
+			</div>
+		);
+	} else if (firstLoad) {
+		return (
+			<div>
+				<Post />
+			</div>
+		);
+	} else if (hasError) {
+		return (
+			<div>
+				<p>An error has occurred.</p>
+			</div>
+		);
+	} else if (isLoadingPage && loadPosts) {
+		const listPosts = loadPosts.map((post, index) => {
+			const linkToPost = 'posts/' + post.id;
 
-        return (
-          <div>
-            <p>An error has occurred.</p>
-          </div>
-          )
+			return (
+				<Link to={linkToPost} key={post.id}>
+					<Post post={loadPosts[index]} />
+				</Link>
+			);
+		});
 
-    } else {
+		return (
+			<div className="postList">
+				{listPosts}
+				{/* Restores position to top */}
+				<Link
+					className="load-post"
+					onClick={handleNextPage}
+					preventScrollReset={true}
+				>
+					Load more posts
+				</Link>
+				<ScrollRestoration />
+			</div>
+		);
+	} else {
+		const listPosts = loadPosts.map((post, index) => {
+			const linkToPost = 'posts/' + post.id;
 
-    const listPosts = loadPosts.map((post, index) => {
-      
+			return (
+				<Link to={linkToPost} key={post.id}>
+					<Post post={loadPosts[index]} />
+				</Link>
+			);
+		});
 
-      const linkToPost = "posts/" + post.id;
-
-      return (
-      <Link to={linkToPost} key={post.id} >
-        <Post post={loadPosts[index]} />
-      </Link>
-      )
-    })
-
-    return (
-      <div className='postList'>
-      {listPosts} 
-      {/* Restores position to top */}
-      <button className='load-post' onClick={handleNextPage}>Load more</button>  
-      <ScrollRestoration />    
-      </div>
-    )
-  };
-}
+		return (
+			<div className="postList">
+				{listPosts}
+				{/* Restores position to top */}
+				<Link
+					className="load-post"
+					onClick={handleNextPage}
+					preventScrollReset={true}
+				>
+					Load more posts
+				</Link>
+				<ScrollRestoration />
+			</div>
+		);
+	}
+};
