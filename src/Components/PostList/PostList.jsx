@@ -12,6 +12,7 @@ import {
 	addPage,
 	addCurrentPage,
 	loadingMorePosts,
+  loadNextPosts,
 } from '../../Features/Posts/postsSlice';
 import './PostList.css';
 import { CircularProgress } from '@mui/material';
@@ -19,7 +20,8 @@ import { CircularProgress } from '@mui/material';
 export const PostList = () => {
 	const dispatch = useDispatch();
 
-	const loadPosts = useSelector(loadAllPosts);
+	const loadPosts = useSelector(loadAllPosts)
+  // const nextPosts = useSelector(loadNextPosts);
 	const firstLoad = useSelector(postLoading);
 	const isLoadingPage = useSelector(loadingMorePosts);
 	const hasError = useSelector(postError);
@@ -55,8 +57,8 @@ export const PostList = () => {
 				{listPosts}
 				{/* Restores position to top */}
 				<div className="load-container">
-        <CircularProgress />
-        </div>
+					<CircularProgress />
+				</div>
 				<ScrollRestoration />
 			</div>
 		);
@@ -87,33 +89,33 @@ export const PostList = () => {
 				{listPosts}
 				{/* Restores position to top */}
 				<div className="load-container">
-        <CircularProgress />
-        </div>
+					<CircularProgress />
+				</div>
 				<ScrollRestoration />
 			</div>
 		);
 	} else {
 		const listPosts = loadPosts.map((post, index) => {
-			const linkToPost = 'posts/' + post.id;
+			const urlToPost = 'posts/' + post.id;
 			return (
-				<Link to={linkToPost} key={post.id}>
+				<Link to={urlToPost} key={post.id}>
 					<Post post={loadPosts[index]} />
 				</Link>
 			);
 		});
-
 		return (
 			<div className="postList">
 				{listPosts}
 				<div className="load-container">
-        <Link
-					className="load-post"
-					onClick={handleNextPage}
-					preventScrollReset={true}>
-					Load more posts
-				</Link>
-        </div>
-        {/* Restores position to top */}
+					<Link
+						className="load-post"
+						onClick={handleNextPage}
+						preventScrollReset={true}
+					>
+						Load more posts
+					</Link>
+				</div>
+				{/* Restores position to top */}
 				<ScrollRestoration />
 			</div>
 		);
