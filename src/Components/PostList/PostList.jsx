@@ -41,7 +41,7 @@ export const PostList = () => {
 		dispatch(addCurrentPage());
 	};
 
-	if (isLoadingPage && loadPosts) {
+	if (isLoadingPage && loadPosts) { // If more posts are loading and state.posts are filled with posts.
 		const listPosts = loadPosts.map((post) => {
 			const linkToPost = 'posts/' + post.id;
 
@@ -55,10 +55,10 @@ export const PostList = () => {
 		return (
 			<div className="postList">
 				{listPosts}
-				{/* Restores position to top */}
 				<div className="load-container">
 					<CircularProgress />
 				</div>
+				{/* Restores position to top */}
 				<ScrollRestoration />
 			</div>
 		);
@@ -72,26 +72,6 @@ export const PostList = () => {
 		return (
 			<div>
 				<p>An error has occurred.</p>
-			</div>
-		);
-	} else if (isLoadingPage && loadPosts) {
-		const listPosts = loadPosts.map((post, index) => {
-			const linkToPost = 'posts/' + post.id;
-
-			return (
-				<Link to={linkToPost} key={post.id}>
-					<Post post={loadPosts[index]} />
-				</Link>
-			);
-		});
-		return (
-			<div className="postList">
-				{listPosts}
-				{/* Restores position to top */}
-				<div className="load-container">
-					<CircularProgress />
-				</div>
-				<ScrollRestoration />
 			</div>
 		);
 	} else {

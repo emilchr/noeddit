@@ -37,7 +37,11 @@ export const postsSlice = createSlice({
 			state.nextPage = state.nextPage + 1;
 			
 		},
-		addCurrentPage: (state) => {
+		addCurrentPage: (state) => { 
+			// ----------------TODO---------------------
+			// currentPage is reset when reloaded in /posts. Need to store it in localStorage.
+			// -------------------------------------
+
 			state.currentPage = state.currentPage + 1;
 		},
 	},
