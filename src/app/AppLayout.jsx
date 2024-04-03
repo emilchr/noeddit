@@ -112,21 +112,21 @@ export default function AppLayout() {
 				<Outlet />
 			</main>
 			<footer>
-		Made with <FavoriteRoundedIcon style={{color: 'red'}} /> by Emil
-		</footer>						
+				Made with <FavoriteRoundedIcon style={{color: 'red'}} /> by Emil
+			</footer>						
 		</div>
-
-		
 		<ScrollRestoration
 			getKey={(location) => {
-				const paths = ['/posts'];
-				return paths.includes(location.pathname)
+				
+				return location.pathname
 				? // posts restore by pathname
 					location.pathname
 				: // everything else by location like the browser
 					location.key;
 			}}
 		/> 
+		
+		
 	</>
 	);
 }

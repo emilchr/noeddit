@@ -129,8 +129,8 @@ export const PostList = () => {
 				<div className="load-container">
 					<CircularProgress />
 				</div>
-				{/* Restores position to bottom. It needs to hold position at last buttonpress */}
-				<ScrollRestoration />
+				{/* !---     <ScrollRestoration />
+				 Restores position to bottom. It needs to hold position at last buttonpress */}
 			</div>
 		);
 	} else if (firstLoad) {
@@ -171,20 +171,18 @@ export const PostList = () => {
 				{listNextPosts}
 				
 				<div className="load-container">
+					
 					<Link
 						className="load-post"
 						onClick={handleNextPage}
-						preventScrollReset={true}
+						// preventScrollReset={true} // !! HAS NO EFFECT
 					>
 						Load more posts
 					</Link>
 				</div>
 				{/* ------------------------------------------ 
-        Restores position to top. Needs to restore scroll before the next posts. 
-
-        Does it get fixed when i add new posts below?
-        ------------------------------------------------------*/}
-				<ScrollRestoration />
+        Restores position to bottom. Needs to restore scroll before the next posts. 
+		*/}
 			</div>
 		);
 	}
