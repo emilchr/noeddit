@@ -12,9 +12,9 @@ import {
 export const Post = (props) => {
 	// console.log("POST: props post.id: " + props.post.id)
 	const post = props.post;
-
+	//  console.log(props)
 	const firstLoad = useSelector(postLoading);
-	const isLoadingPage = useSelector(loadingMorePosts);
+	const isLoadingMore = useSelector(loadingMorePosts);
 	const hasError = useSelector(postError);
 
 	let content = '';
@@ -68,42 +68,7 @@ export const Post = (props) => {
 		content = skeletonArray;
 
 		return content;
-	} else if (isLoadingPage) {
-		// If post is defined but loading new posts after fetching new page.
-		content = (
-			<div>
-				<div className="post">
-					<div className="sub-title">
-						r/
-						<Skeleton width="5rem" height=".55rem" />
-					</div>
-					<h2 className="post-title">
-						<Skeleton variant="h2" />
-					</h2>
-					<div className="votes">
-						<ArrowUpward />
-						<Skeleton height="1rem" />
-						<ArrowDownward />
-					</div>
-					<div className="post-text">
-						<p>
-							<Skeleton />
-							<Skeleton />
-							<Skeleton />
-							<Skeleton width="80%" height="1rem" />
-							<Skeleton width="50%" height="1rem" />
-						</p>
-					</div>
-					<div className="image-container">
-						<Skeleton variant="image" />
-					</div>
-					<div className="post-info">
-						<Skeleton height=".75rem" />
-					</div>
-				</div>
-			</div>
-		);
-	} else if (post) {
+	}  else if (post) {
 		// If post is defined
 		content = (
 			<div className="post" id={post.id}>
