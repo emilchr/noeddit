@@ -22,8 +22,8 @@ export const postsSlice = createSlice({
 	initialState: {
 		posts: [],
 		nextPosts: [],
-		currentPage: 1,
-		nextPage: 2,
+		currentPage: null,
+		nextPage: 3,
 		firstLoad: false,
 		isLoadingMore: false,
 		hasError: false,
@@ -33,24 +33,46 @@ export const postsSlice = createSlice({
 			const persistedState = JSON.parse(localStorage.getItem('posts'));
 			state.posts = persistedState;
 		},
-		addPage: (state) => {
+		rehydrateCurrentPage: (state) => {
+			const persistedCurrentPage = JSON.parse(localStorage.getItem('currentPage'));
+			state.currentPage = persistedCurrentPage;
+		},
+		rehydrateNextPage: (state) => {
+			const persistedNextPage = JSON.parse(localStorage.getItem('nextPage'));
+			state.currentPage = persistedNextPage;
+		},
+		addNextPage: (state) => {
+
 			state.nextPage = state.nextPage + 1;
-			
+
+			localStorage.setItem('posts', JSON.stringify(state.posts.concat(state.nextPosts)));
+
+			state.posts = state.posts.concat(state.nextPosts) 
+			 
 		},
 		addCurrentPage: (state) => { 
-			// ----------------TODO---------------------
-			// currentPage is reset when reloaded in /posts. Need to store it in localStorage.
-			// -------------------------------------
+			// !----------------TODO---------------------
+			// !currentPage is reset when reloaded in /posts. Need to store it in localStorage.
+			// !-----------------------------------------
+			const persistedCurrentPage = JSON.parse(localStorage.getItem('currentPage'));
+			
 
-			state.currentPage = state.currentPage + 1;
+			if (state.currentPage === null){
+				state.currentPage = state.currentPage + 2;
+			} else {
+				
+				state.currentPage = state.currentPage + 1;
+				
+			 }
+			
+			
 		},
 	},
 	extraReducers: (builder) => {
 		builder
 			//------------ FETCH PAGE -----------
 			.addCase(fetchPage.pending, (state) => {
-				if (state.posts.length === 0) {
-					// If this is the first loading of posts.
+				if (state.posts.length === 0) {// If this is the first loading of posts.
 					state.firstLoad = true; // set state.firstLoad to true.
 				} else {
 					state.isLoadingMore = true;
@@ -63,21 +85,21 @@ export const postsSlice = createSlice({
 				state.hasError = false;
 
 				const isEmpty = action.payload.length;
-				if (isEmpty === 0) {
-					console.log('No more posts for you.');
+				if (isEmpty === 0) { // if payload is empty log result
+					console.log('Payload is empty.');
 				} else {
-					if (state.posts.length === 0) { // If there is no posts in array.
+					if (state.posts.length === 0) { // If there is no posts in array, state.posts is hydrated.
 						state.posts = action.payload;
 						localStorage.setItem('posts', JSON.stringify(state.posts));
 						console.log('fetchPage is fulfilled. First load.');
 					} else {
+						//--------------------------------------
+						// adds nextPosts to posts. This has to be refactored 
+						// to show the nextPosts in PostList.
+						//--------------------------------------
 						state.nextPosts = action.payload;
-
-						//--------------------------------------
-						state.posts = state.posts.concat(state.nextPosts) // adds nextPosts to posts. This has to be refactored to show the nextPosts in PostList.
-						//--------------------------------------
-						localStorage.setItem('posts', JSON.stringify(state.posts.concat(state.nextPosts)));
-						console.log('fetchPage is fulfilled. Next load complete.'); // Stores the posts and nextPosts in localStorage.
+						
+						console.log('fetchPage is fulfilled. Next load complete.'); 
 					}
 				}
 			})
@@ -94,7 +116,9 @@ export const postsSlice = createSlice({
 
 // Action creators
 export const { rehydratePosts } = postsSlice.actions;
-export const { addPage } = postsSlice.actions;
+export const { rehydrateCurrentPage } = postsSlice.actions;
+export const { rehydrateNextPage } = postsSlice.actions;
+export const { addNextPage } = postsSlice.actions;
 export const { addCurrentPage } = postsSlice.actions;
 
 // Selectors
