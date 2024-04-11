@@ -49,7 +49,7 @@ export const postsSlice = createSlice({
 		},
 		addNextPage: (state) => {
 			state.nextPage = state.nextPage + 1;
-
+			//Updates localStorage to current nextPage.
 			localStorage.setItem(
 				'posts',
 				JSON.stringify(state.posts.concat(state.nextPosts))
@@ -58,11 +58,7 @@ export const postsSlice = createSlice({
 			state.posts = state.posts.concat(state.nextPosts);
 		},
 		addCurrentPage: (state) => {
-			const persistedCurrentPage = JSON.parse(
-				localStorage.getItem('currentPage')
-			);
-
-			if (state.currentPage === null) {
+			if (state.currentPage === null) { // If this is the first load, add 2 to null.
 				state.currentPage = state.currentPage + 2;
 			} else {
 				state.currentPage = state.currentPage + 1;
@@ -99,7 +95,7 @@ export const postsSlice = createSlice({
 					} else {
 						state.nextPosts = action.payload;
 						localStorage.setItem('nextPosts', JSON.stringify(state.nextPosts));
-						console.log('fetchPage is fulfilled. Next load complete.');
+						console.log('fetchPage is fulfilled. Next page has loaded.');
 					}
 				}
 			})
