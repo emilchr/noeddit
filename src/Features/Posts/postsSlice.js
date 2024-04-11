@@ -33,6 +33,10 @@ export const postsSlice = createSlice({
 			const persistedState = JSON.parse(localStorage.getItem('posts'));
 			state.posts = persistedState;
 		},
+		rehydrateNextPosts: (state) => {
+			const persistedState = JSON.parse(localStorage.getItem('nextPosts'));
+			state.nextPosts = persistedState;
+		},
 		rehydrateCurrentPage: (state) => {
 			const persistedCurrentPage = JSON.parse(
 				localStorage.getItem('currentPage')
@@ -41,7 +45,7 @@ export const postsSlice = createSlice({
 		},
 		rehydrateNextPage: (state) => {
 			const persistedNextPage = JSON.parse(localStorage.getItem('nextPage'));
-			state.currentPage = persistedNextPage;
+			state.nextPage = persistedNextPage;
 		},
 		addNextPage: (state) => {
 			state.nextPage = state.nextPage + 1;
@@ -54,9 +58,6 @@ export const postsSlice = createSlice({
 			state.posts = state.posts.concat(state.nextPosts);
 		},
 		addCurrentPage: (state) => {
-			// !----------------TODO---------------------
-			// !currentPage is reset when reloaded in /posts. Need to store it in localStorage.
-			// !-----------------------------------------
 			const persistedCurrentPage = JSON.parse(
 				localStorage.getItem('currentPage')
 			);
@@ -97,7 +98,7 @@ export const postsSlice = createSlice({
 						console.log('fetchPage is fulfilled. First load.');
 					} else {
 						state.nextPosts = action.payload;
-
+						localStorage.setItem('nextPosts', JSON.stringify(state.nextPosts));
 						console.log('fetchPage is fulfilled. Next load complete.');
 					}
 				}
@@ -115,6 +116,7 @@ export const postsSlice = createSlice({
 
 // Action creators
 export const { rehydratePosts } = postsSlice.actions;
+export const { rehydrateNextPosts } = postsSlice.actions;
 export const { rehydrateCurrentPage } = postsSlice.actions;
 export const { rehydrateNextPage } = postsSlice.actions;
 export const { addNextPage } = postsSlice.actions;

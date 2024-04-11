@@ -32,13 +32,13 @@ export const PostList = () => {
 	const hasError = useSelector(postError);
 	const nextPage = useSelector(postNextPage);
 	const currentPage = useSelector(postCurrentPage);
-	// const rehydratePage = useSelector(rehydrateCurrentPage);
-	// const rehydrateUpcomingPage = useSelector(rehydrateNextPage);
 
 	const persistedCurrentPage = JSON.parse(localStorage.getItem('currentPage'));
-	localStorage.setItem('currentPage', JSON.stringify(currentPage));
+
 	const persistedNextPage = JSON.parse(localStorage.getItem('nextPage'));
+	localStorage.setItem('currentPage', JSON.stringify(currentPage));
 	localStorage.setItem('nextPage', JSON.stringify(nextPage));
+	
 
 	useEffect(() => {
 		if (loadPosts.length === 0) {
@@ -67,6 +67,7 @@ export const PostList = () => {
 			localStorage.setItem('nextPage', JSON.stringify(nextPage));
 		}
 	};
+
 	// ----- handles loading, errors and the rendering of posts ---------
 	if (isLoadingMore && loadPosts) {
 		// If more posts are loading and state.posts are filled with posts.
@@ -175,7 +176,6 @@ export const PostList = () => {
 					<Link
 						className="load-post"
 						onClick={handleNextPage}
-						// preventScrollReset={true} // !! HAS NO EFFECT
 					>
 						Load more posts
 					</Link>
