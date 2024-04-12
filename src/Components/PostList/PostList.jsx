@@ -51,6 +51,27 @@ export const PostList = () => {
 		}
 	}, [loadPosts]);
 
+	// Infinite scroll feature
+	const scrolledToBottom = () => {
+		const bottom =
+			Math.ceil(window.innerHeight + window.scrollY) >=
+			document.documentElement.scrollHeight;
+
+		if (bottom) {
+			console.log('at the bottom');
+			pageLoad();
+		}
+	};
+
+	useEffect(() => {
+		window.addEventListener('scroll', scrolledToBottom, {
+			passive: true,
+		});
+		
+		return () => { // Clean up of event listener
+			window.removeEventListener('scroll', scrolledToBottom);
+		};
+	}, []);
 	/// -------- Handles loading of next page and the logic for increasing posts.currentPage and posts.nextPage.------------------ ///
 	const pageLoad = () => {
 		if (currentPage === null) {
@@ -68,26 +89,7 @@ export const PostList = () => {
 		pageLoad();
 		
 	};
-	const scrolledToBottom = () => {
-		const bottom =
-			Math.ceil(window.innerHeight + window.scrollY) >=
-			document.documentElement.scrollHeight;
 
-		if (bottom) {
-			console.log('at the bottom');
-			pageLoad();
-		}
-	};
-
-	useEffect(() => {
-		window.addEventListener('scroll', scrolledToBottom, {
-			passive: true,
-		});
-		
-		return () => {
-			window.removeEventListener('scroll', scrolledToBottom);
-		};
-	}, []);
 	// ----- handles loading, errors and the rendering of posts ---------
 	if (isLoadingMore && loadPosts) {
 		// If more posts are loading and state.posts are filled with posts.

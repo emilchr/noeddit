@@ -48,7 +48,7 @@ export const postsSlice = createSlice({
 			state.nextPage = persistedNextPage;
 		},
 		addNextPage: (state) => {
-			state.nextPage = state.nextPage + 1;
+			state.nextPage += 1;
 			//Updates localStorage to current nextPage.
 			localStorage.setItem(
 				'posts',
@@ -59,9 +59,9 @@ export const postsSlice = createSlice({
 		},
 		addCurrentPage: (state) => {
 			if (state.currentPage === null) { // If this is the first load, add 2 to null.
-				state.currentPage = state.currentPage + 2;
+				state.currentPage += 2;
 			} else {
-				state.currentPage = state.currentPage + 1;
+				state.currentPage += 1;
 			}
 		},
 	},
