@@ -53,14 +53,14 @@ export const PostList = () => {
 
 	// Checks if user has scrolled to the bottom.
 	
-	const scrolledToBottom = () => {
+	const scrolledToBottom = () => { // ! Not the correct way to define the function. Find a  better solution for this. This happens because the function is a dependency for the useEffect below.
 		const bottom =
 			Math.ceil(window.innerHeight + window.scrollY) >=
 			document.documentElement.scrollHeight;
 
 		if (bottom) {
 			console.log('at the bottom'); console.log(nextPage)
-			pageLoad(); // ! Not the correct way to define the function. Find a  better solution for this.
+			pageLoad();
 		}
 	};
 
