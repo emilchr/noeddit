@@ -51,15 +51,16 @@ export const PostList = () => {
 		}
 	}, [loadPosts]);
 
-	// Infinite scroll feature
+	// Checks if user has scrolled to the bottom.
+	
 	const scrolledToBottom = () => {
 		const bottom =
 			Math.ceil(window.innerHeight + window.scrollY) >=
 			document.documentElement.scrollHeight;
 
 		if (bottom) {
-			console.log('at the bottom');
-			pageLoad();
+			console.log('at the bottom'); console.log(nextPage)
+			pageLoad(); // ! Not the correct way to define the function. Find a  better solution for this.
 		}
 	};
 
@@ -71,7 +72,7 @@ export const PostList = () => {
 		return () => { // Clean up of event listener
 			window.removeEventListener('scroll', scrolledToBottom);
 		};
-	}, []);
+	}, [scrolledToBottom]);
 	/// -------- Handles loading of next page and the logic for increasing posts.currentPage and posts.nextPage.------------------ ///
 	const pageLoad = () => {
 		if (currentPage === null) {
@@ -87,10 +88,9 @@ export const PostList = () => {
 	const handleNextPage = (e) => {
 		e.preventDefault();
 		pageLoad();
-		
 	};
 
-	// ----- handles loading, errors and the rendering of posts ---------
+	// ----- Handles loading, errors and the rendering of posts ---------
 	if (isLoadingMore && loadPosts) {
 		// If more posts are loading and state.posts are filled with posts.
 		const listPosts = loadPosts.map((post, index) => {
