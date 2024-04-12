@@ -20,7 +20,7 @@ Portfolio project through Codecademy.
 ## Features
 - Lite view of general posts
 - View posts with votes and comments
-    - View emojis and post text edits in the app. Markdown viewer?
+    - View markdown parsed as rich text in the app. "[react-markdown](https://www.copycat.dev/blog/react-markdown/)"?
 - Category selection
 - Search function
 - Compatible with all modern devices
@@ -52,4 +52,7 @@ SCREENSHOTS
 
 
 ## Future features
-- [ ] Not written any yet. 
+- [ ] Add infinite scroll
+- [ ] Add search functionality
+- [ ] Optimize caching in localStorage
+- [ ] Add MarkDown-translator for emojis, rich text and so on.

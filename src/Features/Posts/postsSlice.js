@@ -95,7 +95,7 @@ export const postsSlice = createSlice({
 					} else {
 						state.nextPosts = action.payload;
 						localStorage.setItem('nextPosts', JSON.stringify(state.nextPosts));
-						console.log('fetchPage is fulfilled. Next page has loaded.');
+						console.log('fetchPage is fulfilled. Next page loaded.');
 					}
 				}
 			})
