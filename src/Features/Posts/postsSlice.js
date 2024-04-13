@@ -48,6 +48,10 @@ export const postsSlice = createSlice({
 			const persistedNextPage = JSON.parse(localStorage.getItem('nextPage'));
 			state.nextPage = persistedNextPage;
 		},
+		rehydratePayloadEmpty: (state) => {
+			const persistedNextPage = JSON.parse(localStorage.getItem('payloadEmpty'));
+			state.payloadEmpty = persistedNextPage;
+		},
 		addNextPage: (state) => {
 			state.nextPage += 1;
 			//Updates localStorage to current nextPage.
@@ -84,7 +88,7 @@ export const postsSlice = createSlice({
 					// if payload is empty log result
 					console.log('Payload is empty.');
 					state.payloadEmpty = true;
-
+					localStorage.setItem('payloadEmpty', JSON.stringify(state.payloadEmpty));
 				} else {
 					if (state.posts.length === 0) {
 						// If there is no posts in array, state.posts is hydrated.
@@ -114,6 +118,7 @@ export const { rehydratePosts } = postsSlice.actions;
 export const { rehydrateNextPosts } = postsSlice.actions;
 export const { rehydrateCurrentPage } = postsSlice.actions;
 export const { rehydrateNextPage } = postsSlice.actions;
+export const { rehydratePayloadEmpty } = postsSlice.actions;
 export const { addNextPage } = postsSlice.actions;
 export const { addCurrentPage } = postsSlice.actions;
 
