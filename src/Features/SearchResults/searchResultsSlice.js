@@ -5,14 +5,21 @@ export const searchResultsSlice = createSlice({
 	name: 'searchResults',
 	initialState: {
 		searchResults: [],
+		searchQuery: '',
 		isLoading: false,
 		hasError: false,
 	},
-	reducers: {},
+	reducers: {
+		setSearchQuery: (state, action) => {
+			state.searchQuery = action.payload;
+			console.log(action.payload)
+		}
+	},
 });
 
 // Action creators
-
+export const { setSearchQuery } = searchResultsSlice.actions;
 // Selectors
+export const searchQuery = (state) => state.searchResults.searchQuery;
 
 export default searchResultsSlice.reducer;
