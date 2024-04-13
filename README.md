@@ -52,7 +52,7 @@ SCREENSHOTS
 
 
 ## Future features
-- [ ] Add infinite scroll
+- [x] Add infinite scroll
 - [ ] Add search functionality
 - [ ] Optimize caching in localStorage
 - [ ] Add MarkDown-translator for emojis, rich text and so on.

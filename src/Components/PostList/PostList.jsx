@@ -16,6 +16,7 @@ import {
 	postCurrentPage,
 	rehydrateCurrentPage,
 	rehydrateNextPage,
+	payloadEmpty,
 } from '../../Features/Posts/postsSlice';
 import './PostList.css';
 import { CircularProgress } from '@mui/material';
@@ -30,6 +31,8 @@ export const PostList = () => {
 	const firstLoad = useSelector(postLoading);
 	const isLoadingMore = useSelector(loadingMorePosts);
 	const hasError = useSelector(postError);
+	const isEmpty = useSelector(payloadEmpty);
+
 	const nextPage = useSelector(postNextPage);
 	const currentPage = useSelector(postCurrentPage);
 
@@ -58,8 +61,7 @@ export const PostList = () => {
 			Math.ceil(window.innerHeight + window.scrollY) >=
 			document.documentElement.scrollHeight;
 
-		if (bottom) {
-			console.log('at the bottom'); console.log(nextPage)
+		if (bottom) { // if the user has scrolled to the bottom.
 			pageLoad();
 		}
 	};
@@ -77,7 +79,10 @@ export const PostList = () => {
 	const pageLoad = () => {
 		if (currentPage === null) {
 			console.log('CurrentPage is null.');
-		} else {
+		} else if(isEmpty) {
+			console.log('No more posts.');
+		}
+		else {
 			dispatch(fetchPage(nextPage));
 			dispatch(addNextPage());
 			dispatch(addCurrentPage());
@@ -152,8 +157,6 @@ export const PostList = () => {
 				<div className="load-container">
 					<CircularProgress />
 				</div>
-				{/* !---     <ScrollRestoration />
-				 Restores position to bottom. It needs to hold position at last buttonpress */}
 			</div>
 		);
 	} else if (firstLoad) {
@@ -191,12 +194,15 @@ export const PostList = () => {
 			<div className="postList">
 				{listPosts}
 				{listNextPosts}
-
-				<div className="load-container">
-					<Link className="load-post" onClick={handleNextPage}>
-						Load more posts
-					</Link>
-				</div>
+			{isEmpty? 
+			<div className='post-title'>No more posts</div>
+			: 
+			<div className="load-container">
+				<Link className="load-post" onClick={handleNextPage}>
+					Load more posts
+				</Link>
+			</div> }
+				
 				{/* ------------------------------------------ 
         Restores position to bottom. Needs to restore scroll before the next posts. 
 		*/}

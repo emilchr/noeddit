@@ -27,6 +27,7 @@ export const postsSlice = createSlice({
 		firstLoad: false,
 		isLoadingMore: false,
 		hasError: false,
+		payloadEmpty: false,
 	},
 	reducers: {
 		rehydratePosts: (state) => {
@@ -58,11 +59,7 @@ export const postsSlice = createSlice({
 			state.posts = state.posts.concat(state.nextPosts);
 		},
 		addCurrentPage: (state) => {
-			if (state.currentPage === null) { // If this is the first load, add 2 to null.
-				state.currentPage += 2;
-			} else {
-				state.currentPage += 1;
-			}
+			state.currentPage += 1;
 		},
 	},
 	extraReducers: (builder) => {
@@ -86,6 +83,8 @@ export const postsSlice = createSlice({
 				if (isEmpty === 0) {
 					// if payload is empty log result
 					console.log('Payload is empty.');
+					state.payloadEmpty = true;
+
 				} else {
 					if (state.posts.length === 0) {
 						// If there is no posts in array, state.posts is hydrated.
@@ -126,6 +125,7 @@ export const loadNextPosts = (state) => state.posts.nextPosts;
 export const postLoading = (state) => state.posts.firstLoad;
 export const loadingMorePosts = (state) => state.posts.isLoadingMore;
 export const postError = (state) => state.posts.hasError;
+export const payloadEmpty = (state) => state.posts.payloadEmpty;
 
 // page states
 export const postNextPage = (state) => state.posts.nextPage;
