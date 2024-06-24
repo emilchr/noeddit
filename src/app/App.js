@@ -5,6 +5,7 @@ import AppLayout from './AppLayout';
 import SubReddits from '../Features/SubReddit/SubReddits';
 import { PostList } from '../Components/PostList/PostList';
 import { PostPage } from '../Components/PostPage/PostPage';
+import SearchResults from '../Features/SearchResults/SearchResults';
 
 function App() {
 
@@ -12,7 +13,8 @@ function App() {
 		<Route element={<AppLayout />}>
 			<Route path="/*" element={<NotFound />} />	
 			<Route path="/" element={<PostList />} />
-			<Route path="posts/:postId" element={<PostPage /> } />						
+			<Route path="posts/:postId" element={<PostPage /> } />		
+			<Route path='search' element={<SearchResults />} />			
 			<Route path="subreddits" element={<SubReddits />} />
 		</Route>
 	))

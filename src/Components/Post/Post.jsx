@@ -1,6 +1,6 @@
 import React from 'react';
 import './Post.css';
-import { ArrowDownward, ArrowUpward } from '@mui/icons-material';
+import { ArrowDownward, ArrowUpward, CommentOutlined } from '@mui/icons-material';
 import Skeleton from '../Skeleton/Skeleton';
 import { useSelector } from 'react-redux';
 import {
@@ -93,7 +93,8 @@ export const Post = (props) => {
 						Posted by userID: <b>{post.userId}</b>
 					</p>
 					<p> 2 minutes ago</p>
-					<p>Comments</p>
+					<p><CommentOutlined /></p>
+					<p>2</p>
 				</div>
 			</div>
 		);
