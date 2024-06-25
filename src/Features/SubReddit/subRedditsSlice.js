@@ -63,25 +63,26 @@ export const subRedditsSlice = createSlice({
 				console.error(
 					'An error in fetchLinks has occurred. Error:' + action.error.message
 				);
-			});
-			// .addCase(fetchSubReddit.pending, (state) => {
-			// 	state.isLoading = true;
-			// 	state.hasError = false;
-			// })
-			// .addCase(fetchSubReddit.fulfilled, (state, action) => {
-			// 	state.isLoading = false;
-			// 	state.hasError = false;
-			// 	console.log('fetchSubReddit is fulfilled.');
-			// 	state.subReddits = state.subReddits.concat(action.payload);
+			})
+			.addCase(fetchSubReddit.pending, (state) => {
+				state.isLoading = true;
+				state.hasError = false;
+			})
+			.addCase(fetchSubReddit.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.hasError = false;
+				console.log('fetchSubReddit is fulfilled.');
+				state.posts = state.subReddits.concat(action.payload);
+				console.log(action.payload)
 				
-			// })
-			// .addCase(fetchSubReddit.rejected, (state, action) => {
-			// 	state.isLoading = false;
-			// 	state.hasError = true;
-			// 	console.error(
-			// 		'An error in fetchSubReddit has occurred. Error:' + action.error.message
-			// 	);
-			// });
+			})
+			.addCase(fetchSubReddit.rejected, (state, action) => {
+				state.isLoading = false;
+				state.hasError = true;
+				console.error(
+					'An error in fetchSubReddit has occurred. Error:' + action.error.message
+				);
+			});
 	},
 });
 

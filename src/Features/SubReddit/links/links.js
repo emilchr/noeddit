@@ -16,47 +16,47 @@ export const subRedditLinks = () => {
 					{
 						title: 'React',
 						id: 1,
-						url: `React`,
+						
 					},
 					{
 						title: 'Javascript',
 						id: 2,
-						url: `Javascript`,
+						
 					},
 					{
 						title: 'Norge',
 						id: 3,
-						url: `Norge`,
+						
 					},
 					{
 						title: 'Warhammer40k',
 						id: 4,
-						url: `Warhammer40k`,
+					
 					},
 					{
 						title: 'SmartThings',
 						id: 5,
-						url: `SmartThings`,
+						
 					},
 					{
 						title: 'Minipainting',
 						id: 6,
-						url: `Minipainting`,
+						
 					},
 					{
 						title: 'SWGOH',
 						id: 7,
-						url: `SWGOH`,
+						
 					},
 					{
 						title: 'space',
 						id: 8,
-						url: `space`,
+						
 					},
 					{
 						title: 'ProgrammerHumor',
 						id: 9,
-						url: `ProgrammerHumor`,
+						
 					},
 					
 				]);
