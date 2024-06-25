@@ -31,12 +31,12 @@
 	display: none;
 }
 #toggle-menu[type='checkbox']:checked ~ .subReddits {
-	transform: translateX(0);
-	animation: menu-slide ease-in-out 0.2s;
+	/* transform: translateX(0);
+	animation: menu-slide ease-in-out 0.2s; */
 }
 #toggle-menu[type='checkbox']:not(:checked) ~ .subReddits {
-	transform: translateX(600px);
-	animation: menu-slide-out ease-in-out 0.2s;
+	/* transform: translateX(600px); */
+	/* animation: menu-slide-out ease-in-out 0.2s; */
 }
 nav .subReddits button {
 	position: relative;

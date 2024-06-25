@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { fetchLinks, fetchSubReddit, loadLinks } from './subRedditsSlice';
 import './SubReddits.css';
+import { menuState, toggleMenu } from '../userUi/userUiSlice';
 
 function SubReddits() {
 
@@ -11,8 +12,15 @@ function SubReddits() {
 	const isLoading = useSelector((state) => state.subReddits.isLoading);
 	const hasError = useSelector((state) => state.subReddits.hasError);
 	const link = useSelector(loadLinks);
-	
+	const currentMenuState = useSelector(menuState);
 	let content = '';
+
+	const handleLinkClick = (e) => {
+		e.preventDefault();
+		if (currentMenuState){
+		dispatch(toggleMenu());
+	}
+	}
 
 	if (isLoading) {
 		content = <p>Loading...</p>;
@@ -22,7 +30,7 @@ function SubReddits() {
 		content = (
 			<>
 				{link.map((link) => (
-					<button key={link.id}>
+					<button onClick={handleLinkClick} key={link.id}>
 						<NavLink to={link.url}>{link.title}</NavLink>
 					</button>
 				))}

@@ -1,7 +1,6 @@
 
 
 export const subRedditLinks = () => {
-	const URL = 'https://www.reddit.com/r/';
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
 			if (Math.random() < 0.00001) {
@@ -12,52 +11,52 @@ export const subRedditLinks = () => {
 					{
 						title: 'Popular',
 						id: 0,
-						url: `/popular`,
+						url: `/`,
 					},
 					{
 						title: 'React',
 						id: 1,
-						url: `/React`,
+						url: `React`,
 					},
 					{
 						title: 'Javascript',
 						id: 2,
-						url: `/Javascript`,
+						url: `Javascript`,
 					},
 					{
 						title: 'Norge',
 						id: 3,
-						url: `/Norge`,
+						url: `Norge`,
 					},
 					{
 						title: 'Warhammer40k',
 						id: 4,
-						url: `/Warhammer40k`,
+						url: `Warhammer40k`,
 					},
 					{
 						title: 'SmartThings',
 						id: 5,
-						url: `/SmartThings`,
+						url: `SmartThings`,
 					},
 					{
 						title: 'Minipainting',
 						id: 6,
-						url: `/Minipainting`,
+						url: `Minipainting`,
 					},
 					{
 						title: 'SWGOH',
 						id: 7,
-						url: `/SWGOH`,
+						url: `SWGOH`,
 					},
 					{
 						title: 'space',
 						id: 8,
-						url: `/space`,
+						url: `space`,
 					},
 					{
 						title: 'ProgrammerHumor',
 						id: 9,
-						url: `${URL}ProgrammerHumor`,
+						url: `ProgrammerHumor`,
 					},
 					
 				]);
