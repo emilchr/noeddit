@@ -1,17 +1,34 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { subRedditLinks } from './mock-api/api';
+import { subRedditLinks } from './links/links';
+
 
 export const fetchLinks = createAsyncThunk(
 	'subReddits/fetchLinks',
 	async () => {
 		try {
-			const response = subRedditLinks();
+			const response = await subRedditLinks();
 			return response;
 		} catch (error) {
 			return console.log(error);
 		}
 	}
 );
+
+export const fetchSubReddit = createAsyncThunk(
+	'subReddits/fetchSubReddit',
+	async (subreddit) => {
+		try {
+			const response = await fetch(`https://www.reddit.com/r/${subreddit}.json`, {
+				header: 'Access-Control-Allow-Origin: *',
+				mode: 'cors'
+			});
+			const json = await response.json();
+			return json.data;
+		} catch (error) {
+			return console.log(error);
+		}
+	}
+)
 
 // Slice
 export const subRedditsSlice = createSlice({
@@ -44,9 +61,27 @@ export const subRedditsSlice = createSlice({
 				state.isLoading = false;
 				state.hasError = true;
 				console.error(
-					'An error in fetchPosts has occurred. Error:' + action.error.message
+					'An error in fetchLinks has occurred. Error:' + action.error.message
 				);
 			});
+			// .addCase(fetchSubReddit.pending, (state) => {
+			// 	state.isLoading = true;
+			// 	state.hasError = false;
+			// })
+			// .addCase(fetchSubReddit.fulfilled, (state, action) => {
+			// 	state.isLoading = false;
+			// 	state.hasError = false;
+			// 	console.log('fetchSubReddit is fulfilled.');
+			// 	state.subReddits = state.subReddits.concat(action.payload);
+				
+			// })
+			// .addCase(fetchSubReddit.rejected, (state, action) => {
+			// 	state.isLoading = false;
+			// 	state.hasError = true;
+			// 	console.error(
+			// 		'An error in fetchSubReddit has occurred. Error:' + action.error.message
+			// 	);
+			// });
 	},
 });
 
