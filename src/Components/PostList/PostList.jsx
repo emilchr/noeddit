@@ -17,6 +17,7 @@ import {
 	rehydrateCurrentPage,
 	rehydrateNextPage,
 	payloadEmpty,
+	fetchSubReddit,
 } from '../../Features/Posts/postsSlice';
 import './PostList.css';
 import { CircularProgress } from '@mui/material';
@@ -43,10 +44,10 @@ export const PostList = () => {
 
 	useEffect(() => {
 		if (loadPosts.length === 0) {
-			dispatch(fetchPage(1));
+			dispatch(fetchSubReddit('popular'));
 			setTimeout(() => {
 				// Delay added for proper loading in state.posts and state.nextPosts.
-				dispatch(fetchPage(2));
+				// dispatch(fetchPage(2));
 			}, 100);
 		}
 		if (!persistedCurrentPage) {
@@ -99,9 +100,9 @@ export const PostList = () => {
 	if (isLoadingMore && loadPosts) {
 		// If more posts are loading and state.posts are filled with posts.
 		const listPosts = loadPosts.map((post, index) => {
-			const urlToPost = 'posts/' + post.id;
+			const urlToPost = 'posts/' + post.data.id;
 			return (
-				<Link to={urlToPost} key={post.id}>
+				<Link to={urlToPost} key={post.data.id}>
 					<Post post={loadPosts[index]} />
 				</Link>
 			);
@@ -142,9 +143,9 @@ export const PostList = () => {
 			</div>
 		);
 		const listNextPosts = nextPosts.map((post, index) => {
-			const urlToPost = 'posts/' + post.id;
+			const urlToPost = 'posts/' + post.data.id;
 			return (
-				<Link to={urlToPost} key={post.id}>
+				<Link to={urlToPost} key={post.data.id}>
 					<Post post={nextPosts[index]} />
 				</Link>
 			);
@@ -153,7 +154,8 @@ export const PostList = () => {
 		return (
 			<div className="postList">
 				{listPosts}
-				{listNextPosts && content}
+				{/* {listNextPosts && content} Created issues with loading props.posts.data*/} 
+				{content}
 				<div className="load-container">
 					<CircularProgress />
 				</div>
@@ -174,10 +176,11 @@ export const PostList = () => {
 		);
 	} else {
 		const listPosts = loadPosts.map((post, index) => {
-			const urlToPost = 'posts/' + post.id;
+			const urlToPost = 'posts/' + post.data.id;
+			// console.log(post)
 			return (
-				<Link to={urlToPost} key={post.id}>
-					<Post post={loadPosts[index]} />
+				<Link to={urlToPost} key={post.data.id}>
+					<Post post={post.data} />
 				</Link>
 			);
 		});
@@ -193,7 +196,7 @@ export const PostList = () => {
 		return (
 			<div className="postList">
 				{listPosts}
-				{listNextPosts}
+				{/* {listNextPosts} */}
 			{isEmpty? 
 			<div className='post-title'>No more posts</div>
 			: 

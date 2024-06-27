@@ -1,4 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
+
+const uuid = uuidv4();
 
 const PAGE_URL = 'https://jsonplaceholder.typicode.com/posts?_page=';
 
@@ -12,6 +15,26 @@ export const fetchPage = createAsyncThunk(
 			return json;
 		} catch (error) {
 			return error.message;
+		}
+	}
+);
+
+export const fetchSubReddit = createAsyncThunk(
+	'posts/fetchSubReddit',
+	async (subreddit) => {
+		try {
+			const response = await fetch(
+				`https://www.reddit.com/r/${subreddit}.json`,
+				{
+					header: 'Access-Control-Allow-Origin: *',
+					mode: 'cors',
+				}
+			);
+			const json = await response.json();
+			
+			return json.data;
+		} catch (error) {
+			return console.log(error);
 		}
 	}
 );
@@ -49,7 +72,9 @@ export const postsSlice = createSlice({
 			state.nextPage = persistedNextPage;
 		},
 		rehydratePayloadEmpty: (state) => {
-			const persistedNextPage = JSON.parse(localStorage.getItem('payloadEmpty'));
+			const persistedNextPage = JSON.parse(
+				localStorage.getItem('payloadEmpty')
+			);
 			state.payloadEmpty = persistedNextPage;
 		},
 		addNextPage: (state) => {
@@ -88,7 +113,10 @@ export const postsSlice = createSlice({
 					// if payload is empty log result
 					console.log('Payload is empty.');
 					state.payloadEmpty = true;
-					localStorage.setItem('payloadEmpty', JSON.stringify(state.payloadEmpty));
+					localStorage.setItem(
+						'payloadEmpty',
+						JSON.stringify(state.payloadEmpty)
+					);
 				} else {
 					if (state.posts.length === 0) {
 						// If there is no posts in array, state.posts is hydrated.
@@ -108,6 +136,32 @@ export const postsSlice = createSlice({
 				state.hasError = true;
 				console.error(
 					'An error in fetchPosts has occurred. ' + action.error.message
+				);
+			})
+			.addCase(fetchSubReddit.pending, (state) => {
+				state.isLoading = true;
+				state.hasError = false;
+			})
+			.addCase(fetchSubReddit.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.hasError = false;
+				console.log('fetchSubReddit is fulfilled.');
+				if (!action.payload){
+					console.log('Payload is empty.');
+				} else {
+					state.posts = action.payload.children;
+				}
+				// state.posts.map((post) => {
+				// 	post.data.keyId = uuid;
+				// })
+				// console.log(action.payload.children);
+			})
+			.addCase(fetchSubReddit.rejected, (state, action) => {
+				state.isLoading = false;
+				state.hasError = true;
+				console.error(
+					'An error in fetchSubReddit has occurred. Error:' +
+						action.error.message
 				);
 			});
 	},

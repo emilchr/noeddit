@@ -14,7 +14,8 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
-import { fetchLinks, fetchSubReddit } from '../Features/SubReddit/subRedditsSlice';
+import { fetchLinks } from '../Features/SubReddit/subRedditsSlice';
+
 
 export default function AppLayout() {
 	const dispatch = useDispatch();
@@ -24,7 +25,6 @@ export default function AppLayout() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		dispatch(fetchSubReddit('popular'));
 		dispatch(fetchLinks());
 	}, [dispatch]);
 

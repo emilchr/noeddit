@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { fetchSubReddit, loadLinks } from './subRedditsSlice';
+import { loadLinks } from './subRedditsSlice';
 import './SubReddits.css';
 import { toggleMenu } from '../userUi/userUiSlice';
 import { useCallback } from 'react';
+import { fetchSubReddit } from '../Posts/postsSlice';
 
 function SubReddits() {
 	const dispatch = useDispatch();

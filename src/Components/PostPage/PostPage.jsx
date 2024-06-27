@@ -18,14 +18,14 @@ import { fetchComments } from '../../Features/Comments/commentsSlice';
 export const PostPage = () => {
 	const params = useParams();
 	let { postId } = params;
-	postId = Number(postId); // Converts postId to a number
+	// postId = Number(postId); // Converts postId to a number
 
 	let loadPosts = useSelector(loadAllPosts);
 	let nextPosts = useSelector(loadNextPosts);
 
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(fetchComments(postId));
+		// dispatch(fetchComments(postId)); no comments in REDDIT DATA
 	}, [dispatch, postId]);
 
 	// Check if state.posts is empty. If empty, rehydrate with the state stored in localStorage.
@@ -36,14 +36,14 @@ export const PostPage = () => {
 		dispatch(rehydrateNextPage());
 		dispatch(rehydratePayloadEmpty());
 	}
-
+	
 	// Selects the post that has the same ID as postID
-	const singlePost = loadPosts.find((post) => post.id === postId);
-	const nextPagePost = nextPosts.find((post) => post.id === postId);
-
+	const singlePost = loadPosts.find((post) => post.data.id === postId);
+	const nextPagePost = nextPosts.find((post) => post.data.id === postId);
+	
 	return (
 		<div className="postPage">
-			<Post post={singlePost || nextPagePost} />
+			<Post post={singlePost.data || nextPagePost.data} />
 			<CommentList />
 		</div>
 	);

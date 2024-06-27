@@ -12,7 +12,7 @@ import {
 export const Post = (props) => {
 	// console.log("POST: props post.id: " + props.post.id)
 	const post = props.post;
-	//  console.log(props)
+	// console.log(props)
 	const firstLoad = useSelector(postLoading);
 	const isLoadingMore = useSelector(loadingMorePosts);
 	const hasError = useSelector(postError);
@@ -20,7 +20,7 @@ export const Post = (props) => {
 	let content = '';
 	// if (!post){console.log('Post error: ' + post)} else { console.log(post)}
 	// If post is undefined, log error and repeat.
-
+	
 	if (firstLoad) {
 		// if fetching of post is pending and there are no posts avalible display the skeleton.
 		const skeletonArray = [];
@@ -72,9 +72,9 @@ export const Post = (props) => {
 		// If post is defined
 		content = (
 			<div className="post" id={post.id}>
-				<div className="sub-title">r/facePalm</div>
+				<div className="sub-title">r/{post.subreddit}</div>
 
-				<h2 className="post-title">Post title: {post.title}</h2>
+				<h2 className="post-title">{post.title}</h2>
 
 				<div className="votes">
 					<ArrowUpward />
@@ -83,18 +83,18 @@ export const Post = (props) => {
 				</div>
 
 				<div className="post-text">
-					<p>Body: {post.body}</p>
+					<p>{post.selftext}</p>
 				</div>
 
 				<div className="image-container"></div>
 
 				<div className="post-info">
 					<p>
-						Posted by userID: <b>{post.userId}</b>
+						Posted by <b>{post.author}</b>
 					</p>
 					<p> 2 minutes ago</p>
 					<p><CommentOutlined /></p>
-					<p>2</p>
+					<p>{post.num_comments}</p>
 				</div>
 			</div>
 		);
