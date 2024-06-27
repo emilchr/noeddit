@@ -181,7 +181,8 @@ export const { addCurrentPage } = postsSlice.actions;
 export const loadAllPosts = (state) => state.posts.posts;
 export const loadNextPosts = (state) => state.posts.nextPosts;
 // loading and error states
-export const postLoading = (state) => state.posts.firstLoad;
+export const postFirstLoad = (state) => state.posts.firstLoad;
+export const postLoading = (state) => state.posts.isLoading;
 export const loadingMorePosts = (state) => state.posts.isLoadingMore;
 export const postError = (state) => state.posts.hasError;
 export const payloadEmpty = (state) => state.posts.payloadEmpty;

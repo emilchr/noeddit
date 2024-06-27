@@ -15,6 +15,7 @@ import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import { fetchLinks } from '../Features/SubReddit/subRedditsSlice';
+import { loadAllPosts } from '../Features/Posts/postsSlice';
 
 
 export default function AppLayout() {
@@ -23,6 +24,8 @@ export default function AppLayout() {
 	const currentSearchState = useSelector(searchState);
 
 	const navigate = useNavigate();
+
+	
 
 	useEffect(() => {
 		dispatch(fetchLinks());

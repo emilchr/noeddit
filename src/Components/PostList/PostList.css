@@ -1,7 +1,4 @@
-.postList a{
-    text-decoration: none;
-    color: var(--font-color);
- }
+
 .postList:first-child{
     margin-top: .25em;
 }

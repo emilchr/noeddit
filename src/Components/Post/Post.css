@@ -63,3 +63,7 @@
 .post-info svg{
     transform: scale(.75);
   }
+ .post-title a{
+    text-decoration: none;
+    color: var(--font-color);
+ }

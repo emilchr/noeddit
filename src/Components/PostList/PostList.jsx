@@ -18,6 +18,7 @@ import {
 	rehydrateNextPage,
 	payloadEmpty,
 	fetchSubReddit,
+	postFirstLoad,
 } from '../../Features/Posts/postsSlice';
 import './PostList.css';
 import { CircularProgress } from '@mui/material';
@@ -29,7 +30,7 @@ export const PostList = () => {
 
 	const loadPosts = useSelector(loadAllPosts);
 	const nextPosts = useSelector(loadNextPosts);
-	const firstLoad = useSelector(postLoading);
+	const firstLoad = useSelector(postFirstLoad);
 	const isLoadingMore = useSelector(loadingMorePosts);
 	const hasError = useSelector(postError);
 	const isEmpty = useSelector(payloadEmpty);
@@ -56,13 +57,15 @@ export const PostList = () => {
 	}, [loadPosts]);
 
 	// Checks if user has scrolled to the bottom.
-	
-	const scrolledToBottom = () => { // ! Not the correct way to define the function. Find a  better solution for this. This happens because the function is a dependency for the useEffect below.
+
+	const scrolledToBottom = () => {
+		// ! Not the correct way to define the function. Find a  better solution for this. This happens because the function is a dependency for the useEffect below.
 		const bottom =
 			Math.ceil(window.innerHeight + window.scrollY) >=
 			document.documentElement.scrollHeight;
 
-		if (bottom) { // if the user has scrolled to the bottom.
+		if (bottom) {
+			// if the user has scrolled to the bottom.
 			pageLoad();
 		}
 	};
@@ -71,8 +74,9 @@ export const PostList = () => {
 		window.addEventListener('scroll', scrolledToBottom, {
 			passive: true,
 		});
-		
-		return () => { // Clean up of event listener
+
+		return () => {
+			// Clean up of event listener
 			window.removeEventListener('scroll', scrolledToBottom);
 		};
 	}, [scrolledToBottom]);
@@ -80,17 +84,16 @@ export const PostList = () => {
 	const pageLoad = () => {
 		if (currentPage === null) {
 			console.log('CurrentPage is null.');
-		} else if(isEmpty) {
+		} else if (isEmpty) {
 			console.log('No more posts.');
-		}
-		else {
+		} else {
 			dispatch(fetchPage(nextPage));
 			dispatch(addNextPage());
 			dispatch(addCurrentPage());
 			localStorage.setItem('currentPage', JSON.stringify(currentPage));
 			localStorage.setItem('nextPage', JSON.stringify(nextPage));
 		}
-	}
+	};
 	const handleNextPage = (e) => {
 		e.preventDefault();
 		pageLoad();
@@ -102,9 +105,7 @@ export const PostList = () => {
 		const listPosts = loadPosts.map((post, index) => {
 			const urlToPost = 'posts/' + post.data.id;
 			return (
-				<Link to={urlToPost} key={post.data.id}>
-					<Post post={loadPosts[index]} />
-				</Link>
+				<Post url={urlToPost} post={post.data} key={post.data.id} />
 			);
 		});
 
@@ -154,7 +155,7 @@ export const PostList = () => {
 		return (
 			<div className="postList">
 				{listPosts}
-				{/* {listNextPosts && content} Created issues with loading props.posts.data*/} 
+				{/* {listNextPosts && content} Created issues with loading props.posts.data*/}
 				{content}
 				<div className="load-container">
 					<CircularProgress />
@@ -178,11 +179,7 @@ export const PostList = () => {
 		const listPosts = loadPosts.map((post, index) => {
 			const urlToPost = 'posts/' + post.data.id;
 			// console.log(post)
-			return (
-				<Link to={urlToPost} key={post.data.id}>
-					<Post post={post.data} />
-				</Link>
-			);
+			return <Post url={urlToPost} post={post.data} key={post.data.id} />;
 		});
 
 		const listNextPosts = nextPosts.map((post, index) => {
@@ -197,15 +194,16 @@ export const PostList = () => {
 			<div className="postList">
 				{listPosts}
 				{/* {listNextPosts} */}
-			{isEmpty? 
-			<div className='post-title'>No more posts</div>
-			: 
-			<div className="load-container">
-				<Link className="load-post" onClick={handleNextPage}>
-					Load more posts
-				</Link>
-			</div> }
-				
+				{isEmpty ? (
+					<div className="post-title">No more posts</div>
+				) : (
+					<div className="load-container">
+						<Link className="load-post" onClick={handleNextPage}>
+							Load more posts
+						</Link>
+					</div>
+				)}
+
 				{/* ------------------------------------------ 
         Restores position to bottom. Needs to restore scroll before the next posts. 
 		*/}

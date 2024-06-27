@@ -6,14 +6,19 @@ import { useSelector } from 'react-redux';
 import {
 	loadingMorePosts,
 	postError,
+	postFirstLoad,
 	postLoading,
 } from '../../Features/Posts/postsSlice';
+import ReactMarkdown from 'react-markdown';
+import Markdown from 'react-markdown';
+import { Link } from 'react-router-dom';
 
 export const Post = (props) => {
 	// console.log("POST: props post.id: " + props.post.id)
 	const post = props.post;
 	// console.log(props)
-	const firstLoad = useSelector(postLoading);
+	const firstLoad = useSelector(postFirstLoad);
+	const isLoading = useSelector(postLoading)
 	const isLoadingMore = useSelector(loadingMorePosts);
 	const hasError = useSelector(postError);
 
@@ -21,7 +26,7 @@ export const Post = (props) => {
 	// if (!post){console.log('Post error: ' + post)} else { console.log(post)}
 	// If post is undefined, log error and repeat.
 	
-	if (firstLoad) {
+	if (firstLoad || isLoading) {
 		// if fetching of post is pending and there are no posts avalible display the skeleton.
 		const skeletonArray = [];
 		let i = 0;
@@ -74,16 +79,17 @@ export const Post = (props) => {
 			<div className="post" id={post.id}>
 				<div className="sub-title">r/{post.subreddit}</div>
 
-				<h2 className="post-title">{post.title}</h2>
+				<h2 className="post-title"><Link to={props.url}>{post.title}</Link></h2>
 
 				<div className="votes">
 					<ArrowUpward />
-					2.7k
+					{post.ups}
 					<ArrowDownward />
 				</div>
 
 				<div className="post-text">
-					<p>{post.selftext}</p>
+					<Markdown>{post.selftext}</Markdown>
+					
 				</div>
 
 				<div className="image-container"></div>
