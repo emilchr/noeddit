@@ -2,6 +2,7 @@ import React from 'react';
 import './Comment.css';
 import { useSelector } from 'react-redux';
 import { commentError } from '../../Features/Comments/commentsSlice';
+import Markdown from 'react-markdown';
 
 
 export default function Comment(props) {
@@ -16,9 +17,9 @@ export default function Comment(props) {
         content = (
             <div className='comment'>
                 <div className='comment-body'>
-                    Comment Body: {comment.body}
+                    <Markdown>{comment.body}</Markdown>
                 </div>
-                <div className='comment-name'><h6> Comment Name: {comment.name}</h6></div>
+                <div className='comment-name'><h6>{comment.author}</h6></div>
             </div>
         )
     } else if (hasError){

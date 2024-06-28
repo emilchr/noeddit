@@ -1,24 +1,26 @@
-
-.postList:first-child{
-    margin-top: .25em;
+.postList:first-child {
+	margin-top: 0.25em;
 }
 .postList .load-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-content: center;
 }
 .postList .load-container .load-post {
-    text-align: center;
-    font-size: medium;
-    background-color: var(--accent-color);
-    color: var(--background-color);
-    box-sizing: border-box;
-    border-radius: .25rem;
-    height: 1.5rem;
-    width: 9rem;
-    opacity: 0.7;
+	text-align: center;
+	font-size: medium;
+	background-color: var(--accent-color);
+	color: var(--background-color);
+	box-sizing: border-box;
+	border-radius: 0.25rem;
+	height: 1.5rem;
+	width: 9rem;
+	opacity: 0.7;
 }
-.postList .load-post:hover{
-    opacity: 1;
+.postList .load-post:hover {
+	opacity: 1;
+}
+.postList {
+	width: 100%;
 }

@@ -20,6 +20,7 @@
 }
 .comment-body{
     grid-area: body;
+    word-wrap: anywhere;
 }
 .comment-name{
     grid-area: name;

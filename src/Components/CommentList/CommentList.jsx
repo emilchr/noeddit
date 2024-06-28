@@ -2,7 +2,7 @@ import React from 'react'
 import './CommentList.css';
 import Comment from '../Comment/Comment';
 import { useSelector } from 'react-redux';
-import { commentLoading, loadAllComments } from '../../Features/Comments/commentsSlice';
+import { commentError, commentLoading, loadAllComments } from '../../Features/Comments/commentsSlice';
 import { useParams } from 'react-router-dom';
 import Skeleton from '../Skeleton/Skeleton';
 
@@ -13,9 +13,9 @@ export default function CommentList() {
    const params = useParams();
    let { postId } = params;
    
-   postId = Number(postId); // Converts postId to a number
    let comments = useSelector(loadAllComments);
    const isLoading = useSelector(commentLoading);
+   const hasError = useSelector(commentError);
 
    let postComments = '';
 
@@ -46,11 +46,16 @@ export default function CommentList() {
             postComments = skeletonArray;
             return postComments;
         
+    } else if (hasError){
+
+        console.log('Something went wrong.')
+
+        return postComments;
     } else if (loadAllComments){
         postComments = 
         comments
-        .filter((comment) => comment.postId === postId)
-        .map((comment) => {return <Comment comment={comment} key={comment.id} />});
+        .map((comment) => {return <Comment comment={comment.data} key={comment.data.id} />});
+        
 
         return postComments;
     }

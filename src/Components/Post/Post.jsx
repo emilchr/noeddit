@@ -1,6 +1,10 @@
 import React from 'react';
 import './Post.css';
-import { ArrowDownward, ArrowUpward, CommentOutlined } from '@mui/icons-material';
+import {
+	ArrowDownward,
+	ArrowUpward,
+	CommentOutlined,
+} from '@mui/icons-material';
 import Skeleton from '../Skeleton/Skeleton';
 import { useSelector } from 'react-redux';
 import {
@@ -9,23 +13,23 @@ import {
 	postFirstLoad,
 	postLoading,
 } from '../../Features/Posts/postsSlice';
-import ReactMarkdown from 'react-markdown';
 import Markdown from 'react-markdown';
 import { Link } from 'react-router-dom';
+import remarkGfm from 'remark-gfm';
 
 export const Post = (props) => {
 	// console.log("POST: props post.id: " + props.post.id)
 	const post = props.post;
 	// console.log(props)
 	const firstLoad = useSelector(postFirstLoad);
-	const isLoading = useSelector(postLoading)
+	const isLoading = useSelector(postLoading);
 	const isLoadingMore = useSelector(loadingMorePosts);
 	const hasError = useSelector(postError);
 
 	let content = '';
 	// if (!post){console.log('Post error: ' + post)} else { console.log(post)}
 	// If post is undefined, log error and repeat.
-	
+
 	if (firstLoad || isLoading) {
 		// if fetching of post is pending and there are no posts avalible display the skeleton.
 		const skeletonArray = [];
@@ -73,13 +77,15 @@ export const Post = (props) => {
 		content = skeletonArray;
 
 		return content;
-	}  else if (post) {
-		// If post is defined
+	} else if (post) {
+		// If there are posts present in state.
 		content = (
 			<div className="post" id={post.id}>
 				<div className="sub-title">r/{post.subreddit}</div>
 
-				<h2 className="post-title"><Link to={props.url}>{post.title}</Link></h2>
+				<h3 className="post-title">
+					<Link to={props.url}>{post.title}</Link>
+				</h3>
 
 				<div className="votes">
 					<ArrowUpward />
@@ -88,8 +94,7 @@ export const Post = (props) => {
 				</div>
 
 				<div className="post-text">
-					<Markdown>{post.selftext}</Markdown>
-					
+					<Markdown remarkPlugins={[remarkGfm]}>{post.selftext}</Markdown>
 				</div>
 
 				<div className="image-container"></div>
@@ -99,7 +104,9 @@ export const Post = (props) => {
 						Posted by <b>{post.author}</b>
 					</p>
 					<p> 2 minutes ago</p>
-					<p><CommentOutlined /></p>
+					<p>
+						<CommentOutlined />
+					</p>
 					<p>{post.num_comments}</p>
 				</div>
 			</div>

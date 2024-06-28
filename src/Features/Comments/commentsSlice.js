@@ -1,10 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const COMMENTS_URL = 'https://jsonplaceholder.typicode.com/comments?';
 
-export const fetchComments = createAsyncThunk('comments/fetchComments', async (postId) => {
+const COMMENTS_URL = 'https://www.reddit.com/r/';
+
+export const fetchComments = createAsyncThunk('comments/fetchComments', async (postInfo) => {
 	try {
-		const response = await fetch(COMMENTS_URL + 'postId=' + postId);
+		
+
+		const response = await fetch(COMMENTS_URL + postInfo.subreddit + '/comments/' + postInfo.singlePostId + '.json');
 		const json = await response.json();
 
 		return json;
@@ -34,7 +37,7 @@ export const commentsSlice = createSlice({
 			.addCase(fetchComments.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.hasError = false;
-				state.comments = action.payload;
+				state.comments = action.payload[1].data.children;
 				console.log('fetchComments is fulfilled.');
 				localStorage.setItem('comments', JSON.stringify(state.comments)) // Sends the fetched state to localStorage for persistedState.
 			})

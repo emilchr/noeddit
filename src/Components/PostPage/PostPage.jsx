@@ -18,15 +18,24 @@ import { fetchComments } from '../../Features/Comments/commentsSlice';
 export const PostPage = () => {
 	const params = useParams();
 	let { postId } = params;
-	// postId = Number(postId); // Converts postId to a number
+	const dispatch = useDispatch();
 
 	let loadPosts = useSelector(loadAllPosts);
 	let nextPosts = useSelector(loadNextPosts);
-
-	const dispatch = useDispatch();
+	// Selects the post that has the same ID as postID
+	const singlePost = loadPosts.find((post) => post.data.id === postId);
+	const nextPagePost = nextPosts.find((post) => post.data.id === postId);
+	const subreddit = singlePost.data.subreddit; // Selects the subreddit name
+	const singlePostId = singlePost.data.id // Selecting post id
+	const postInfo = { // Merges to an object for the thunk parameter.
+		subreddit,
+		singlePostId
+	} 
+	
+	
 	useEffect(() => {
-		// dispatch(fetchComments(postId)); no comments in REDDIT DATA
-	}, [dispatch, postId]);
+		dispatch(fetchComments(postInfo));
+	}, [dispatch, singlePostId]);
 
 	// Check if state.posts is empty. If empty, rehydrate with the state stored in localStorage.
 	if (loadPosts.length === 0) {
@@ -37,9 +46,6 @@ export const PostPage = () => {
 		dispatch(rehydratePayloadEmpty());
 	}
 	
-	// Selects the post that has the same ID as postID
-	const singlePost = loadPosts.find((post) => post.data.id === postId);
-	const nextPagePost = nextPosts.find((post) => post.data.id === postId);
 	
 	return (
 		<div className="postPage">
