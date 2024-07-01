@@ -13,9 +13,8 @@ import {
 	postFirstLoad,
 	postLoading,
 } from '../../Features/Posts/postsSlice';
-import Markdown from 'react-markdown';
 import { Link } from 'react-router-dom';
-import remarkGfm from 'remark-gfm';
+import Markdown from 'marked-react';
 
 export const Post = (props) => {
 	// console.log("POST: props post.id: " + props.post.id)
@@ -45,11 +44,7 @@ export const Post = (props) => {
 						<h2 className="post-title">
 							<Skeleton variant="h2" />
 						</h2>
-						<div className="votes">
-							<ArrowUpward />
-							<Skeleton height="1rem" />
-							<ArrowDownward />
-						</div>
+
 						<div className="post-text">
 							<p>
 								<Skeleton />
@@ -59,7 +54,7 @@ export const Post = (props) => {
 								<Skeleton width="50%" height="1rem" />
 							</p>
 						</div>
-						<div className="image-container">
+						<div className="post-media">
 							<Skeleton variant="image" />
 						</div>
 						<div className="post-info">
@@ -87,21 +82,28 @@ export const Post = (props) => {
 					<Link to={props.url}>{post.title}</Link>
 				</h3>
 
-				<div className="votes">
+				{/* <div className="votes">
 					<ArrowUpward />
 					{post.ups}
 					<ArrowDownward />
-				</div>
+				</div> */}
 
 				<div className="post-text">
-					<Markdown remarkPlugins={[remarkGfm]}>{post.selftext}</Markdown>
+					<p>
+						Posted by <b>{post.author}</b>
+					</p>
+					<Markdown gfm={true} breaks={true}>
+						{post.selftext}
+					</Markdown>
 				</div>
 
-				<div className="image-container"></div>
+				<div className="post-media"></div>
 
 				<div className="post-info">
 					<p>
-						Posted by <b>{post.author}</b>
+						<ArrowUpward />
+						<ArrowDownward />
+						{post.score}
 					</p>
 					<p> 2 minutes ago</p>
 					<p>

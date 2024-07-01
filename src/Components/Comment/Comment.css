@@ -1,31 +1,37 @@
-.comment{
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: .1fr auto;
-    grid-template-areas:
-        "body body"
-        "name name";
-    margin-bottom: .75em;
-    margin-left: 1em;
-    margin-right: 1em;
-    gap: .25em;
-    padding: 0.25em 0.75em;
-    box-shadow: 0 3px 12px -3px rgba(0, 0, 0, 0.2), 0 3px 12px -3px rgba(0, 0, 0, 0.2);
-    border-radius: .5rem;
+.comment,
+.inner-comment {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 0.75em;
+	margin-left: 1em;
+	margin-right: 1em;
+	gap: 0.25em;
+	padding: 0.25em 0.75em;
+	box-shadow:
+		0 3px 12px -3px rgba(0, 0, 0, 0.2),
+		0 3px 12px -3px rgba(0, 0, 0, 0.2);
+	border-radius: 0.5rem;
 }
-.comment:last-child{
-    /* last comment */
-    margin-bottom: .25rem;
-    padding-bottom: .25rem;
+.inner-comment {
+	justify-content: flex-end;
+	margin-left: 0.25em;
+	margin-right: 0;
 }
-.comment-body{
-    grid-area: body;
-    word-wrap: anywhere;
+.comment:last-child {
+	/* last comment */
+	margin-bottom: 0.25rem;
+	padding-bottom: 0.25rem;
 }
-.comment-name{
-    grid-area: name;
-    display: inline-flex;
-    justify-content: flex-end;
-    width: 100%;
+.inner-comment:last-child {
+	display: none; /* Hides last post thats empty in innerComment */
 }
-
+.comment-body,
+.inner-comment-body {
+	word-wrap: anywhere;
+}
+.comment-name,
+.inner-comment-name {
+	display: inline-flex;
+	justify-content: flex-end;
+	width: 100%;
+}

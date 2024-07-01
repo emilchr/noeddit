@@ -30,3 +30,7 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 		monospace;
 }
+ul,
+ol {
+	padding-left: 1em;
+}

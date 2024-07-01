@@ -79,7 +79,6 @@ nav .subReddits button a::before {
 nav .subReddits button a {
 	display: flex;
 	width: 100%;
-
 	border-radius: inherit;
 	padding: 0 0.2rem;
 	font-size: large;

@@ -5,8 +5,8 @@
 	grid-template-areas:
 		'head head'
 		'title title'
-		'votes text'
-		'votes image'
+		'text text'
+		'media media'
 		'info info';
 	margin-bottom: 0.75em;
 	margin-left: 1em;
@@ -40,12 +40,17 @@
 }
 .post-text {
 	grid-area: text;
-	width: auto;
-
-	word-wrap: break-word;
+	width: 100%;
 }
-.image-container {
-	grid-area: image;
+.post-text ul,
+.post-text ol {
+	padding-left: 1em;
+}
+pre {
+	text-wrap: wrap;
+}
+.post-media {
+	grid-area: media;
 	display: inline-flex;
 	justify-content: center;
 	min-height: 4rem;
@@ -54,9 +59,10 @@
 .post-info {
 	grid-area: info;
 	display: inline-flex;
-	justify-content: space-evenly;
+	justify-content: space-between;
 	align-content: center;
 	height: 100%;
+	width: 100%;
 	border-top: 1px solid rgb(178, 178, 178);
 	font-size: small;
 }
@@ -70,14 +76,11 @@
 	text-decoration: none;
 	color: var(--font-color);
 }
-
 table {
 	border-collapse: collapse;
 	display: inline-block;
-	word-break: normal;
-	overflow-x: auto;
-	max-width: 100%;
-	width: 100%;
+	text-wrap: wrap;
+	word-break: keep-all;
 }
 thead {
 	color: var(--secondary-background-color);
@@ -91,10 +94,22 @@ tbody {
 tr {
 }
 td {
-	text-align:;
 	padding: 0.1rem;
-	min-width: 2rem;
 }
 tr:nth-child(n + 2):nth-child(even) {
 	background-color: var(--secondary-background-color);
+}
+@media screen and (max-width: 576px) {
+	.post {
+		font-size: 0.9rem;
+		.post-info {
+			font-size: 0.9em;
+		}
+	}
+	pre {
+		font-size: xx-small;
+	}
+	table {
+		font-size: small;
+	}
 }
