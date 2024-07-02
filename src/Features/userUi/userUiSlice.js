@@ -7,6 +7,7 @@ export const userUiSlice = createSlice({
 		showMenu: false,
 		showSearch: false,
 		activeSubreddit: '',
+		windowWidth: '',
 	},
 	reducers: {
 		toggleMenu: (state) => {
@@ -20,6 +21,9 @@ export const userUiSlice = createSlice({
 		setSubreddit: (state, action) => {
 			state.activeSubreddit = action.payload;
 		},
+		setWindowWidth: (state, action) => {
+			state.windowWidth = action.payload;
+		},
 	},
 });
 
@@ -27,10 +31,12 @@ export const userUiSlice = createSlice({
 export const { toggleMenu } = userUiSlice.actions;
 export const { toggleSearch } = userUiSlice.actions;
 export const { setSubreddit } = userUiSlice.actions;
+export const { setWindowWidth } = userUiSlice.actions;
 
 // Selectors
 export const menuState = (state) => state.userUi.showMenu;
 export const searchState = (state) => state.userUi.showSearch;
 export const activeSubreddit = (state) => state.userUi.activeSubreddit;
+export const winWidth = (state) => state.userUi.windowWidth;
 
 export default userUiSlice.reducer;

@@ -72,6 +72,7 @@ header .toggle-button {
 	width: 2.2rem;
 	margin: 0 0.15rem;
 	z-index: 4;
+	cursor: pointer;
 }
 header .toggle-button:hover {
 	padding: 0.3rem 0;
@@ -116,4 +117,10 @@ footer {
 	align-items: center;
 	width: 100%;
 	margin-top: 0.5rem;
+}
+
+@media screen and (min-width: 1600px) {
+	header label.toggle-button {
+		display: none;
+	}
 }

@@ -7,6 +7,8 @@ import {
 	toggleMenu,
 	toggleSearch,
 	activeSubreddit,
+	setWindowWidth,
+	winWidth,
 } from '../Features/userUi/userUiSlice';
 import SubReddits from '../Features/SubReddit/SubReddits';
 import './AppLayout.css';
@@ -22,11 +24,16 @@ export default function AppLayout() {
 	const currentMenuState = useSelector(menuState);
 	const currentSearchState = useSelector(searchState);
 	const subredditName = useSelector(activeSubreddit);
+	const windowWidth = useSelector(winWidth);
 
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		dispatch(fetchLinks());
+
+		window.addEventListener('resize', () => {
+			dispatch(setWindowWidth(window.innerWidth));
+		});
 	}, [dispatch]);
 
 	const handleMenuClick = (e) => {
@@ -61,17 +68,17 @@ export default function AppLayout() {
 	};
 
 	let modalBackground = '';
-	if (currentMenuState || currentSearchState) {
-		// if one condition is true, modalBackground is displayed.
-		modalBackground = (
-			<div className="modal-background" onClick={handleDisableClick}></div>
-		);
-	}
 	let navMenu = '';
 
-	if (window.innerWidth >= 1600) {
+	if (windowWidth >= 1600) {
 		navMenu = <SubReddits />;
 	} else {
+		if (currentMenuState || currentSearchState) {
+			// if one condition is true, modalBackground is displayed.
+			modalBackground = (
+				<div className="modal-background" onClick={handleDisableClick}></div>
+			);
+		}
 		navMenu = !currentMenuState ? null : <SubReddits />;
 	}
 
