@@ -42,10 +42,7 @@
 	grid-area: text;
 	width: 100%;
 }
-.post-text ul,
-.post-text ol {
-	padding-left: 1em;
-}
+
 pre {
 	text-wrap: wrap;
 }

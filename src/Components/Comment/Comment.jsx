@@ -11,12 +11,26 @@ export default function Comment(props) {
 
 	const comment = props.comment;
 	let innerComment = '';
-	console.log(comment.replies);
-	if (!comment.replies) {
-		console.log('No replies to comment.');
-	} else {
-		console.log('not undefined');
+	let deepComment = '';
+
+	if (comment.replies) {
 		innerComment = comment.replies.data.children.map((innerComment) => {
+			if (innerComment.data.replies) {
+				deepComment = innerComment.data.replies.data.children;
+				deepComment = deepComment.map((deepComment) => {
+					return (
+						<div className="inner-comment" key={deepComment.data.id}>
+							<div className="inner-comment-body">
+								<Markdown>{deepComment.data.body}</Markdown>
+							</div>
+							<div className="inner-comment-name">
+								<h6>{deepComment.data.author}</h6>
+							</div>
+						</div>
+					);
+				});
+			}
+
 			return (
 				<div className="inner-comment" key={innerComment.data.id}>
 					<div className="inner-comment-body">
@@ -25,6 +39,7 @@ export default function Comment(props) {
 					<div className="inner-comment-name">
 						<h6>{innerComment.data.author}</h6>
 					</div>
+					{deepComment}
 				</div>
 			);
 		});

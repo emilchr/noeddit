@@ -30,6 +30,9 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 		monospace;
 }
+pre {
+	background-color: #e5e4e4;
+}
 ul,
 ol {
 	padding-left: 1em;

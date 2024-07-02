@@ -14,17 +14,19 @@
 }
 .inner-comment {
 	justify-content: flex-end;
+	background-color: #e5e4e4;
 	margin-left: 0.25em;
 	margin-right: 0;
+	box-shadow:
+		0 3px 12px -3px rgba(0, 0, 0, 0.1),
+		0 3px 12px -3px rgba(0, 0, 0, 0.1);
 }
 .comment:last-child {
 	/* last comment */
 	margin-bottom: 0.25rem;
 	padding-bottom: 0.25rem;
 }
-.inner-comment:last-child {
-	display: none; /* Hides last post thats empty in innerComment */
-}
+
 .comment-body,
 .inner-comment-body {
 	word-wrap: anywhere;

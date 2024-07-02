@@ -74,6 +74,7 @@ export const Post = (props) => {
 		return content;
 	} else if (post) {
 		// If there are posts present in state.
+		let postCreated = new Date(post.created * 1000); // get time for when post is created.
 		content = (
 			<div className="post" id={post.id}>
 				<div className="sub-title">r/{post.subreddit}</div>
@@ -81,12 +82,6 @@ export const Post = (props) => {
 				<h3 className="post-title">
 					<Link to={props.url}>{post.title}</Link>
 				</h3>
-
-				{/* <div className="votes">
-					<ArrowUpward />
-					{post.ups}
-					<ArrowDownward />
-				</div> */}
 
 				<div className="post-text">
 					<p>
@@ -105,7 +100,7 @@ export const Post = (props) => {
 						<ArrowDownward />
 						{post.score}
 					</p>
-					<p> 2 minutes ago</p>
+					<p>Posted {postCreated.toLocaleString('no-NO')}</p>
 					<p>
 						<CommentOutlined />
 					</p>
