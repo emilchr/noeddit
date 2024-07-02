@@ -104,52 +104,15 @@ export const PostList = () => {
 		// If more posts are loading and state.posts are filled with posts.
 		const listPosts = loadPosts.map((post, index) => {
 			const urlToPost = 'posts/' + post.data.id;
-			return (
-				<Post url={urlToPost} post={post.data} key={post.data.id} />
-			);
+			return <Post url={urlToPost} post={post.data} key={post.data.id} />;
 		});
 
 		// If post is defined but loading new posts after fetching new page.
-		let content = (
-			<div>
-				<div className="post">
-					<div className="sub-title">
-						r/
-						<Skeleton width="5rem" height=".55rem" />
-					</div>
-					<h2 className="post-title">
-						<Skeleton variant="h2" />
-					</h2>
-					<div className="votes">
-						<ArrowUpward />
-						<Skeleton height="1rem" />
-						<ArrowDownward />
-					</div>
-					<div className="post-text">
-						<p>
-							<Skeleton />
-							<Skeleton />
-							<Skeleton />
-							<Skeleton width="80%" height="1rem" />
-							<Skeleton width="50%" height="1rem" />
-						</p>
-					</div>
-					<div className="image-container">
-						<Skeleton variant="image" />
-					</div>
-					<div className="post-info">
-						<Skeleton height=".75rem" />
-					</div>
-				</div>
-			</div>
-		);
+		let content = '';
+
 		const listNextPosts = nextPosts.map((post, index) => {
 			const urlToPost = 'posts/' + post.data.id;
-			return (
-				<Link to={urlToPost} key={post.data.id}>
-					<Post post={nextPosts[index]} />
-				</Link>
-			);
+			return <Post post={nextPosts[index]} key={post.data.id} />;
 		});
 
 		return (
@@ -184,11 +147,7 @@ export const PostList = () => {
 
 		const listNextPosts = nextPosts.map((post, index) => {
 			const urlToPost = 'posts/' + post.id;
-			return (
-				<Link to={urlToPost} key={post.id}>
-					<Post post={nextPosts[index]} />
-				</Link>
-			);
+			return <Post post={nextPosts[index]} key={post.data.id} />;
 		});
 		return (
 			<div className="postList">

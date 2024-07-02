@@ -75,8 +75,42 @@ export const Post = (props) => {
 	} else if (post) {
 		// If there are posts present in state.
 		let postCreated = new Date(post.created * 1000); // get time for when post is created.
+
+		let media = [];
+
+		switch (props.post.post_hint) {
+			case 'image':
+				media.push(
+					<div key={post.id}>
+						<Link to={props.url}>
+							<img
+								src={props.post.url}
+								height={props.post.preview.images[0].resolutions[2].height}
+								width={props.post.preview.images[0].resolutions[2].width}
+								alt={post.title}
+							/>
+						</Link>
+					</div>
+				);
+				break;
+			case 'hosted:video':
+				media.push(
+					<div key={post.id}>
+						<video
+							src={props.post.secure_media.reddit_video.fallback_url}
+							height="400px"
+							width="300px"
+							controls
+						></video>
+					</div>
+				);
+				break;
+			default:
+				break;
+		}
+
 		content = (
-			<div className="post" id={post.id}>
+			<div className="post">
 				<div className="sub-title">r/{post.subreddit}</div>
 
 				<h3 className="post-title">
@@ -87,12 +121,10 @@ export const Post = (props) => {
 					<p>
 						Posted by <b>{post.author}</b>
 					</p>
-					<Markdown gfm={true} breaks={true}>
-						{post.selftext}
-					</Markdown>
+					<Markdown gfm={true}>{post.selftext || post.url}</Markdown>
 				</div>
 
-				<div className="post-media"></div>
+				<div className="post-media">{media}</div>
 
 				<div className="post-info">
 					<p>
