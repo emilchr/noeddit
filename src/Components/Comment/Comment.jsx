@@ -18,16 +18,18 @@ export default function Comment(props) {
 			if (innerComment.data.replies) {
 				deepComment = innerComment.data.replies.data.children;
 				deepComment = deepComment.map((deepComment) => {
-					return (
-						<div className="inner-comment" key={deepComment.data.id}>
-							<div className="inner-comment-body">
-								<Markdown>{deepComment.data.body}</Markdown>
+					if (deepComment.kind !== 'more') {
+						return (
+							<div className="inner-comment" key={deepComment.data.id}>
+								<div className="inner-comment-body">
+									<Markdown>{deepComment.data.body}</Markdown>
+								</div>
+								<div className="inner-comment-name">
+									<h6>{deepComment.data.author}</h6>
+								</div>
 							</div>
-							<div className="inner-comment-name">
-								<h6>{deepComment.data.author}</h6>
-							</div>
-						</div>
-					);
+						);
+					}
 				});
 			}
 

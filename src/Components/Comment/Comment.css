@@ -14,12 +14,14 @@
 }
 .inner-comment {
 	justify-content: flex-end;
-	background-color: #e5e4e4;
+	background-color: #ebeaea;
 	margin-left: 0.25em;
 	margin-right: 0;
-	box-shadow:
-		0 3px 12px -3px rgba(0, 0, 0, 0.1),
-		0 3px 12px -3px rgba(0, 0, 0, 0.1);
+	padding-right: 0.25em;
+	box-shadow: none;
+	border-left: 1px solid #ababab;
+	border-bottom: 1px solid #ababab;
+	border-radius: 0 0.5em;
 }
 .comment:last-child {
 	/* last comment */
