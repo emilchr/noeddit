@@ -78,7 +78,9 @@ export const Post = (props) => {
 
 		let media = [];
 
-		switch (props.post.post_hint) {
+		switch (
+			props.post.post_hint // check for media type and pushes media to the variable 'media'.
+		) {
 			case 'image':
 				media.push(
 					<div key={post.id}>
@@ -133,10 +135,10 @@ export const Post = (props) => {
 						{post.score}
 					</p>
 					<p>Posted {postCreated.toLocaleString('no-NO')}</p>
-					<p>
+					<p className="num_comments">
 						<CommentOutlined />
+						<Link to={props.url}>{post.num_comments}</Link>
 					</p>
-					<p>{post.num_comments}</p>
 				</div>
 			</div>
 		);

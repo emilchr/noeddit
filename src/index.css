@@ -13,6 +13,10 @@
 #root {
 	min-height: 100%;
 }
+html,
+body {
+	height: 100%;
+}
 body {
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
 		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -22,16 +26,13 @@ body {
 	background-color: var(--background-color);
 	color: var(--font-color);
 }
-html,
-body {
-	height: 100%;
-}
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 		monospace;
 }
 pre {
 	background-color: #e5e4e4;
+	margin: 0.5em 0;
 }
 ul,
 ol {

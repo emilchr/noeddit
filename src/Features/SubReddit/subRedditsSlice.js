@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { subRedditLinks } from './links/links';
 
-
 export const fetchLinks = createAsyncThunk(
 	'subReddits/fetchLinks',
 	async () => {
@@ -52,7 +51,6 @@ export const subRedditsSlice = createSlice({
 });
 
 // Action creators
-
 
 // Selectors
 

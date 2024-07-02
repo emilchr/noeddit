@@ -2,8 +2,7 @@ import React from 'react';
 import './Comment.css';
 import { useSelector } from 'react-redux';
 import { commentError } from '../../Features/Comments/commentsSlice';
-import Markdown from 'react-markdown';
-
+import Markdown from 'marked-react';
 export default function Comment(props) {
 	let content = '';
 

@@ -6,6 +6,7 @@ import {
 	searchState,
 	toggleMenu,
 	toggleSearch,
+	activeSubreddit,
 } from '../Features/userUi/userUiSlice';
 import SubReddits from '../Features/SubReddit/SubReddits';
 import './AppLayout.css';
@@ -15,17 +16,14 @@ import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import { fetchLinks } from '../Features/SubReddit/subRedditsSlice';
-import { loadAllPosts } from '../Features/Posts/postsSlice';
-
 
 export default function AppLayout() {
 	const dispatch = useDispatch();
 	const currentMenuState = useSelector(menuState);
 	const currentSearchState = useSelector(searchState);
+	const subredditName = useSelector(activeSubreddit);
 
 	const navigate = useNavigate();
-
-	
 
 	useEffect(() => {
 		dispatch(fetchLinks());
@@ -69,6 +67,13 @@ export default function AppLayout() {
 			<div className="modal-background" onClick={handleDisableClick}></div>
 		);
 	}
+	let navMenu = '';
+
+	if (window.innerWidth >= 1600) {
+		navMenu = <SubReddits />;
+	} else {
+		navMenu = !currentMenuState ? null : <SubReddits />;
+	}
 
 	return (
 		<>
@@ -83,7 +88,7 @@ export default function AppLayout() {
 					</h2>
 
 					<div className="header-overhang">
-						<p>r/subReddit</p>
+						<p>r/{!subredditName ? 'popular' : subredditName}</p>
 					</div>
 
 					{
@@ -111,7 +116,7 @@ export default function AppLayout() {
 					</div>
 					<nav>
 						<input type="checkbox" id="toggle-menu"></input>
-						{!currentMenuState ? null : <SubReddits />}
+						{navMenu}
 					</nav>
 				</header>
 

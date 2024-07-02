@@ -32,12 +32,7 @@
 	justify-self: center;
 	text-align: center;
 }
-.votes {
-	display: flex;
-	grid-area: votes;
-	justify-self: center;
-	flex-direction: column;
-}
+
 .post-text {
 	grid-area: text;
 	width: 100%;
@@ -56,7 +51,7 @@ pre {
 .post-info {
 	grid-area: info;
 	display: inline-flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-content: center;
 	height: 100%;
 	width: 100%;
@@ -67,7 +62,16 @@ pre {
 	margin-top: 0.5em;
 }
 .post-info svg {
-	transform: scale(0.75);
+	font-size: 1em;
+}
+.post-info {
+	a {
+		text-decoration: none;
+		color: var(--font-color);
+	}
+	.num_comments svg {
+		margin-right: 0.25em;
+	}
 }
 .post-title a {
 	text-decoration: none;
@@ -85,10 +89,6 @@ thead {
 }
 th {
 	padding: 0.25rem 0.5rem;
-}
-tbody {
-}
-tr {
 }
 td {
 	padding: 0.1rem;

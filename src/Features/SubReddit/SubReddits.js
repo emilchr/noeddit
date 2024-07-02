@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { loadLinks } from './subRedditsSlice';
 import './SubReddits.css';
-import { toggleMenu } from '../userUi/userUiSlice';
+import { setSubreddit, toggleMenu } from '../userUi/userUiSlice';
 import { useCallback } from 'react';
 import { fetchSubReddit } from '../Posts/postsSlice';
 
@@ -19,7 +19,8 @@ function SubReddits() {
 		return (e) => {
 			e.preventDefault();
 			dispatch(fetchSubReddit(link));
-			
+
+			dispatch(setSubreddit(link));
 			dispatch(toggleMenu());
 		};
 	}, []);
@@ -32,10 +33,7 @@ function SubReddits() {
 		content = (
 			<>
 				{link.map((link) => (
-					<button
-						onClick={handleLinkClick(link.title)}
-						key={link.id}
-					>
+					<button onClick={handleLinkClick(link.title)} key={link.id}>
 						<NavLink to={link.url ? link.url : link.title}>
 							{link.title}
 						</NavLink>
