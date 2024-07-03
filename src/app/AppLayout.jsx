@@ -30,10 +30,10 @@ export default function AppLayout() {
 
 	useEffect(() => {
 		dispatch(fetchLinks());
-
 		window.addEventListener('resize', () => {
 			dispatch(setWindowWidth(window.innerWidth));
 		});
+		console.log(window.innerWidth);
 	}, [dispatch]);
 
 	const handleMenuClick = (e) => {
@@ -70,7 +70,7 @@ export default function AppLayout() {
 	let modalBackground = '';
 	let navMenu = '';
 
-	if (windowWidth >= 1600) {
+	if (windowWidth >= 1600 || window.innerWidth >= 1600) {
 		navMenu = <SubReddits />;
 	} else {
 		if (currentMenuState || currentSearchState) {
@@ -95,7 +95,7 @@ export default function AppLayout() {
 					</h2>
 
 					<div className="header-overhang">
-						<p>r/{!subredditName ? 'popular' : subredditName}</p>
+						<p>r/{!subredditName ? 'Popular' : subredditName}</p>
 					</div>
 
 					{

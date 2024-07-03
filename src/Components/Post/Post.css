@@ -43,10 +43,16 @@ pre {
 }
 .post-media {
 	grid-area: media;
-	display: inline-flex;
+	display: flex;
 	justify-content: center;
+
 	min-height: 4rem;
 	margin-bottom: 0.25rem;
+
+	img {
+		width: 400px;
+		object-fit: contain;
+	}
 }
 .post-info {
 	grid-area: info;
@@ -101,6 +107,11 @@ tr:nth-child(n + 2):nth-child(even) {
 		font-size: 0.9rem;
 		.post-info {
 			font-size: 0.9em;
+		}
+		.post-media {
+			img {
+				width: 300px;
+			}
 		}
 	}
 	pre {

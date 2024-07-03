@@ -1,20 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { v4 as uuidv4 } from 'uuid';
 
-const uuid = uuidv4();
-
-const PAGE_URL = 'https://jsonplaceholder.typicode.com/posts?_page=';
+const PAGE_URL = 'https://www.reddit.com/r/';
 
 export const fetchPage = createAsyncThunk(
 	'posts/fetchPage',
-	async (nextPage) => {
+	async (subreddit) => {
 		try {
-			const response = await fetch(PAGE_URL + nextPage);
+			const response = await fetch(`${PAGE_URL}${subreddit}.json`, {
+				header: 'Access-Control-Allow-Origin: *',
+				mode: 'cors',
+			});
 			const json = await response.json();
 
-			return json;
+			return json.data;
 		} catch (error) {
-			return error.message;
+			return console.log(error.message);
 		}
 	}
 );
@@ -23,18 +23,15 @@ export const fetchSubReddit = createAsyncThunk(
 	'posts/fetchSubReddit',
 	async (subreddit) => {
 		try {
-			const response = await fetch(
-				`https://www.reddit.com/r/${subreddit}.json`,
-				{
-					header: 'Access-Control-Allow-Origin: *',
-					mode: 'cors',
-				}
-			);
+			const response = await fetch(`${PAGE_URL}${subreddit}.json`, {
+				header: 'Access-Control-Allow-Origin: *',
+				mode: 'cors',
+			});
 			const json = await response.json();
-			
+
 			return json.data;
 		} catch (error) {
-			return console.log(error);
+			return console.log(error.message);
 		}
 	}
 );
@@ -146,7 +143,7 @@ export const postsSlice = createSlice({
 				state.isLoading = false;
 				state.hasError = false;
 				console.log('fetchSubReddit is fulfilled.');
-				if (!action.payload){
+				if (!action.payload) {
 					console.log('Payload is empty.');
 				} else {
 					state.posts = action.payload.children;

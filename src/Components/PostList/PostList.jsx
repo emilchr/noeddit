@@ -31,6 +31,7 @@ export const PostList = () => {
 	const loadPosts = useSelector(loadAllPosts);
 	const nextPosts = useSelector(loadNextPosts);
 	const firstLoad = useSelector(postFirstLoad);
+	const isLoading = useSelector(postLoading);
 	const isLoadingMore = useSelector(loadingMorePosts);
 	const hasError = useSelector(postError);
 	const isEmpty = useSelector(payloadEmpty);
@@ -87,7 +88,7 @@ export const PostList = () => {
 		} else if (isEmpty) {
 			console.log('No more posts.');
 		} else {
-			dispatch(fetchPage(nextPage));
+			// dispatch(fetchPage(nextPage));
 			dispatch(addNextPage());
 			dispatch(addCurrentPage());
 			localStorage.setItem('currentPage', JSON.stringify(currentPage));
@@ -98,7 +99,9 @@ export const PostList = () => {
 		e.preventDefault();
 		pageLoad();
 	};
-
+	// console.log('___________________________________________');
+	// console.log(loadPosts);
+	// console.log('___________________________________________');
 	// ----- Handles loading, errors and the rendering of posts ---------
 	if (isLoadingMore && loadPosts) {
 		// If more posts are loading and state.posts are filled with posts.
@@ -125,8 +128,8 @@ export const PostList = () => {
 				</div>
 			</div>
 		);
-	} else if (firstLoad) {
-		// If this is the first time the app loads. Displays skeleton of posts.
+	} else if (firstLoad || isLoading) {
+		// If this is the first time the app loads and if there are no posts in state. Displays skeleton of posts.
 		return (
 			<div>
 				<Post />
@@ -145,10 +148,10 @@ export const PostList = () => {
 			return <Post url={urlToPost} post={post.data} key={post.data.id} />;
 		});
 
-		const listNextPosts = nextPosts.map((post, index) => {
-			const urlToPost = 'posts/' + post.id;
-			return <Post post={nextPosts[index]} key={post.data.id} />;
-		});
+		// const listNextPosts = nextPosts.map((post, index) => {
+		// 	const urlToPost = 'posts/' + post.id;
+		// 	return <Post post={nextPosts[index]} key={post.data.id} />;
+		// });
 		return (
 			<div className="postList">
 				{listPosts}

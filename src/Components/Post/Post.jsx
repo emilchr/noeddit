@@ -77,38 +77,32 @@ export const Post = (props) => {
 		let postCreated = new Date(post.created * 1000); // get time for when post is created.
 
 		let media = [];
-
-		switch (
-			props.post.post_hint // check for media type and pushes media to the variable 'media'.
+		if (post.url.startsWith('https://i') && post.post_hint === 'image') {
+			media.push(
+				<div key={post.id}>
+					<Link to={props.url}>
+						<img src={post.url} alt={post.title} />
+					</Link>
+				</div>
+			);
+		} else if (
+			post.url.startsWith('https://v.') &&
+			post.post_hint === 'hosted:video'
 		) {
-			case 'image':
-				media.push(
-					<div key={post.id}>
-						<Link to={props.url}>
-							<img
-								src={props.post.url}
-								height={props.post.preview.images[0].resolutions[2].height}
-								width={props.post.preview.images[0].resolutions[2].width}
-								alt={post.title}
-							/>
-						</Link>
-					</div>
-				);
-				break;
-			case 'hosted:video':
-				media.push(
-					<div key={post.id}>
-						<video
-							src={props.post.secure_media.reddit_video.fallback_url}
-							height="400px"
-							width="300px"
-							controls
-						></video>
-					</div>
-				);
-				break;
-			default:
-				break;
+			media.push(
+				<div key={post.id}>
+					<video
+						src={post.secure_media.reddit_video.fallback_url}
+						height="400px"
+						width="300px"
+						controls
+					></video>
+				</div>
+			);
+		} else if (post.url.startsWith('https://www.reddit.com/gallery/')) {
+			media.push('GALLERY');
+		} else {
+			media.push('');
 		}
 
 		content = (
