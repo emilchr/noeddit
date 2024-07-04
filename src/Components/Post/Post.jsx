@@ -103,12 +103,17 @@ export const Post = (props) => {
 			const mediaArr = Object.entries(post.media_metadata);
 
 			media.push(
-				<div className="carousel">
-					<h1>GALLERY</h1>
-					{console.log(post)}
-					{mediaArr.map((item) => {
-						return <img src={cleanUrl(item[1].s.u)} alt={post.title} />;
-					})}
+				<div className="carousel-container">
+					<div className="carousel">
+						{console.log(post)}
+						{mediaArr.map((item) => {
+							return (
+								<p>
+									<img src={cleanUrl(item[1].s.u)} alt={post.title} />
+								</p>
+							);
+						})}
+					</div>
 				</div>
 				//
 			);
