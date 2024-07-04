@@ -7,7 +7,7 @@ export const cleanUrl = (imgUrl) => {
 	return quadEncoded;
 };
 
-// trunkates strings
+// truncates strings
 export const truncateString = (str, num) => {
 	if (str.length > num) {
 		return str.slice(0, num) + '...';

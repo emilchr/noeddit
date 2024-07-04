@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
 	loadAllPosts,
 	loadNextPosts,
-	rehydrateCurrentPage,
 	rehydrateNextPage,
 	rehydrateNextPosts,
 	rehydratePayloadEmpty,
@@ -26,13 +25,14 @@ export const PostPage = () => {
 	const singlePost = loadPosts.find((post) => post.data.id === postId);
 	const nextPagePost = nextPosts.find((post) => post.data.id === postId);
 	const subreddit = singlePost.data.subreddit; // Selects the subreddit name
-	const singlePostId = singlePost.data.id // Selecting post id
-	const postInfo = { // Merges to an object for the thunk parameter.
+	const singlePostId = singlePost.data.id; // Selecting post id
+
+	const postInfo = {
+		// Merges to an object for the thunk parameter.
 		subreddit,
-		singlePostId
-	} 
-	
-	
+		singlePostId,
+	};
+
 	useEffect(() => {
 		dispatch(fetchComments(postInfo));
 	}, [dispatch, singlePostId]);
@@ -41,12 +41,10 @@ export const PostPage = () => {
 	if (loadPosts.length === 0) {
 		dispatch(rehydratePosts());
 		dispatch(rehydrateNextPosts());
-		dispatch(rehydrateCurrentPage());
 		dispatch(rehydrateNextPage());
 		dispatch(rehydratePayloadEmpty());
 	}
-	
-	
+
 	return (
 		<div className="postPage">
 			<Post post={singlePost.data || nextPagePost.data} />

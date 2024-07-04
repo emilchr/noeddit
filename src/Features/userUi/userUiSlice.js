@@ -6,7 +6,7 @@ export const userUiSlice = createSlice({
 	initialState: {
 		showMenu: false,
 		showSearch: false,
-		activeSubreddit: '',
+		activeSubreddit: 'Popular',
 		windowWidth: '',
 	},
 	reducers: {
@@ -24,14 +24,23 @@ export const userUiSlice = createSlice({
 		setWindowWidth: (state, action) => {
 			state.windowWidth = action.payload;
 		},
+		rehydrateActiveSubreddit: (state) => {
+			const persistedSubreddit = JSON.parse(
+				localStorage.getItem('activeSubreddit')
+			);
+			state.activeSubreddit = persistedSubreddit;
+		},
 	},
 });
 
 // Action creators
-export const { toggleMenu } = userUiSlice.actions;
-export const { toggleSearch } = userUiSlice.actions;
-export const { setSubreddit } = userUiSlice.actions;
-export const { setWindowWidth } = userUiSlice.actions;
+export const {
+	toggleMenu,
+	toggleSearch,
+	setSubreddit,
+	rehydrateActiveSubreddit,
+	setWindowWidth,
+} = userUiSlice.actions;
 
 // Selectors
 export const menuState = (state) => state.userUi.showMenu;

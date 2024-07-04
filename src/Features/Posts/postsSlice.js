@@ -45,7 +45,6 @@ export const postsSlice = createSlice({
 	initialState: {
 		posts: [],
 		nextPosts: [],
-		currentPage: null,
 		nextPage: 3,
 		firstLoad: false,
 		isLoadingMore: false,
@@ -60,12 +59,6 @@ export const postsSlice = createSlice({
 		rehydrateNextPosts: (state) => {
 			const persistedState = JSON.parse(localStorage.getItem('nextPosts'));
 			state.nextPosts = persistedState;
-		},
-		rehydrateCurrentPage: (state) => {
-			const persistedCurrentPage = JSON.parse(
-				localStorage.getItem('currentPage')
-			);
-			state.currentPage = persistedCurrentPage;
 		},
 		rehydrateNextPage: (state) => {
 			const persistedNextPage = JSON.parse(localStorage.getItem('nextPage'));
@@ -86,9 +79,6 @@ export const postsSlice = createSlice({
 			);
 
 			state.posts = state.posts.concat(state.nextPosts);
-		},
-		addCurrentPage: (state) => {
-			state.currentPage += 1;
 		},
 	},
 	extraReducers: (builder) => {
@@ -138,6 +128,7 @@ export const postsSlice = createSlice({
 					'An error in fetchPosts has occurred. ' + action.error.message
 				);
 			})
+			// Fetching posts
 			.addCase(fetchPosts.pending, (state) => {
 				state.isLoading = true;
 				state.hasError = false;
@@ -150,11 +141,8 @@ export const postsSlice = createSlice({
 					console.log('Payload is empty.');
 				} else {
 					state.posts = action.payload.children;
+					localStorage.setItem('posts', JSON.stringify(state.posts));
 				}
-				// state.posts.map((post) => {
-				// 	post.data.keyId = uuid;
-				// })
-				// console.log(action.payload.children);
 			})
 			.addCase(fetchPosts.rejected, (state, action) => {
 				state.isLoading = false;
@@ -167,13 +155,13 @@ export const postsSlice = createSlice({
 });
 
 // Action creators
-export const { rehydratePosts } = postsSlice.actions;
-export const { rehydrateNextPosts } = postsSlice.actions;
-export const { rehydrateCurrentPage } = postsSlice.actions;
-export const { rehydrateNextPage } = postsSlice.actions;
-export const { rehydratePayloadEmpty } = postsSlice.actions;
-export const { addNextPage } = postsSlice.actions;
-export const { addCurrentPage } = postsSlice.actions;
+export const {
+	rehydratePosts,
+	rehydrateNextPosts,
+	rehydrateNextPage,
+	rehydratePayloadEmpty,
+	addNextPage,
+} = postsSlice.actions;
 
 // Selectors
 // post states
@@ -188,6 +176,5 @@ export const payloadEmpty = (state) => state.posts.payloadEmpty;
 
 // page states
 export const postNextPage = (state) => state.posts.nextPage;
-export const postCurrentPage = (state) => state.posts.currentPage;
 
 export default postsSlice.reducer;

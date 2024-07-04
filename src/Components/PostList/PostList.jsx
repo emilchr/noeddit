@@ -10,11 +10,8 @@ import {
 	fetchNextPosts,
 	postNextPage,
 	addNextPage,
-	addCurrentPage,
 	loadingMorePosts,
 	loadNextPosts,
-	postCurrentPage,
-	rehydrateCurrentPage,
 	rehydrateNextPage,
 	payloadEmpty,
 	fetchPosts,
@@ -22,6 +19,10 @@ import {
 } from '../../Features/Posts/postsSlice';
 import './PostList.css';
 import { CircularProgress } from '@mui/material';
+import {
+	activeSubreddit,
+	rehydrateActiveSubreddit,
+} from '../../Features/userUi/userUiSlice';
 
 export const PostList = () => {
 	const dispatch = useDispatch();
@@ -33,25 +34,23 @@ export const PostList = () => {
 	const isLoadingMore = useSelector(loadingMorePosts);
 	const hasError = useSelector(postError);
 	const isEmpty = useSelector(payloadEmpty);
+	const currentSubreddit = useSelector(activeSubreddit);
 
 	const nextPage = useSelector(postNextPage);
-	const currentPage = useSelector(postCurrentPage);
 
-	const persistedCurrentPage = JSON.parse(localStorage.getItem('currentPage'));
-
-	localStorage.setItem('currentPage', JSON.stringify(currentPage));
 	localStorage.setItem('nextPage', JSON.stringify(nextPage));
+	localStorage.setItem('currentSubreddit', JSON.stringify(currentSubreddit));
+
+	const persistedSubreddit = localStorage.getItem('currentSubreddit');
 
 	useEffect(() => {
 		if (loadPosts.length === 0) {
 			dispatch(fetchPosts('popular'));
+
 			setTimeout(() => {
 				// Delay added for proper loading in state.posts and state.nextPosts.
 				// dispatch(fetchNextPosts(2));
 			}, 100);
-		}
-		if (!persistedCurrentPage) {
-			dispatch(addCurrentPage());
 		}
 	}, [loadPosts]);
 
@@ -79,17 +78,14 @@ export const PostList = () => {
 			window.removeEventListener('scroll', scrolledToBottom);
 		};
 	}, [scrolledToBottom]);
-	/// -------- Handles loading of next page and the logic for increasing posts.currentPage and posts.nextPage.------------------ ///
+	// -------- Handles loading of next page and the logic for increasing posts.nextPage.------------------ //
 	const pageLoad = () => {
-		if (currentPage === null) {
-			console.log('CurrentPage is null.');
-		} else if (isEmpty) {
+		if (isEmpty) {
 			console.log('No more posts.');
 		} else {
 			// dispatch(fetchNextPosts(nextPage));
 			dispatch(addNextPage());
-			dispatch(addCurrentPage());
-			localStorage.setItem('currentPage', JSON.stringify(currentPage));
+
 			localStorage.setItem('nextPage', JSON.stringify(nextPage));
 		}
 	};
