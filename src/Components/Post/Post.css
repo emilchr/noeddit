@@ -153,8 +153,8 @@ tr:nth-child(n + 2):nth-child(even) {
 		p {
 			img:first-child {
 				padding-right: 0;
-				margin-right: 25px;
-				margin-left: 25px;
+				margin-right: 50px;
+				margin-left: 50px;
 			}
 			img:last-child {
 				padding-left: 0;
