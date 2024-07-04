@@ -97,9 +97,9 @@ export const PostList = () => {
 		e.preventDefault();
 		pageLoad();
 	};
-	console.log('___________________________________________');
-	console.log(loadPosts);
-	console.log('___________________________________________');
+	// console.log('___________________________________________');
+	// console.log(loadPosts);
+	// console.log('___________________________________________');
 	// ----- Handles loading, errors and the rendering of posts ---------
 	if (isLoadingMore && loadPosts) {
 		// If more posts are loading and state.posts are filled with posts.

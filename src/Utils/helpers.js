@@ -6,3 +6,12 @@ export const cleanUrl = (imgUrl) => {
 	let quadEncoded = tripleEncoded.replace('amp;v', 'v');
 	return quadEncoded;
 };
+
+// trunkates strings
+export const truncateString = (str, num) => {
+	if (str.length > num) {
+		return str.slice(0, num) + '...';
+	} else {
+		return str;
+	}
+};

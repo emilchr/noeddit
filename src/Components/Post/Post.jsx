@@ -91,24 +91,22 @@ export const Post = (props) => {
 			post.post_hint === 'hosted:video'
 		) {
 			media.push(
-				<div key={post.id}>
+				<div className="video-container" key={post.id}>
 					<video
 						src={post.secure_media.reddit_video.fallback_url}
-						width="300px"
 						controls
 					></video>
 				</div>
 			);
-		} else if (post.url.startsWith('https://www.reddit.com/gallery/')) {
+		} else if (post.is_gallery) {
 			const mediaArr = Object.entries(post.media_metadata);
 
 			media.push(
-				<div className="carousel-container">
+				<div className="carousel-container" key={post.id}>
 					<div className="carousel">
-						{console.log(post)}
 						{mediaArr.map((item) => {
 							return (
-								<p>
+								<p key={item[0]}>
 									<img src={cleanUrl(item[1].s.u)} alt={post.title} />
 								</p>
 							);

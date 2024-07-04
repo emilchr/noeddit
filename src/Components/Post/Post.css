@@ -102,6 +102,17 @@ td {
 tr:nth-child(n + 2):nth-child(even) {
 	background-color: var(--secondary-background-color);
 }
+
+/* Styling for video */
+.video-container {
+	width: auto;
+	video {
+		max-height: 600px;
+		width: 100%;
+	}
+}
+
+/* Styling for gallery */
 .carousel-container {
 	overflow-x: scroll;
 	scroll-snap-type: x mandatory;
