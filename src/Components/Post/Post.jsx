@@ -113,7 +113,6 @@ export const Post = (props) => {
 						})}
 					</div>
 				</div>
-				//
 			);
 		} else {
 			media.push('');
