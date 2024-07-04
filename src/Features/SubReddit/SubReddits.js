@@ -4,7 +4,7 @@ import { loadLinks } from './subRedditsSlice';
 import './SubReddits.css';
 import { setSubreddit, toggleMenu } from '../userUi/userUiSlice';
 import { useCallback } from 'react';
-import { fetchSubReddit } from '../Posts/postsSlice';
+import { fetchPosts } from '../Posts/postsSlice';
 
 function SubReddits() {
 	const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function SubReddits() {
 	const handleLinkClick = useCallback((link) => {
 		return (e) => {
 			e.preventDefault();
-			dispatch(fetchSubReddit(link));
+			dispatch(fetchPosts(link));
 
 			dispatch(setSubreddit(link));
 			dispatch(toggleMenu());

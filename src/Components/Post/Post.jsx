@@ -15,6 +15,7 @@ import {
 } from '../../Features/Posts/postsSlice';
 import { Link } from 'react-router-dom';
 import Markdown from 'marked-react';
+import { cleanUrl } from '../../Utils/helpers';
 
 export const Post = (props) => {
 	// console.log("POST: props post.id: " + props.post.id)
@@ -93,14 +94,24 @@ export const Post = (props) => {
 				<div key={post.id}>
 					<video
 						src={post.secure_media.reddit_video.fallback_url}
-						height="400px"
 						width="300px"
 						controls
 					></video>
 				</div>
 			);
 		} else if (post.url.startsWith('https://www.reddit.com/gallery/')) {
-			media.push('GALLERY');
+			const mediaArr = Object.entries(post.media_metadata);
+
+			media.push(
+				<div className="carousel">
+					<h1>GALLERY</h1>
+					{console.log(post)}
+					{mediaArr.map((item) => {
+						return <img src={cleanUrl(item[1].s.u)} alt={post.title} />;
+					})}
+				</div>
+				//
+			);
 		} else {
 			media.push('');
 		}

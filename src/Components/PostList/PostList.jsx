@@ -7,7 +7,7 @@ import {
 	loadAllPosts,
 	postLoading,
 	postError,
-	fetchPage,
+	fetchNextPosts,
 	postNextPage,
 	addNextPage,
 	addCurrentPage,
@@ -17,13 +17,11 @@ import {
 	rehydrateCurrentPage,
 	rehydrateNextPage,
 	payloadEmpty,
-	fetchSubReddit,
+	fetchPosts,
 	postFirstLoad,
 } from '../../Features/Posts/postsSlice';
 import './PostList.css';
 import { CircularProgress } from '@mui/material';
-import Skeleton from '../Skeleton/Skeleton';
-import { ArrowDownward, ArrowUpward } from '@mui/icons-material';
 
 export const PostList = () => {
 	const dispatch = useDispatch();
@@ -46,10 +44,10 @@ export const PostList = () => {
 
 	useEffect(() => {
 		if (loadPosts.length === 0) {
-			dispatch(fetchSubReddit('popular'));
+			dispatch(fetchPosts('popular'));
 			setTimeout(() => {
 				// Delay added for proper loading in state.posts and state.nextPosts.
-				// dispatch(fetchPage(2));
+				// dispatch(fetchNextPosts(2));
 			}, 100);
 		}
 		if (!persistedCurrentPage) {
@@ -88,7 +86,7 @@ export const PostList = () => {
 		} else if (isEmpty) {
 			console.log('No more posts.');
 		} else {
-			// dispatch(fetchPage(nextPage));
+			// dispatch(fetchNextPosts(nextPage));
 			dispatch(addNextPage());
 			dispatch(addCurrentPage());
 			localStorage.setItem('currentPage', JSON.stringify(currentPage));
@@ -99,9 +97,9 @@ export const PostList = () => {
 		e.preventDefault();
 		pageLoad();
 	};
-	// console.log('___________________________________________');
-	// console.log(loadPosts);
-	// console.log('___________________________________________');
+	console.log('___________________________________________');
+	console.log(loadPosts);
+	console.log('___________________________________________');
 	// ----- Handles loading, errors and the rendering of posts ---------
 	if (isLoadingMore && loadPosts) {
 		// If more posts are loading and state.posts are filled with posts.

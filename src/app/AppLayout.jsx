@@ -33,7 +33,6 @@ export default function AppLayout() {
 		window.addEventListener('resize', () => {
 			dispatch(setWindowWidth(window.innerWidth));
 		});
-		console.log(window.innerWidth);
 	}, [dispatch]);
 
 	const handleMenuClick = (e) => {

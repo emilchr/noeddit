@@ -2,14 +2,17 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const PAGE_URL = 'https://www.reddit.com/r/';
 
-export const fetchPage = createAsyncThunk(
-	'posts/fetchPage',
-	async (subreddit) => {
+export const fetchNextPosts = createAsyncThunk(
+	'posts/fetchNextPosts',
+	async (subreddit, lastId) => {
 		try {
-			const response = await fetch(`${PAGE_URL}${subreddit}.json`, {
-				header: 'Access-Control-Allow-Origin: *',
-				mode: 'cors',
-			});
+			const response = await fetch(
+				`${PAGE_URL}${subreddit}.json?after=${lastId}`,
+				{
+					header: 'Access-Control-Allow-Origin: *',
+					mode: 'cors',
+				}
+			);
 			const json = await response.json();
 
 			return json.data;
@@ -19,8 +22,8 @@ export const fetchPage = createAsyncThunk(
 	}
 );
 
-export const fetchSubReddit = createAsyncThunk(
-	'posts/fetchSubReddit',
+export const fetchPosts = createAsyncThunk(
+	'posts/fetchPosts',
 	async (subreddit) => {
 		try {
 			const response = await fetch(`${PAGE_URL}${subreddit}.json`, {
@@ -91,7 +94,7 @@ export const postsSlice = createSlice({
 	extraReducers: (builder) => {
 		builder
 			//------------ FETCH PAGE -----------
-			.addCase(fetchPage.pending, (state) => {
+			.addCase(fetchNextPosts.pending, (state) => {
 				if (state.posts.length === 0) {
 					// If this is the first loading of posts.
 					state.firstLoad = true; // set state.firstLoad to true.
@@ -100,7 +103,7 @@ export const postsSlice = createSlice({
 				}
 				state.hasError = false;
 			})
-			.addCase(fetchPage.fulfilled, (state, action) => {
+			.addCase(fetchNextPosts.fulfilled, (state, action) => {
 				state.isLoadingMore = false;
 				state.firstLoad = false;
 				state.hasError = false;
@@ -119,15 +122,15 @@ export const postsSlice = createSlice({
 						// If there is no posts in array, state.posts is hydrated.
 						state.posts = action.payload;
 						localStorage.setItem('posts', JSON.stringify(state.posts));
-						console.log('fetchPage is fulfilled. First load.');
+						console.log('fetchNextPosts is fulfilled. First load.');
 					} else {
 						state.nextPosts = action.payload;
 						localStorage.setItem('nextPosts', JSON.stringify(state.nextPosts));
-						console.log('fetchPage is fulfilled. Next page loaded.');
+						console.log('fetchNextPosts is fulfilled. Next page loaded.');
 					}
 				}
 			})
-			.addCase(fetchPage.rejected, (state, action) => {
+			.addCase(fetchNextPosts.rejected, (state, action) => {
 				state.isLoadingMore = false;
 				state.firstLoad = false;
 				state.hasError = true;
@@ -135,14 +138,14 @@ export const postsSlice = createSlice({
 					'An error in fetchPosts has occurred. ' + action.error.message
 				);
 			})
-			.addCase(fetchSubReddit.pending, (state) => {
+			.addCase(fetchPosts.pending, (state) => {
 				state.isLoading = true;
 				state.hasError = false;
 			})
-			.addCase(fetchSubReddit.fulfilled, (state, action) => {
+			.addCase(fetchPosts.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.hasError = false;
-				console.log('fetchSubReddit is fulfilled.');
+				console.log('fetchPosts is fulfilled.');
 				if (!action.payload) {
 					console.log('Payload is empty.');
 				} else {
@@ -153,12 +156,11 @@ export const postsSlice = createSlice({
 				// })
 				// console.log(action.payload.children);
 			})
-			.addCase(fetchSubReddit.rejected, (state, action) => {
+			.addCase(fetchPosts.rejected, (state, action) => {
 				state.isLoading = false;
 				state.hasError = true;
 				console.error(
-					'An error in fetchSubReddit has occurred. Error:' +
-						action.error.message
+					'An error in fetchPosts has occurred. Error:' + action.error.message
 				);
 			});
 	},
