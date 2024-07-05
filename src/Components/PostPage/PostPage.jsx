@@ -2,14 +2,7 @@ import React, { useEffect } from 'react';
 import './PostPage.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-	loadAllPosts,
-	loadNextPosts,
-	rehydrateNextPage,
-	rehydrateNextPosts,
-	rehydratePayloadEmpty,
-	rehydratePosts,
-} from '../../Features/Posts/postsSlice';
+import { loadAllPosts, rehydratePosts } from '../../Features/Posts/postsSlice';
 import { Post } from '../Post/Post';
 import CommentList from '../CommentList/CommentList';
 import { fetchComments } from '../../Features/Comments/commentsSlice';

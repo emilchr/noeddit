@@ -15,7 +15,7 @@ import {
 } from '../../Features/Posts/postsSlice';
 import { Link } from 'react-router-dom';
 import Markdown from 'marked-react';
-import { cleanUrl } from '../../Utils/helpers';
+import { cleanUrl, postCreated } from '../../Utils/helpers';
 
 export const Post = (props) => {
 	// console.log("POST: props post.id: " + props.post.id)
@@ -75,7 +75,6 @@ export const Post = (props) => {
 		return content;
 	} else if (post) {
 		// If there are posts present in state.
-		let postCreated = new Date(post.created * 1000); // get time for when post is created.
 
 		let media = [];
 		if (post.url.startsWith('https://i') && post.post_hint === 'image') {
@@ -141,7 +140,7 @@ export const Post = (props) => {
 						<ArrowDownward />
 						{post.score}
 					</p>
-					<p>Posted {postCreated.toLocaleString('no-NO')}</p>
+					<p>Posted {postCreated(post.created)}</p>
 					<p className="num_comments">
 						<CommentOutlined />
 						<Link to={props.url}>{post.num_comments}</Link>
