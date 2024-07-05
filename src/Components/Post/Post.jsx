@@ -100,11 +100,11 @@ export const Post = (props) => {
 			);
 		} else if (post.is_gallery) {
 			const mediaArr = Object.entries(post.media_metadata);
-
 			media.push(
 				<div className="carousel-container" key={post.id}>
 					<div className="carousel">
 						{mediaArr.map((item) => {
+							// console.log(cleanUrl(item[1].s.u));
 							return (
 								<p key={item[0]}>
 									<img src={cleanUrl(item[1].s.u)} alt={post.title} />

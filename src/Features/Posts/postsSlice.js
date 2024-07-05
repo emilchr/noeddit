@@ -52,6 +52,12 @@ export const postsSlice = createSlice({
 		payloadEmpty: false,
 	},
 	reducers: {
+		setLocalPosts: (state) => {
+			localStorage.setItem('posts', JSON.stringify(state.posts));
+		},
+		setLocalNextPosts: (state) => {
+			localStorage.setItem('nextPosts', JSON.stringify(state.nextPosts));
+		},
 		rehydratePosts: (state) => {
 			const persistedState = JSON.parse(localStorage.getItem('posts'));
 			state.posts = persistedState;
@@ -98,26 +104,11 @@ export const postsSlice = createSlice({
 				state.firstLoad = false;
 				state.hasError = false;
 
-				const isEmpty = action.payload.length;
-				if (isEmpty === 0) {
-					// if payload is empty log result
+				if (!action.payload) {
 					console.log('Payload is empty.');
-					state.payloadEmpty = true;
-					localStorage.setItem(
-						'payloadEmpty',
-						JSON.stringify(state.payloadEmpty)
-					);
+					state.payloadEmpty = false;
 				} else {
-					if (state.posts.length === 0) {
-						// If there is no posts in array, state.posts is hydrated.
-						state.posts = action.payload;
-						localStorage.setItem('posts', JSON.stringify(state.posts));
-						console.log('fetchNextPosts is fulfilled. First load.');
-					} else {
-						state.nextPosts = action.payload;
-						localStorage.setItem('nextPosts', JSON.stringify(state.nextPosts));
-						console.log('fetchNextPosts is fulfilled. Next page loaded.');
-					}
+					state.nextPosts = action.payload.children;
 				}
 			})
 			.addCase(fetchNextPosts.rejected, (state, action) => {
@@ -139,9 +130,9 @@ export const postsSlice = createSlice({
 				console.log('fetchPosts is fulfilled.');
 				if (!action.payload) {
 					console.log('Payload is empty.');
+					state.payloadEmpty = false;
 				} else {
 					state.posts = action.payload.children;
-					localStorage.setItem('posts', JSON.stringify(state.posts));
 				}
 			})
 			.addCase(fetchPosts.rejected, (state, action) => {
@@ -156,6 +147,8 @@ export const postsSlice = createSlice({
 
 // Action creators
 export const {
+	setLocalPosts,
+	setLocalNextPosts,
 	rehydratePosts,
 	rehydrateNextPosts,
 	rehydrateNextPage,

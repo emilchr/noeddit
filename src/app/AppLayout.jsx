@@ -18,18 +18,20 @@ import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import { fetchLinks } from '../Features/SubReddit/subRedditsSlice';
+import { fetchPosts } from '../Features/Posts/postsSlice';
 
 export default function AppLayout() {
 	const dispatch = useDispatch();
 	const currentMenuState = useSelector(menuState);
 	const currentSearchState = useSelector(searchState);
-	const subredditName = useSelector(activeSubreddit);
+	const currentSubreddit = useSelector(activeSubreddit);
 	const windowWidth = useSelector(winWidth);
 
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		dispatch(fetchLinks());
+
 		window.addEventListener('resize', () => {
 			dispatch(setWindowWidth(window.innerWidth));
 		});
@@ -94,7 +96,7 @@ export default function AppLayout() {
 					</h2>
 
 					<div className="header-overhang">
-						<p>r/{!subredditName ? 'Popular' : subredditName}</p>
+						<p>r/{currentSubreddit}</p>
 					</div>
 
 					{

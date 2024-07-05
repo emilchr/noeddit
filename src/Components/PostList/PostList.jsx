@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Post } from '../Post/Post';
 import { useDispatch } from 'react-redux';
-import { Link, ScrollRestoration } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
 	loadAllPosts,
@@ -16,12 +16,14 @@ import {
 	payloadEmpty,
 	fetchPosts,
 	postFirstLoad,
+	setLocalPosts,
 } from '../../Features/Posts/postsSlice';
 import './PostList.css';
 import { CircularProgress } from '@mui/material';
 import {
 	activeSubreddit,
 	rehydrateActiveSubreddit,
+	setSubreddit,
 } from '../../Features/userUi/userUiSlice';
 
 export const PostList = () => {
@@ -38,15 +40,15 @@ export const PostList = () => {
 
 	const nextPage = useSelector(postNextPage);
 
-	localStorage.setItem('nextPage', JSON.stringify(nextPage));
-	localStorage.setItem('currentSubreddit', JSON.stringify(currentSubreddit));
-
-	const persistedSubreddit = localStorage.getItem('currentSubreddit');
-
 	useEffect(() => {
+		if (loadPosts) {
+			// if posts.posts is populated
+			dispatch(setLocalPosts());
+		}
 		if (loadPosts.length === 0) {
-			dispatch(fetchPosts('popular'));
+			dispatch(fetchPosts(currentSubreddit));
 
+			dispatch(setSubreddit(currentSubreddit)); // Sets the current subreddit
 			setTimeout(() => {
 				// Delay added for proper loading in state.posts and state.nextPosts.
 				// dispatch(fetchNextPosts(2));
@@ -136,6 +138,9 @@ export const PostList = () => {
 			</div>
 		);
 	} else {
+		//
+		// if there is no error or loading, this executes.
+		//
 		const listPosts = loadPosts.map((post, index) => {
 			const urlToPost = 'posts/' + post.data.id;
 			// console.log(post)
@@ -150,15 +155,12 @@ export const PostList = () => {
 			<div className="postList">
 				{listPosts}
 				{/* {listNextPosts} */}
-				{isEmpty ? (
-					<div className="post-title">No more posts</div>
-				) : (
-					<div className="load-container">
-						<Link className="load-post" onClick={handleNextPage}>
-							Load more posts
-						</Link>
-					</div>
-				)}
+
+				<div className="load-container">
+					<Link className="load-post" onClick={handleNextPage}>
+						Load more posts
+					</Link>
+				</div>
 
 				{/* ------------------------------------------ 
         Restores position to bottom. Needs to restore scroll before the next posts. 
