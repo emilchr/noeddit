@@ -20,14 +20,23 @@ export const PostPage = () => {
 	const dispatch = useDispatch();
 
 	let loadPosts = useSelector(loadAllPosts);
-	let nextPosts = useSelector(loadNextPosts);
 	// Selects the post that has the same ID as postID
-	const singlePost = loadPosts.find((post) => post.data.id === postId);
-	const nextPagePost = nextPosts.find((post) => post.data.id === postId);
-	const subreddit = singlePost.data.subreddit; // Selects the subreddit name
-	const singlePostId = singlePost.data.id; // Selecting post id
+	if (loadPosts.length === 0) {
+		dispatch(rehydratePosts());
+	}
+	console.log(loadPosts);
+	let singlePost = null;
+	let subreddit = null; // Selects the subreddit name
+	let singlePostId = null; // Selecting post id
+	if (loadPosts.length !== 0) {
+		singlePost = loadPosts.find((post) => post.data.id === postId);
+		subreddit = singlePost ? singlePost.data.subreddit : null; // Selects the subreddit name
+		singlePostId = singlePost ? singlePost.data.id : null; // Selecting post id
+	}
 
 	useEffect(() => {
+		// Check if state.posts is empty. If empty, rehydrate with the state stored in localStorage.
+
 		const postInfo = {
 			// Merges to an object for the thunk parameter.
 			subreddit,
@@ -36,17 +45,9 @@ export const PostPage = () => {
 		dispatch(fetchComments(postInfo));
 	}, [dispatch, singlePostId, subreddit]);
 
-	// Check if state.posts is empty. If empty, rehydrate with the state stored in localStorage.
-	if (loadPosts.length === 0) {
-		dispatch(rehydratePosts());
-		dispatch(rehydrateNextPosts());
-		dispatch(rehydrateNextPage());
-		dispatch(rehydratePayloadEmpty());
-	}
-
 	return (
 		<div className="postPage">
-			<Post post={singlePost.data || nextPagePost.data} />
+			<Post post={singlePost ? singlePost.data : ''} />
 			<CommentList />
 		</div>
 	);

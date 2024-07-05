@@ -89,7 +89,31 @@ export const postsSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			//------------ FETCH PAGE -----------
+			//------------ FETCH POSTS -----------
+			.addCase(fetchPosts.pending, (state) => {
+				state.isLoading = true;
+				state.hasError = false;
+			})
+			.addCase(fetchPosts.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.hasError = false;
+
+				if (!action.payload) {
+					console.log('Payload is empty.');
+					state.payloadEmpty = false;
+				} else {
+					state.posts = action.payload.children;
+					console.log('fetchPosts is fulfilled.');
+				}
+			})
+			.addCase(fetchPosts.rejected, (state, action) => {
+				state.isLoading = false;
+				state.hasError = true;
+				console.error(
+					'An error in fetchPosts has occurred. Error:' + action.error.message
+				);
+			})
+			// --------------- FETCH NEXT POSTS -----------
 			.addCase(fetchNextPosts.pending, (state) => {
 				if (state.posts.length === 0) {
 					// If this is the first loading of posts.
@@ -117,30 +141,6 @@ export const postsSlice = createSlice({
 				state.hasError = true;
 				console.error(
 					'An error in fetchPosts has occurred. ' + action.error.message
-				);
-			})
-			// Fetching posts
-			.addCase(fetchPosts.pending, (state) => {
-				state.isLoading = true;
-				state.hasError = false;
-			})
-			.addCase(fetchPosts.fulfilled, (state, action) => {
-				state.isLoading = false;
-				state.hasError = false;
-
-				if (!action.payload) {
-					console.log('Payload is empty.');
-					state.payloadEmpty = false;
-				} else {
-					state.posts = action.payload.children;
-					console.log('fetchPosts is fulfilled.');
-				}
-			})
-			.addCase(fetchPosts.rejected, (state, action) => {
-				state.isLoading = false;
-				state.hasError = true;
-				console.error(
-					'An error in fetchPosts has occurred. Error:' + action.error.message
 				);
 			});
 	},
