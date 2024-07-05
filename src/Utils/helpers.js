@@ -9,9 +9,6 @@ export const cleanUrl = (imgUrl) => {
 // Time of posting
 export const postCreated = (postCreated) => {
 	const postedTime = new Date(postCreated * 1000); // get time for when post is created.
-	const epochTime = new Date(new Date().getTime() / 1000);
-
-	const timeAgo = '';
 
 	return postedTime.toLocaleString('no-NO');
 };

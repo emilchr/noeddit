@@ -17,6 +17,7 @@ import {
 	fetchPosts,
 	postFirstLoad,
 	setLocalPosts,
+	getLastPostId,
 } from '../../Features/Posts/postsSlice';
 import './PostList.css';
 import { CircularProgress } from '@mui/material';
@@ -44,11 +45,12 @@ export const PostList = () => {
 		if (loadPosts.length !== 0) {
 			// if posts.posts is populated
 			dispatch(setLocalPosts());
+			dispatch(getLastPostId(loadPosts));
 		}
 		if (loadPosts.length === 0) {
 			dispatch(fetchPosts(currentSubreddit));
-
 			dispatch(setSubreddit(currentSubreddit)); // Sets the current subreddit
+
 			setTimeout(() => {
 				// Delay added for proper loading in state.posts and state.nextPosts.
 				// dispatch(fetchNextPosts(2));

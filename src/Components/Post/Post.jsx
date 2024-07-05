@@ -15,7 +15,7 @@ import {
 } from '../../Features/Posts/postsSlice';
 import { Link } from 'react-router-dom';
 import Markdown from 'marked-react';
-import { cleanUrl, postCreated } from '../../Utils/helpers';
+import { cleanUrl, postCreated, truncateString } from '../../Utils/helpers';
 
 export const Post = (props) => {
 	// console.log("POST: props post.id: " + props.post.id)

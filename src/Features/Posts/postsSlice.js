@@ -50,6 +50,7 @@ export const postsSlice = createSlice({
 		isLoadingMore: false,
 		hasError: false,
 		payloadEmpty: false,
+		lastPostId: null,
 	},
 	reducers: {
 		setLocalPosts: (state) => {
@@ -85,6 +86,9 @@ export const postsSlice = createSlice({
 			);
 
 			state.posts = state.posts.concat(state.nextPosts);
+		},
+		getLastPostId: (state) => {
+			console.log();
 		},
 	},
 	extraReducers: (builder) => {
@@ -155,6 +159,7 @@ export const {
 	rehydrateNextPage,
 	rehydratePayloadEmpty,
 	addNextPage,
+	getLastPostId,
 } = postsSlice.actions;
 
 // Selectors
