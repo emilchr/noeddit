@@ -44,7 +44,9 @@ export const commentsSlice = createSlice({
 			.addCase(fetchComments.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.hasError = false;
-				state.comments = action.payload[1].data.children;
+				!action.payload
+					? console.log('CommentPayload is empty.')
+					: (state.comments = action.payload[1].data.children);
 				console.log('fetchComments is fulfilled.');
 			})
 			.addCase(fetchComments.rejected, (state, action) => {

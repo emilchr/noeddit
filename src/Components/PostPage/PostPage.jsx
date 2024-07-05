@@ -24,10 +24,10 @@ export const PostPage = () => {
 	if (loadPosts.length === 0) {
 		dispatch(rehydratePosts());
 	}
-	console.log(loadPosts);
 	let singlePost = null;
-	let subreddit = null; // Selects the subreddit name
-	let singlePostId = null; // Selecting post id
+	let subreddit = null;
+	let singlePostId = null;
+
 	if (loadPosts.length !== 0) {
 		singlePost = loadPosts.find((post) => post.data.id === postId);
 		subreddit = singlePost ? singlePost.data.subreddit : null; // Selects the subreddit name
