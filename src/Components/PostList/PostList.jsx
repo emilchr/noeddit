@@ -45,7 +45,7 @@ export const PostList = () => {
 		if (loadPosts.length !== 0) {
 			// if posts.posts is populated
 			dispatch(setLocalPosts());
-			dispatch(getLastPostId(loadPosts));
+			dispatch(getLastPostId());
 		}
 		if (loadPosts.length === 0) {
 			dispatch(fetchPosts(currentSubreddit));

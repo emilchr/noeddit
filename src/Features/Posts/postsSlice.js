@@ -88,7 +88,11 @@ export const postsSlice = createSlice({
 			state.posts = state.posts.concat(state.nextPosts);
 		},
 		getLastPostId: (state) => {
-			console.log();
+			let posts = JSON.parse(JSON.stringify(state));
+			const lastItem = posts.posts[posts.posts.length - 1];
+			const lastItemId = lastItem.data.id;
+			console.log(lastItemId);
+			state.lastPostId = lastItemId;
 		},
 	},
 	extraReducers: (builder) => {
