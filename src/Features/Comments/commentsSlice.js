@@ -30,7 +30,11 @@ export const commentsSlice = createSlice({
 		isLoading: false,
 		hasError: false,
 	},
-	reducers: {},
+	reducers: {
+		setLocalComments: (state) => {
+			localStorage.setItem('comments', JSON.stringify(state.comments)); // Sends the fetched state to localStorage for persistedState.
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(fetchComments.pending, (state) => {
@@ -42,7 +46,6 @@ export const commentsSlice = createSlice({
 				state.hasError = false;
 				state.comments = action.payload[1].data.children;
 				console.log('fetchComments is fulfilled.');
-				localStorage.setItem('comments', JSON.stringify(state.comments)); // Sends the fetched state to localStorage for persistedState.
 			})
 			.addCase(fetchComments.rejected, (state, action) => {
 				state.isLoading = false;
@@ -55,7 +58,7 @@ export const commentsSlice = createSlice({
 });
 
 // Action creators
-
+export const { setLocalComments } = commentsSlice.actions;
 // Selectors
 export const loadAllComments = (state) => state.comments.comments;
 export const commentLoading = (state) => state.comments.isLoading;

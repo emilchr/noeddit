@@ -41,7 +41,7 @@ export const PostList = () => {
 	const nextPage = useSelector(postNextPage);
 
 	useEffect(() => {
-		if (loadPosts) {
+		if (loadPosts.length !== 0) {
 			// if posts.posts is populated
 			dispatch(setLocalPosts());
 		}
@@ -56,21 +56,19 @@ export const PostList = () => {
 		}
 	}, [loadPosts]);
 
-	// Checks if user has scrolled to the bottom.
-
-	const scrolledToBottom = () => {
-		// ! Not the correct way to define the function. Find a  better solution for this. This happens because the function is a dependency for the useEffect below.
-		const bottom =
-			Math.ceil(window.innerHeight + window.scrollY) >=
-			document.documentElement.scrollHeight;
-
-		if (bottom) {
-			// if the user has scrolled to the bottom.
-			pageLoad();
-		}
-	};
-
 	useEffect(() => {
+		// Checks if user has scrolled to the bottom.
+
+		const scrolledToBottom = () => {
+			const bottom =
+				Math.ceil(window.innerHeight + window.scrollY) >=
+				document.documentElement.scrollHeight;
+
+			if (bottom) {
+				// if the user has scrolled to the bottom.
+				pageLoad();
+			}
+		};
 		window.addEventListener('scroll', scrolledToBottom, {
 			passive: true,
 		});
@@ -79,7 +77,7 @@ export const PostList = () => {
 			// Clean up of event listener
 			window.removeEventListener('scroll', scrolledToBottom);
 		};
-	}, [scrolledToBottom]);
+	}, []);
 	// -------- Handles loading of next page and the logic for increasing posts.nextPage.------------------ //
 	const pageLoad = () => {
 		if (isEmpty) {
@@ -95,9 +93,7 @@ export const PostList = () => {
 		e.preventDefault();
 		pageLoad();
 	};
-	// console.log('___________________________________________');
-	// console.log(loadPosts);
-	// console.log('___________________________________________');
+
 	// ----- Handles loading, errors and the rendering of posts ---------
 	if (isLoadingMore && loadPosts) {
 		// If more posts are loading and state.posts are filled with posts.

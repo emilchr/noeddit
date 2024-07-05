@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './CommentList.css';
 import Comment from '../Comment/Comment';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
 	commentError,
 	commentLoading,
 	loadAllComments,
+	setLocalComments,
 } from '../../Features/Comments/commentsSlice';
 import { useParams } from 'react-router-dom';
 import Skeleton from '../Skeleton/Skeleton';
 
 export default function CommentList() {
-	// filter and map over comments to get correct comments assosiated with post.
+	const dispatch = useDispatch();
 	const params = useParams();
 	let { postId } = params;
 
@@ -20,6 +21,11 @@ export default function CommentList() {
 	const hasError = useSelector(commentError);
 
 	let postComments = '';
+	useEffect(() => {
+		if (comments.length !== 0) {
+			dispatch(setLocalComments()); // Sets comments.comments in localStorage if the state isn't empty.
+		}
+	}, [dispatch, comments]);
 
 	if (isLoading) {
 		const skeletonArray = [];
@@ -54,7 +60,6 @@ export default function CommentList() {
 		postComments = comments.map((comment) => {
 			return <Comment comment={comment.data} key={comment.data.id} />;
 		});
-
 		return postComments;
 	}
 

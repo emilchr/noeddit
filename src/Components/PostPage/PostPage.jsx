@@ -27,15 +27,14 @@ export const PostPage = () => {
 	const subreddit = singlePost.data.subreddit; // Selects the subreddit name
 	const singlePostId = singlePost.data.id; // Selecting post id
 
-	const postInfo = {
-		// Merges to an object for the thunk parameter.
-		subreddit,
-		singlePostId,
-	};
-
 	useEffect(() => {
+		const postInfo = {
+			// Merges to an object for the thunk parameter.
+			subreddit,
+			singlePostId,
+		};
 		dispatch(fetchComments(postInfo));
-	}, [dispatch, singlePostId]);
+	}, [dispatch, singlePostId, subreddit]);
 
 	// Check if state.posts is empty. If empty, rehydrate with the state stored in localStorage.
 	if (loadPosts.length === 0) {

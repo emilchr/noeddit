@@ -34,7 +34,7 @@ export const fetchPosts = createAsyncThunk(
 
 			return json.data;
 		} catch (error) {
-			return console.log(error.message);
+			return console.log('Fetching posts failed: ' + error.message);
 		}
 	}
 );
@@ -127,12 +127,13 @@ export const postsSlice = createSlice({
 			.addCase(fetchPosts.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.hasError = false;
-				console.log('fetchPosts is fulfilled.');
+
 				if (!action.payload) {
 					console.log('Payload is empty.');
 					state.payloadEmpty = false;
 				} else {
 					state.posts = action.payload.children;
+					console.log('fetchPosts is fulfilled.');
 				}
 			})
 			.addCase(fetchPosts.rejected, (state, action) => {
