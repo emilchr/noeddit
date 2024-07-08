@@ -71,7 +71,7 @@ export const PostList = () => {
 
 			if (bottom) {
 				// if the user has scrolled to the bottom.
-				// pageLoad();
+				pageLoad();
 			}
 		};
 		window.addEventListener('scroll', scrolledToBottom, {

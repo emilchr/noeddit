@@ -2,7 +2,12 @@ import React, { useEffect } from 'react';
 import './PostPage.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadAllPosts, rehydratePosts } from '../../Features/Posts/postsSlice';
+import {
+	loadAllPosts,
+	loadNextPosts,
+	rehydrateNextPosts,
+	rehydratePosts,
+} from '../../Features/Posts/postsSlice';
 import { Post } from '../Post/Post';
 import CommentList from '../CommentList/CommentList';
 import { fetchComments } from '../../Features/Comments/commentsSlice';
@@ -13,16 +18,20 @@ export const PostPage = () => {
 	const dispatch = useDispatch();
 
 	let loadPosts = useSelector(loadAllPosts);
+	let nextPosts = useSelector(loadNextPosts);
 	// Selects the post that has the same ID as postID
 	if (loadPosts.length === 0) {
 		dispatch(rehydratePosts());
+		dispatch(rehydrateNextPosts());
 	}
 	let singlePost = null;
 	let subreddit = null;
 	let singlePostId = null;
 
 	if (loadPosts.length !== 0) {
-		singlePost = loadPosts.find((post) => post.data.id === postId);
+		singlePost =
+			loadPosts.find((post) => post.data.id === postId) ||
+			nextPosts.find((post) => post.data.id === postId);
 		subreddit = singlePost ? singlePost.data.subreddit : null; // Selects the subreddit name
 		singlePostId = singlePost ? singlePost.data.id : null; // Selecting post id
 	}
@@ -35,7 +44,11 @@ export const PostPage = () => {
 			subreddit,
 			singlePostId,
 		};
-		dispatch(fetchComments(postInfo));
+		if (!singlePost) {
+			console.log('No post to load comments.');
+		} else {
+			dispatch(fetchComments(postInfo));
+		}
 	}, [dispatch, singlePostId, subreddit]);
 
 	return (

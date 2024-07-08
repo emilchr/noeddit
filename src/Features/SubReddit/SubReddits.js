@@ -4,7 +4,7 @@ import { loadLinks } from './subRedditsSlice';
 import './SubReddits.css';
 import { setSubreddit, toggleMenu } from '../userUi/userUiSlice';
 import { useCallback } from 'react';
-import { fetchPosts } from '../Posts/postsSlice';
+import { fetchPosts, resetNextPosts } from '../Posts/postsSlice';
 
 function SubReddits() {
 	const dispatch = useDispatch();
@@ -22,6 +22,7 @@ function SubReddits() {
 
 			dispatch(setSubreddit(link));
 			dispatch(toggleMenu());
+			dispatch(resetNextPosts());
 		};
 	}, []);
 
