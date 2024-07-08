@@ -55,11 +55,17 @@ export const postsSlice = createSlice({
 	},
 	reducers: {
 		setLocalPosts: (state) => {
-			localStorage.setItem('posts', JSON.stringify(state.posts));
+			if (state.posts) {
+				localStorage.setItem('posts', JSON.stringify(state.posts));
+				console.log('Posts pushed to localStorage.');
+			} else {
+				console.log('No posts to set in localstorage.');
+			}
 		},
 		setLocalNextPosts: (state) => {
 			if (state.nextPosts) {
 				localStorage.setItem('nextPosts', JSON.stringify(state.nextPosts));
+				console.log('NextPosts pushed to localStorage.');
 			} else {
 				console.log('No nextposts to set in localstorage');
 			}
@@ -87,13 +93,24 @@ export const postsSlice = createSlice({
 			);
 
 			state.posts = state.posts.concat(state.nextPosts);
+			console.log('NextPosts is transferred to posts.');
 		},
 		getLastPostId: (state) => {
-			let posts = JSON.parse(JSON.stringify(state));
-			const lastItem = posts.posts[posts.posts.length - 1]; // selects the last post
-			const lastItemId = lastItem.data.id; // selects the last ID from the last post
-			console.log(`lastItemID: ${lastItemId}`);
-			state.lastPostId = lastItemId; // sets the last post ID in the state lastPostId.
+			if (state.nextPosts) {
+				let posts = JSON.parse(JSON.stringify(state));
+
+				const lastItem = posts.nextPosts[posts.nextPosts.length - 1]; // selects the last post
+				const lastItemId = lastItem.data.id; // selects the last ID from the last post
+				console.log(`NEXTPOSTS lastItemID: ${lastItemId}`);
+				state.lastPostId = lastItemId; // sets the last post ID in the state lastPostId.
+			} else {
+				let posts = JSON.parse(JSON.stringify(state));
+
+				const lastItem = posts.posts[posts.posts.length - 1]; // selects the last post
+				const lastItemId = lastItem.data.id; // selects the last ID from the last post
+				console.log(`lastItemID: ${lastItemId}`);
+				state.lastPostId = lastItemId; // sets the last post ID in the state lastPostId.
+			}
 		},
 	},
 	extraReducers: (builder) => {

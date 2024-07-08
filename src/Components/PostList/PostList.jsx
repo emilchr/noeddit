@@ -47,15 +47,20 @@ export const PostList = () => {
 			dispatch(setSubreddit(currentSubreddit)); // Sets the current subreddit
 			dispatch(fetchPosts(currentSubreddit));
 		}
-	}, [loadPosts]);
+	}, [loadPosts, currentSubreddit, dispatch]);
 
 	useEffect(() => {
 		if (!loadPosts) {
 			console.log('No posts for localStorage.');
 		} else {
 			dispatch(setLocalPosts());
+			if (nextPosts) {
+				dispatch(setLocalNextPosts());
+				dispatch(getLastPostId());
+			}
 		}
-	}, [loadPosts]);
+	}, [loadPosts, nextPosts, dispatch]);
+
 	useEffect(() => {
 		// Checks if user has scrolled to the bottom.
 
@@ -80,13 +85,14 @@ export const PostList = () => {
 	}, []);
 	// -------- Handles loading of next page and the logic for increasing posts.nextPage.------------------ //
 	const pageLoad = () => {
-		dispatch(getLastPostId());
-
 		const nextPostInfo = {
 			currentSubreddit,
 			lastId,
 		};
 		dispatch(fetchNextPosts(nextPostInfo));
+		if (nextPosts) {
+			dispatch(addNextPosts());
+		}
 	};
 	const handleNextPage = (e) => {
 		e.preventDefault();
