@@ -16,6 +16,7 @@ import {
 	setLocalNextPosts,
 	getLastPostId,
 	lastPostId,
+	addNextPosts,
 } from '../../Features/Posts/postsSlice';
 import './PostList.css';
 import { CircularProgress } from '@mui/material';
@@ -48,6 +49,13 @@ export const PostList = () => {
 		}
 	}, [loadPosts]);
 
+	useEffect(() => {
+		if (!loadPosts) {
+			console.log('No posts for localStorage.');
+		} else {
+			dispatch(setLocalPosts());
+		}
+	}, [loadPosts]);
 	useEffect(() => {
 		// Checks if user has scrolled to the bottom.
 
@@ -121,11 +129,6 @@ export const PostList = () => {
 		//
 		// if there is no error or loading, this executes.
 		//
-		if (!loadPosts) {
-			console.log('No posts for localStorage.');
-		} else {
-			dispatch(setLocalPosts());
-		}
 
 		const listPosts = loadPosts.map((post) => {
 			const urlToPost = 'posts/' + post.data.id;
@@ -134,7 +137,6 @@ export const PostList = () => {
 		});
 		let listNextPosts = null;
 		if (nextPosts) {
-			dispatch(setLocalNextPosts());
 			listNextPosts = nextPosts.map((post) => {
 				const urlToPost = 'posts/' + post.data.id;
 				return <Post url={urlToPost} post={post.data} key={post.data.id} />;

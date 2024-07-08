@@ -160,6 +160,7 @@ export const {
 	rehydrateNextPosts,
 	rehydratePayloadEmpty,
 	getLastPostId,
+	addNextPosts,
 } = postsSlice.actions;
 
 // Selectors
