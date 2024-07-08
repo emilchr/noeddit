@@ -4,10 +4,12 @@ const PAGE_URL = 'https://www.reddit.com/r/';
 
 export const fetchNextPosts = createAsyncThunk(
 	'posts/fetchNextPosts',
-	async (subreddit, lastId) => {
+	async (nextPostInfo) => {
+		let subreddit = nextPostInfo.currentSubreddit;
+		let lastId = nextPostInfo.lastId;
 		try {
 			const response = await fetch(
-				`${PAGE_URL}${subreddit}.json?after=${lastId}`,
+				`${PAGE_URL}${subreddit}.json?after=t3_${lastId}`,
 				{
 					header: 'Access-Control-Allow-Origin: *',
 					mode: 'cors',
@@ -63,10 +65,6 @@ export const postsSlice = createSlice({
 			const persistedState = JSON.parse(localStorage.getItem('posts'));
 			state.posts = persistedState;
 		},
-		rehydrateNextPosts: (state) => {
-			const persistedState = JSON.parse(localStorage.getItem('nextPosts'));
-			state.nextPosts = persistedState;
-		},
 		rehydrateNextPage: (state) => {
 			const persistedNextPage = JSON.parse(localStorage.getItem('nextPage'));
 			state.nextPage = persistedNextPage;
@@ -89,10 +87,10 @@ export const postsSlice = createSlice({
 		},
 		getLastPostId: (state) => {
 			let posts = JSON.parse(JSON.stringify(state));
-			const lastItem = posts.posts[posts.posts.length - 1];
-			const lastItemId = lastItem.data.id;
-			console.log(lastItemId);
-			state.lastPostId = lastItemId;
+			const lastItem = posts.posts[posts.posts.length - 1]; // selects the last post
+			const lastItemId = lastItem.data.id; // selects the last ID from the last post
+			console.log(`lastItemID: ${lastItemId}`);
+			state.lastPostId = lastItemId; // sets the last post ID in the state lastPostId.
 		},
 	},
 	extraReducers: (builder) => {
@@ -136,12 +134,7 @@ export const postsSlice = createSlice({
 				state.firstLoad = false;
 				state.hasError = false;
 
-				if (!action.payload) {
-					console.log('Payload is empty.');
-					state.payloadEmpty = false;
-				} else {
-					state.nextPosts = action.payload.children;
-				}
+				state.nextPosts = action.payload.children;
 			})
 			.addCase(fetchNextPosts.rejected, (state, action) => {
 				state.isLoadingMore = false;
@@ -160,9 +153,7 @@ export const {
 	setLocalNextPosts,
 	rehydratePosts,
 	rehydrateNextPosts,
-	rehydrateNextPage,
 	rehydratePayloadEmpty,
-	addNextPage,
 	getLastPostId,
 } = postsSlice.actions;
 
@@ -176,8 +167,8 @@ export const postLoading = (state) => state.posts.isLoading;
 export const loadingMorePosts = (state) => state.posts.isLoadingMore;
 export const postError = (state) => state.posts.hasError;
 export const payloadEmpty = (state) => state.posts.payloadEmpty;
+export const lastPostId = (state) => state.posts.lastPostId;
 
 // page states
-export const postNextPage = (state) => state.posts.nextPage;
 
 export default postsSlice.reducer;

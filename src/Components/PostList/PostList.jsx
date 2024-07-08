@@ -8,16 +8,14 @@ import {
 	postLoading,
 	postError,
 	fetchNextPosts,
-	postNextPage,
-	addNextPage,
 	loadingMorePosts,
 	loadNextPosts,
-	rehydrateNextPage,
 	payloadEmpty,
 	fetchPosts,
 	postFirstLoad,
 	setLocalPosts,
 	getLastPostId,
+	lastPostId,
 } from '../../Features/Posts/postsSlice';
 import './PostList.css';
 import { CircularProgress } from '@mui/material';
@@ -38,23 +36,17 @@ export const PostList = () => {
 	const hasError = useSelector(postError);
 	const isEmpty = useSelector(payloadEmpty);
 	const currentSubreddit = useSelector(activeSubreddit);
-
-	const nextPage = useSelector(postNextPage);
+	const lastId = useSelector(lastPostId);
 
 	useEffect(() => {
 		if (loadPosts.length !== 0) {
 			// if posts.posts is populated
+
 			dispatch(setLocalPosts());
-			dispatch(getLastPostId());
 		}
 		if (loadPosts.length === 0) {
-			dispatch(fetchPosts(currentSubreddit));
 			dispatch(setSubreddit(currentSubreddit)); // Sets the current subreddit
-
-			setTimeout(() => {
-				// Delay added for proper loading in state.posts and state.nextPosts.
-				// dispatch(fetchNextPosts(2));
-			}, 100);
+			dispatch(fetchPosts(currentSubreddit));
 		}
 	}, [loadPosts]);
 
@@ -67,8 +59,9 @@ export const PostList = () => {
 				document.documentElement.scrollHeight;
 
 			if (bottom) {
+				dispatch(getLastPostId());
 				// if the user has scrolled to the bottom.
-				pageLoad();
+				// pageLoad();
 			}
 		};
 		window.addEventListener('scroll', scrolledToBottom, {
@@ -85,10 +78,14 @@ export const PostList = () => {
 		if (isEmpty) {
 			console.log('No more posts.');
 		} else {
-			// dispatch(fetchNextPosts(nextPage));
-			dispatch(addNextPage());
+			console.log(lastId);
+			dispatch(getLastPostId());
 
-			localStorage.setItem('nextPage', JSON.stringify(nextPage));
+			const nextPostInfo = {
+				currentSubreddit,
+				lastId,
+			};
+			dispatch(fetchNextPosts(nextPostInfo));
 		}
 	};
 	const handleNextPage = (e) => {
@@ -109,13 +106,12 @@ export const PostList = () => {
 
 		const listNextPosts = nextPosts.map((post, index) => {
 			const urlToPost = 'posts/' + post.data.id;
-			return <Post post={nextPosts[index]} key={post.data.id} />;
+			return <Post post={post.data.id} key={post.data.id} />;
 		});
 
 		return (
 			<div className="postList">
 				{listPosts}
-				{/* {listNextPosts && content} Created issues with loading props.posts.data*/}
 				{content}
 				<div className="load-container">
 					<CircularProgress />
@@ -139,20 +135,21 @@ export const PostList = () => {
 		//
 		// if there is no error or loading, this executes.
 		//
-		const listPosts = loadPosts.map((post, index) => {
+
+		const listPosts = loadPosts.map((post) => {
 			const urlToPost = 'posts/' + post.data.id;
-			// console.log(post)
+			// console.log(post);
 			return <Post url={urlToPost} post={post.data} key={post.data.id} />;
 		});
 
-		// const listNextPosts = nextPosts.map((post, index) => {
-		// 	const urlToPost = 'posts/' + post.id;
-		// 	return <Post post={nextPosts[index]} key={post.data.id} />;
-		// });
+		const listNextPosts = nextPosts.map((post) => {
+			const urlToPost = 'posts/' + post.data.id;
+			return <Post url={urlToPost} post={post.data} key={post.data.id} />;
+		});
 		return (
 			<div className="postList">
 				{listPosts}
-				{/* {listNextPosts} */}
+				{listNextPosts}
 
 				<div className="load-container">
 					<Link className="load-post" onClick={handleNextPage}>
