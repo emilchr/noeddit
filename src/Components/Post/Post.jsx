@@ -97,7 +97,10 @@ export const Post = (props) => {
 					></video>
 				</div>
 			);
-		} else if (post.is_gallery) {
+		} else if (
+			post.is_gallery &&
+			post.url.startsWith('https://www.reddit.com/gallery')
+		) {
 			const mediaArr = Object.entries(post.media_metadata);
 			media.push(
 				<div className="carousel-container" key={post.id}>

@@ -46,8 +46,7 @@ export const postsSlice = createSlice({
 	name: 'posts',
 	initialState: {
 		posts: [],
-		nextPosts: [],
-		nextPage: 3,
+		nextPosts: null,
 		firstLoad: false,
 		isLoadingMore: false,
 		hasError: false,
@@ -59,7 +58,11 @@ export const postsSlice = createSlice({
 			localStorage.setItem('posts', JSON.stringify(state.posts));
 		},
 		setLocalNextPosts: (state) => {
-			localStorage.setItem('nextPosts', JSON.stringify(state.nextPosts));
+			if (state.nextPosts) {
+				localStorage.setItem('nextPosts', JSON.stringify(state.nextPosts));
+			} else {
+				console.log('No nextposts to set in localstorage');
+			}
 		},
 		rehydratePosts: (state) => {
 			const persistedState = JSON.parse(localStorage.getItem('posts'));
@@ -75,9 +78,9 @@ export const postsSlice = createSlice({
 			);
 			state.payloadEmpty = persistedNextPage;
 		},
-		addNextPage: (state) => {
-			state.nextPage += 1;
-			//Updates localStorage to current nextPage.
+		addNextPosts: (state) => {
+			//Updates localStorage to current nextPosts.
+
 			localStorage.setItem(
 				'posts',
 				JSON.stringify(state.posts.concat(state.nextPosts))
@@ -135,13 +138,15 @@ export const postsSlice = createSlice({
 				state.hasError = false;
 
 				state.nextPosts = action.payload.children;
+				console.log('Fetch nextPosts is fulfilled.');
 			})
 			.addCase(fetchNextPosts.rejected, (state, action) => {
 				state.isLoadingMore = false;
 				state.firstLoad = false;
 				state.hasError = true;
 				console.error(
-					'An error in fetchPosts has occurred. ' + action.error.message
+					'An error in fetchNextPosts has occurred. Error: ' +
+						action.error.message
 				);
 			});
 	},

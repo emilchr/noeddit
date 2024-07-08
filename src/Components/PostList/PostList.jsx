@@ -10,10 +10,10 @@ import {
 	fetchNextPosts,
 	loadingMorePosts,
 	loadNextPosts,
-	payloadEmpty,
 	fetchPosts,
 	postFirstLoad,
 	setLocalPosts,
+	setLocalNextPosts,
 	getLastPostId,
 	lastPostId,
 } from '../../Features/Posts/postsSlice';
@@ -34,15 +34,13 @@ export const PostList = () => {
 	const isLoading = useSelector(postLoading);
 	const isLoadingMore = useSelector(loadingMorePosts);
 	const hasError = useSelector(postError);
-	const isEmpty = useSelector(payloadEmpty);
 	const currentSubreddit = useSelector(activeSubreddit);
 	const lastId = useSelector(lastPostId);
 
 	useEffect(() => {
 		if (loadPosts.length !== 0) {
 			// if posts.posts is populated
-
-			dispatch(setLocalPosts());
+			dispatch(getLastPostId());
 		}
 		if (loadPosts.length === 0) {
 			dispatch(setSubreddit(currentSubreddit)); // Sets the current subreddit
@@ -59,7 +57,6 @@ export const PostList = () => {
 				document.documentElement.scrollHeight;
 
 			if (bottom) {
-				dispatch(getLastPostId());
 				// if the user has scrolled to the bottom.
 				// pageLoad();
 			}
@@ -75,18 +72,13 @@ export const PostList = () => {
 	}, []);
 	// -------- Handles loading of next page and the logic for increasing posts.nextPage.------------------ //
 	const pageLoad = () => {
-		if (isEmpty) {
-			console.log('No more posts.');
-		} else {
-			console.log(lastId);
-			dispatch(getLastPostId());
+		dispatch(getLastPostId());
 
-			const nextPostInfo = {
-				currentSubreddit,
-				lastId,
-			};
-			dispatch(fetchNextPosts(nextPostInfo));
-		}
+		const nextPostInfo = {
+			currentSubreddit,
+			lastId,
+		};
+		dispatch(fetchNextPosts(nextPostInfo));
 	};
 	const handleNextPage = (e) => {
 		e.preventDefault();
@@ -96,23 +88,17 @@ export const PostList = () => {
 	// ----- Handles loading, errors and the rendering of posts ---------
 	if (isLoadingMore && loadPosts) {
 		// If more posts are loading and state.posts are filled with posts.
-		const listPosts = loadPosts.map((post, index) => {
+		const listPosts = loadPosts.map((post) => {
 			const urlToPost = 'posts/' + post.data.id;
 			return <Post url={urlToPost} post={post.data} key={post.data.id} />;
 		});
 
 		// If post is defined but loading new posts after fetching new page.
-		let content = '';
-
-		const listNextPosts = nextPosts.map((post, index) => {
-			const urlToPost = 'posts/' + post.data.id;
-			return <Post post={post.data.id} key={post.data.id} />;
-		});
 
 		return (
 			<div className="postList">
 				{listPosts}
-				{content}
+
 				<div className="load-container">
 					<CircularProgress />
 				</div>
@@ -135,17 +121,25 @@ export const PostList = () => {
 		//
 		// if there is no error or loading, this executes.
 		//
+		if (!loadPosts) {
+			console.log('No posts for localStorage.');
+		} else {
+			dispatch(setLocalPosts());
+		}
 
 		const listPosts = loadPosts.map((post) => {
 			const urlToPost = 'posts/' + post.data.id;
 			// console.log(post);
 			return <Post url={urlToPost} post={post.data} key={post.data.id} />;
 		});
-
-		const listNextPosts = nextPosts.map((post) => {
-			const urlToPost = 'posts/' + post.data.id;
-			return <Post url={urlToPost} post={post.data} key={post.data.id} />;
-		});
+		let listNextPosts = null;
+		if (nextPosts) {
+			dispatch(setLocalNextPosts());
+			listNextPosts = nextPosts.map((post) => {
+				const urlToPost = 'posts/' + post.data.id;
+				return <Post url={urlToPost} post={post.data} key={post.data.id} />;
+			});
+		}
 		return (
 			<div className="postList">
 				{listPosts}
