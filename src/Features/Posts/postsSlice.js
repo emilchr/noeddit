@@ -48,7 +48,9 @@ export const postsSlice = createSlice({
     posts: [],
     nextPosts: null,
     firstLoad: false,
+    isLoading: false,
     isLoadingMore: false,
+    readyForNext: true,
     hasError: false,
     payloadEmpty: false,
     lastPostId: null,
@@ -154,6 +156,7 @@ export const postsSlice = createSlice({
       // --------------- FETCH NEXT POSTS ------------------------------------- //
       // ---------------------------------------------------------------------- //
       .addCase(fetchNextPosts.pending, (state) => {
+        state.readyForNext = false;
         if (state.posts.length === 0) {
           // If this is the first loading of posts.
           state.firstLoad = true; // set state.firstLoad to true.
@@ -166,6 +169,7 @@ export const postsSlice = createSlice({
         state.isLoadingMore = false;
         state.firstLoad = false;
         state.hasError = false;
+        state.readyForNext = true;
 
         state.nextPosts = action.payload.children;
         console.log('Fetch nextPosts is fulfilled.');
@@ -202,6 +206,7 @@ export const loadNextPosts = (state) => state.posts.nextPosts;
 export const postFirstLoad = (state) => state.posts.firstLoad;
 export const postLoading = (state) => state.posts.isLoading;
 export const loadingMorePosts = (state) => state.posts.isLoadingMore;
+export const readyForNext = (state) => state.posts.readyForNext;
 export const postError = (state) => state.posts.hasError;
 export const payloadEmpty = (state) => state.posts.payloadEmpty;
 export const lastPostId = (state) => state.posts.lastPostId;

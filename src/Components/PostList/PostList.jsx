@@ -17,6 +17,7 @@ import {
   getLastPostId,
   lastPostId,
   addNextPosts,
+  readyForNext,
 } from '../../Features/Posts/postsSlice';
 import './PostList.css';
 import { CircularProgress } from '@mui/material';
@@ -34,6 +35,7 @@ export const PostList = () => {
   const firstLoad = useSelector(postFirstLoad);
   const isLoading = useSelector(postLoading);
   const isLoadingMore = useSelector(loadingMorePosts);
+  const readyForPageLoad = useSelector(readyForNext); // Used for disabling pageLoad.
   const hasError = useSelector(postError);
   const currentSubreddit = useSelector(activeSubreddit);
   const lastId = useSelector(lastPostId);
@@ -43,6 +45,9 @@ export const PostList = () => {
       // if posts.posts is populated
       dispatch(getLastPostId());
     }
+    // ------------------------
+    // First load of the app.
+    // ------------------------
     if (loadPosts.length === 0) {
       dispatch(setSubreddit(currentSubreddit)); // Sets the current subreddit
       dispatch(fetchPosts(currentSubreddit));
@@ -93,30 +98,30 @@ export const PostList = () => {
   };
   const pageLoad = () => {
     dispatch(fetchNextPosts(nextPostInfo));
-    console.log('------------------------');
-    console.log(nextPostInfo);
-    console.log('------------------------');
 
-    if (nextPosts) {
+    if (nextPosts && readyForPageLoad) {
       dispatch(addNextPosts());
     }
   };
   // Checks if user has scrolled to the bottom.
-
   const scrolledToBottom = () => {
     const bottom =
       Math.ceil(window.innerHeight + window.scrollY) >=
       document.documentElement.scrollHeight;
 
     if (bottom) {
-      // if the user has scrolled to the bottom.
-      pageLoad();
+      // if the user has scrolled to the bottom load more posts.
+      if (readyForPageLoad) {
+        pageLoad();
+      } else {
+        console.log('Still loading...');
+      }
     }
   };
 
+  // if the user has clicked load more-button.
   const handleNextPage = (e) => {
     e.preventDefault();
-
     pageLoad();
   };
 
