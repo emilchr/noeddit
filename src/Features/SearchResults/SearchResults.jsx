@@ -7,7 +7,7 @@ function SearchResults() {
   const [searchParams] = useSearchParams();
 
   return (
-    <div>
+    <div className="searchResults-container">
       <h2>Search results</h2>
       <p>Search result for: {Object.fromEntries(searchParams).q}</p>
       <PostList />
