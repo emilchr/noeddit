@@ -1,4 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import {
+  fetchSearchResults,
+  searchResultsSlice,
+} from '../SearchResults/searchResultsSlice';
 
 const PAGE_URL = 'https://www.reddit.com/r/';
 
@@ -122,6 +126,9 @@ export const postsSlice = createSlice({
         }
       }
     },
+    setLoading: (state, action) => {
+      state.isLoading = action.payload;
+    },
     resetNextPosts: (state) => {
       state.nextPosts = null;
     },
@@ -182,6 +189,9 @@ export const postsSlice = createSlice({
           'An error in fetchNextPosts has occurred. Error: ' +
             action.error.message
         );
+      })
+      .addCase(fetchSearchResults.fulfilled, (state, action) => {
+        state.posts = action.payload.children; // SearchResults transferred to posts.posts.
       });
   },
 });
@@ -195,6 +205,7 @@ export const {
   rehydratePayloadEmpty,
   getLastPostId,
   addNextPosts,
+  setLoading,
   resetNextPosts,
 } = postsSlice.actions;
 
