@@ -100,15 +100,15 @@ export const postsSlice = createSlice({
 				let posts = JSON.parse(JSON.stringify(state));
 
 				const lastItem = posts.nextPosts[posts.nextPosts.length - 1]; // selects the last post
-				const lastItemId = lastItem.data.id; // selects the last ID from the last post
+				const lastItemId = lastItem?.data.id; // selects the last ID from the last post
 				// console.log(`NEXTPOSTS lastItemID: ${lastItemId}`);
 				state.lastPostId = lastItemId; // sets the last post ID in the state lastPostId.
 			} else {
 				let posts = JSON.parse(JSON.stringify(state));
 
 				const lastItem = posts.posts[posts.posts.length - 1]; // selects the last post
-				const lastItemId = lastItem.data.id; // selects the last ID from the last post
-				// console.log(`lastItemID: ${lastItemId}`);
+				const lastItemId = lastItem?.data.id; // selects the last ID from the last post
+				console.log(`lastItemID: ${lastItemId}`);
 				state.lastPostId = lastItemId; // sets the last post ID in the state lastPostId.
 			}
 		},
@@ -142,7 +142,9 @@ export const postsSlice = createSlice({
 					'An error in fetchPosts has occurred. Error:' + action.error.message
 				);
 			})
-			// --------------- FETCH NEXT POSTS -----------
+			// ---------------------------------------------------------------------- //
+			// --------------- FETCH NEXT POSTS ------------------------------------- //
+			// ---------------------------------------------------------------------- //
 			.addCase(fetchNextPosts.pending, (state) => {
 				if (state.posts.length === 0) {
 					// If this is the first loading of posts.
