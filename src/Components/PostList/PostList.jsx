@@ -82,19 +82,20 @@ export const PostList = () => {
       // Clean up of event listener
       window.removeEventListener('scroll', scrolledToBottom);
     };
-  }, []);
-
+  }, [lastId]);
   // ---------------------------------------------------------------------- //
   // Handles loading of next page and the logic for increasing posts.nextPage.
   // ---------------------------------------------------------------------- //
 
+  const nextPostInfo = {
+    currentSubreddit,
+    lastId,
+  };
   const pageLoad = () => {
-    const nextPostInfo = {
-      currentSubreddit,
-      lastId,
-    };
-    console.log(nextPostInfo);
     dispatch(fetchNextPosts(nextPostInfo));
+    console.log('------------------------');
+    console.log(nextPostInfo);
+    console.log('------------------------');
 
     if (nextPosts) {
       dispatch(addNextPosts());
@@ -109,9 +110,10 @@ export const PostList = () => {
 
     if (bottom) {
       // if the user has scrolled to the bottom.
-      // pageLoad();
+      pageLoad();
     }
   };
+
   const handleNextPage = (e) => {
     e.preventDefault();
 
