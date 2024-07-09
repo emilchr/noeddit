@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, Outlet, ScrollRestoration, useNavigate } from 'react-router-dom';
+import { Outlet, ScrollRestoration, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   menuState,
@@ -18,7 +18,6 @@ import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import { fetchLinks } from '../Features/SubReddit/subRedditsSlice';
-import { fetchPosts } from '../Features/Posts/postsSlice';
 
 export default function AppLayout() {
   const dispatch = useDispatch();
