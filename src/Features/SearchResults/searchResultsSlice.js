@@ -7,7 +7,7 @@ export const fetchSearchResults = createAsyncThunk(
   'search/fetchSearchResults',
   async (searchQuery) => {
     try {
-      const response = await fetch(`${QUERY_URL}${searchQuery}`);
+      const response = await fetch(`${QUERY_URL}${searchQuery}&limit=50`);
       const json = await response.json();
 
       return json.data;

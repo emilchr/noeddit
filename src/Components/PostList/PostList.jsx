@@ -111,10 +111,13 @@ export const PostList = () => {
 
     if (bottom) {
       // if the user has scrolled to the bottom load more posts.
-      if (readyForPageLoad) {
-        pageLoad();
+      if (currentSubreddit === 'SearchResults') {
       } else {
-        console.log('Still loading...');
+        if (readyForPageLoad) {
+          pageLoad();
+        } else {
+          console.log('Still loading...');
+        }
       }
     }
   };
