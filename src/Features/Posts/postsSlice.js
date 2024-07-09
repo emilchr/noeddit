@@ -1,8 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import {
-  fetchSearchResults,
-  searchResultsSlice,
-} from '../SearchResults/searchResultsSlice';
+import { fetchSearchResults } from '../SearchResults/searchResultsSlice';
 
 const PAGE_URL = 'https://www.reddit.com/r/';
 
