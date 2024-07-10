@@ -23,7 +23,6 @@ import './PostList.css';
 import { CircularProgress } from '@mui/material';
 import {
   activeSubreddit,
-  rehydrateActiveSubreddit,
   setSubreddit,
 } from '../../Features/userUi/userUiSlice';
 
@@ -77,8 +76,26 @@ export const PostList = () => {
   // scrolled to the bottom. If user is at bottom, fetchNextPosts is
   // dispatched.
   // ---------------------------------------------------------------------- //
+  // Checks if user has scrolled to the bottom.
 
   useEffect(() => {
+    const scrolledToBottom = () => {
+      const bottom =
+        Math.ceil(window.innerHeight + window.scrollY) >=
+        document.documentElement.scrollHeight;
+
+      if (bottom) {
+        // if the user has scrolled to the bottom load more posts.
+        if (currentSubreddit === 'SearchResults') {
+        } else {
+          if (readyForPageLoad) {
+            pageLoad();
+          } else {
+            console.log('Still loading...');
+          }
+        }
+      }
+    };
     window.addEventListener('scroll', scrolledToBottom, {
       passive: true,
     });
@@ -87,7 +104,7 @@ export const PostList = () => {
       // Clean up of event listener
       window.removeEventListener('scroll', scrolledToBottom);
     };
-  }, [lastId]);
+  });
   // ---------------------------------------------------------------------- //
   // Handles loading of next page and the logic for increasing posts.nextPage.
   // ---------------------------------------------------------------------- //
@@ -101,24 +118,6 @@ export const PostList = () => {
 
     if (nextPosts && readyForPageLoad) {
       dispatch(addNextPosts());
-    }
-  };
-  // Checks if user has scrolled to the bottom.
-  const scrolledToBottom = () => {
-    const bottom =
-      Math.ceil(window.innerHeight + window.scrollY) >=
-      document.documentElement.scrollHeight;
-
-    if (bottom) {
-      // if the user has scrolled to the bottom load more posts.
-      if (currentSubreddit === 'SearchResults') {
-      } else {
-        if (readyForPageLoad) {
-          pageLoad();
-        } else {
-          console.log('Still loading...');
-        }
-      }
     }
   };
 
@@ -181,12 +180,15 @@ export const PostList = () => {
       <div className="postList">
         {listPosts}
         {listNextPosts}
-
-        <div className="load-container">
-          <Link className="load-post" onClick={handleNextPage}>
-            Load more posts
-          </Link>
-        </div>
+        {currentSubreddit === 'SearchResults' ? (
+          ''
+        ) : (
+          <div className="load-container">
+            <Link className="load-post" onClick={handleNextPage}>
+              Load more posts
+            </Link>
+          </div>
+        )}
       </div>
     );
   }

@@ -130,10 +130,10 @@ export default function AppLayout() {
         <main>
           <Outlet />
         </main>
-        <footer>
-          Made with <FavoriteRoundedIcon style={{ color: 'red' }} /> by Emil
-        </footer>
       </div>
+      <footer>
+        Made with <FavoriteRoundedIcon style={{ color: 'red' }} /> by Emil
+      </footer>
       <ScrollRestoration
         getKey={(location) => {
           return location.pathname
