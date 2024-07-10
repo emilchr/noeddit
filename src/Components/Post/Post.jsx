@@ -8,14 +8,13 @@ import {
 import Skeleton from '../Skeleton/Skeleton';
 import { useSelector } from 'react-redux';
 import {
-  loadingMorePosts,
   postError,
   postFirstLoad,
   postLoading,
 } from '../../Features/Posts/postsSlice';
 import { Link } from 'react-router-dom';
 import Markdown from 'marked-react';
-import { cleanUrl, postCreated, truncateString } from '../../Utils/helpers';
+import { cleanUrl, postCreated } from '../../Utils/helpers';
 
 export const Post = (props) => {
   // console.log("POST: props post.id: " + props.post.id)
@@ -23,7 +22,6 @@ export const Post = (props) => {
   // console.log(props)
   const firstLoad = useSelector(postFirstLoad);
   const isLoading = useSelector(postLoading);
-  const isLoadingMore = useSelector(loadingMorePosts);
   const hasError = useSelector(postError);
 
   let content = '';

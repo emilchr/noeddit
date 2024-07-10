@@ -14,6 +14,7 @@ import { setLoading } from '../../Features/Posts/postsSlice';
 export const SearchBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams();
   const query = useSelector(searchQuery);
 
