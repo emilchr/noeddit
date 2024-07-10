@@ -1,5 +1,7 @@
 # noeddit
 
+Live version: [noeddit.netlify.app](https://noeddit.netlify.app/)
+
 A lite version of Reddit. This project was created to enhance my knowledge of API's, React, Redux Toolkit, React Router v6 and multiple other technologies.
 Portfolio project through Codecademy.
 
