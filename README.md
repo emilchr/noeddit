@@ -27,44 +27,45 @@ Portfolio project through Codecademy.
 - Subreddit selection.
 - Search function.
 - Infinite scroll.
-- Cache posts and comments.
+- Cache for posts and comments.
+- Scroll restoration.
 - Compatible with all modern devices.
 
-## Wireframes
+# Wireframes
 
 ### Mobile
 
 ![Mobile](screenshot/noeddit-mobile.png)
 
-### Desktop 768px
+#### Desktop 768px
 
 ![Desktop 768px](screenshot/noeddit-768.png)
 
-### Desktop 1200px
+#### Desktop 1200px
 
 ![Desktop 1200px](screenshot/noeddit-1200.png)
 
-## Screenshots of end product
+# Screenshots of end product
 
-### Mobile
+#### Mobile
 
 ![Mobile](screenshot/endproduct/mobile-prod.png)
 
-### Desktop 768px
+#### Desktop 768px
 
 ![Desktop 768px](screenshot/endproduct/768-prod.png)
 
-### Desktop 1200px
+#### Desktop 1200px
 
 ![Desktop 1200px](screenshot/endproduct/1200-prod.png)
 
-### Desktop 1600px
+#### Desktop 1600px
 
 ![Desktop 1600px](screenshot/endproduct/1600-prod.png)
 
-## Functions
-
 ## Testing
+
+- Ongoing
 
 ## Known bugs and fixes
 
