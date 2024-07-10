@@ -126,7 +126,7 @@ export const PostList = () => {
     e.preventDefault();
     pageLoad();
   };
-
+  // ---------------------------------------------------------------------- //
   // ----- Handles loading, errors and the rendering of posts ---------
   if (isLoadingMore && loadPosts) {
     // If more posts are loading and state.posts are filled with posts.
