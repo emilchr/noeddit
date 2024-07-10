@@ -31,6 +31,22 @@ Portfolio project through Codecademy.
 - Scroll restoration.
 - Compatible with all modern devices.
 
+## Testing
+
+- Ongoing
+
+## Known bugs and fixes
+
+- No known
+
+## Future features
+
+- [ ] Split app in smaller parts and refactor code for better SoC
+- [x] Add infinite scroll
+- [x] Add search functionality
+- [x] Optimize caching in localStorage
+- [x] Add MarkDown-translator for emojis, rich text and so on.
+
 # Wireframes
 
 ### Mobile
@@ -62,19 +78,3 @@ Portfolio project through Codecademy.
 #### Desktop 1600px
 
 ![Desktop 1600px](screenshot/endproduct/1600-prod.png)
-
-## Testing
-
-- Ongoing
-
-## Known bugs and fixes
-
-- No known
-
-## Future features
-
-- [ ] Split app in smaller parts and refactor code for better SoC
-- [x] Add infinite scroll
-- [x] Add search functionality
-- [x] Optimize caching in localStorage
-- [x] Add MarkDown-translator for emojis, rich text and so on.
